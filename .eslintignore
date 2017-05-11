@@ -1,0 +1,4 @@
+build/*.js
+config/*.js
+src/router/index.js
+src/assets/**/*.js

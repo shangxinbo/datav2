@@ -1,0 +1,31 @@
+// out: false
+
+//------------------------------------  less参数  ------------------------------------
+@black-color:#000;
+@whit-color:#FFF;
+@green-color:#00E1FF;
+
+@yaHei:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei";
+@arial:Arial;
+@geoFont:"geoFont";
+
+.wh(@n:100%){
+  width:@n;
+  height:@n;
+}
+.flo(){
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+.borderBox(){
+  box-sizing: border-box;
+}
+
+.transform(@transform-functions){
+  transform:@arguments;
+}
+.animation(@animation-name,@animation-duration,@animation-timing-function,@animation-delay,@animation-iteration-count,@animation-direction){
+  animation: @arguments;
+}
+//----------------------------------  less参数 End  -----------------------------------

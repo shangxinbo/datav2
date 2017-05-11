@@ -1,0 +1,189 @@
+// out: false
+@import (reference) "base.less";
+
+
+.annual-meeting{
+  li{
+    display: none;
+    .wh();
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    &.sub-active{
+      display: block;
+    }
+    .photo,.bg{
+      .wh();
+    }
+    .text1-1,.text1-2{
+      width: 7.84rem;
+      height: 1.68rem;
+      opacity: 0;
+      position: absolute;
+    }
+    .text1-1{
+      left: 8.54rem;
+      bottom: 3.37rem;
+    }
+    .text1-2{
+      left: 10.4rem;
+      bottom: 1.66rem;
+    }
+    .text2-1,.text2-2,.text2-3{
+      opacity: 0;
+      position: absolute;
+      left: 25.64rem;
+    }
+    .text2-1{
+      width: 6.08rem;
+      height: 1.54rem;
+      top: 0.92rem;
+    }
+    .text2-2{
+      width: 6.59rem;
+      height: 1.53rem;
+      top: 3.13rem;
+    }
+    .text2-3{
+      width: 5.06rem;
+      height: 1.53rem;
+      top: 5.34rem;
+    }
+    .text3-1{
+      width: 6.46rem;
+      height: 2.1rem;
+      opacity: 0;
+      position: absolute;
+      left: 7.06rem;
+      bottom: 4.57rem;
+    }
+    .text3-2{
+      width: 9rem;
+      height: 1.68rem;
+      opacity: 0;
+      position: absolute;
+      left: 9.02rem;
+      bottom: 2.86rem;
+    }
+    .text4-1{
+      width: 21.16rem;
+      height: 1.97rem;
+      opacity: 0;
+      position: absolute;
+      right: 2.36rem;
+      bottom: 2.92rem;
+    }
+    .text5-1,.text5-2{
+      height: 0.9rem;
+      opacity: 0;
+      position: absolute;
+    }
+    .text5-1{
+      width: 5.52rem;
+      left: 11.43rem;
+      bottom: 1.86rem;
+    }
+    .text5-2{
+      width: 6.46rem;
+      left: 13.4rem;
+      bottom: 0.76rem;
+    }
+    .text6-1,.text6-2,.text7-1,.text7-2{
+      width: 8.9rem;
+      height: 1.91rem;
+      opacity: 0;
+      position: absolute;
+    }
+    .text6-1{
+      right: 10.74rem;
+      bottom: 3.41rem;
+    }
+    .text6-2{
+      right: 8.63rem;
+      bottom: 1.47rem;
+    }
+    .text7-1{
+      left: 5.8rem;
+      bottom: 2.92rem;
+    }
+    .text7-2{
+      left: 7.92rem;
+      bottom: 0.98rem;
+    }
+    .text8-1{
+      width: 6.46rem;
+      height: 2.09rem;
+      opacity: 0;
+      position: absolute;
+      right: 8.72rem;
+      bottom: 3.31rem;
+    }
+    .text8-2{
+      width: 6.29rem;
+      height: 1.95rem;
+      opacity: 0;
+      position: absolute;
+      right: 5.7rem;
+      bottom: 1.33rem;
+    }
+    .text9-1,.text9-2{
+      width: 11.31rem;
+      height: 1.91rem;
+      opacity: 0;
+      position: absolute;
+    }
+    .text9-1{
+      left: 7.9rem;
+      bottom: 3.37rem;
+    }
+    .text9-2{
+      left: 10rem;
+      bottom: 1.43rem;
+    }
+  }
+}
+
+
+
+@keyframes annualPhoto{
+ 100%{transform: scale(1.08);}
+}
+@keyframes annualTextLeft{
+   0%{opacity: 0;transform:translateX(-25%);}
+   8%{opacity: 1;transform:translateX(-5%);}
+ 100%{opacity: 1;transform:translateX(0%);}
+}
+@keyframes annualTextRight{
+   0%{opacity: 0;transform:translateX(25%);}
+   8%{opacity: 1;transform:translateX(5%);}
+ 100%{opacity: 1;transform:translateX(0%);}
+}
+
+
+.annual-meeting{
+  .sub-active{
+    .photo{
+      .animation(annualPhoto,10s,linear,0s,1,normal);
+      animation-fill-mode: both;
+    }
+    .text1-1,.text3-1,.text4-1,.text5-1,.text6-1,.text7-1,.text8-1,.text9-1{
+      .animation(annualTextLeft,10s,linear,0s,1,normal);
+      animation-fill-mode: both;
+    }
+    .text1-2,.text3-2,.text5-2,.text6-2,.text7-2,.text8-2,.text9-2{
+      .animation(annualTextRight,10s,linear,0s,1,normal);
+      animation-fill-mode: both;
+    }
+    .text2-1,.text2-2,.text2-3{
+      .animation(opacity_Animation,0.5s,linear,0s,1,normal);
+      animation-fill-mode: both;
+    }
+    .text2-2{
+      animation-delay: 0.5s;
+    }
+    .text2-3{
+      animation-delay: 1s;
+    }
+  }
+}

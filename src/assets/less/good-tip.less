@@ -1,0 +1,339 @@
+// out: false
+@import (reference) "base.less";
+
+
+.good-warp{
+  .wh();
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  &>li{
+    display: none;
+    width: 25.08rem;
+    height: 8.48rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    .transform(translate(-50%,-50%));
+    &.sub-active{
+        display: block;
+    }
+  }
+  .bg{
+    width: 100%;
+  }
+}
+.good-view-chart{
+  margin: 2.22rem 0 0 2.86rem;
+  width: 19.14rem;
+  height: 5rem;
+  border-left: 2px solid fade(#FFF,30%);
+  border-bottom: 2px solid fade(#FFF,30%);
+  box-sizing: border-box;
+  color: #FFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  &>img{
+    position: absolute;
+    top: -1.1rem;
+    left: 50%;
+    .transform(translateX(-50%));
+  }
+  .title01{
+    width: 7.75em;
+  }
+  .title02{
+    width: 7.33em;
+  }
+}
+.good-chart-left,.good-chart-left02{
+  width: 0.74rem;
+  height: 100%;
+  font-size: 0.2rem;
+  line-height: 0.24rem;
+  position: absolute;
+  left: -0.74rem;
+  top: 0;
+  span{
+    display: block;
+    padding-right: 0.26rem;
+    text-align: right;
+    height: 0.24rem;
+    position: absolute;
+    right: 0;
+  }
+}
+.good-chart-left{
+  span{
+    .nth-child(@num) when (@num < 11){
+      &:nth-child(@{num}){
+        top: -0.1rem + (0.55rem*(@num - 1));
+      }
+      .nth-child(( @num + 1 ));
+    }
+    .nth-child(1);
+  }
+}
+.good-chart-left02{
+  span{
+    .nth-child(@num) when (@num < 11){
+      &:nth-child(@{num}){
+        top: -0.1rem + (0.43rem*(@num - 1));
+      }
+      .nth-child(( @num + 1 ));
+    }
+    .nth-child(1);
+  }
+}
+
+.good-chart-content{
+  width: 15.5rem;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  display:flex;
+  justify-content:space-between;
+  h4{
+    width: 100%;
+    font-size: 0.3rem;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: -0.4rem;
+  }
+  .chart-pillar{
+    color: #FFF;
+    span{
+      width: 2.5rem;
+      font-family: @arial;
+      font-weight: bold;
+      line-height: 1;
+      margin-left: -1.25rem;
+      top: 0;
+      .transform(translateY(-135%));
+    }
+    b{
+      font-family: @yaHei;
+      font-weight: normal;
+      line-height: 1;
+      padding-left: 0.1rem;
+    }
+  }
+  dd{
+    width: 1.34rem;
+    height: 100%;
+    position: relative;
+  }
+}
+#good-chart01{
+  dd{
+    @left:1800;
+    @pillar01:982;
+    @pillar02:1078;
+    @pillar03:1228;
+    @pillar04:1272;
+    @pillar05:1529;
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@left,4));
+        em{
+          &:before{
+            background-color: #3A32E2;
+          }
+        }
+        span{
+          font-size: 0.5rem;
+        }
+        b{
+          font-size: 0.3rem;
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@left,4));
+        em{
+          &:before{
+            background-color: #4720D7;
+          }
+        }
+        span{
+          font-size: 0.55rem;
+        }
+        b{
+          font-size: 0.33rem;
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@left,4));
+        em{
+          &:before{
+            background-color: #6520D7;
+          }
+        }
+        span{
+          font-size: 0.6rem;
+        }
+        b{
+          font-size: 0.36rem;
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@left,4));
+        em{
+          &:before{
+            background-color: #8C20D7;
+          }
+        }
+        span{
+          font-size: 0.65rem;
+        }
+        b{
+          font-size: 0.39rem;
+        }
+      }
+    }
+    &:nth-child(5){
+      .chart-pillar{
+        height: percentage(round(@pillar05/@left,4));
+        em{
+          &:before{
+            background-color: #B41FCB;
+          }
+        }
+        span{
+          font-size: 0.7rem;
+        }
+        b{
+          font-size: 0.42rem;
+        }
+      }
+    }
+  }
+}
+#good-chart02{
+  dd{
+    width: 2rem;
+
+    @left:3*2;
+    @pillar01:0.14;
+    @pillar02:0.44;
+    @pillar03:1.39;
+    @pillar04:2.3;
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@left,4)+0.5);
+        em{
+          &:before{
+            background-color: #7a20d7;
+          }
+        }
+        span{
+          font-size: 0.55rem;
+        }
+        b{
+          font-size: 0.33rem;
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@left,4)+0.5);
+        em{
+          &:before{
+            background-color: #9d20d7;
+          }
+        }
+        span{
+          font-size: 0.6rem;
+        }
+        b{
+          font-size: 0.36rem;
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@left,4)+0.5);
+        em{
+          &:before{
+            background-color: #b41fcb;
+          }
+        }
+        span{
+          font-size: 0.65rem;
+        }
+        b{
+          font-size: 0.39rem;
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@left,4)+0.5);
+        em{
+          &:before{
+            background-color: #bc2393;
+          }
+        }
+        span{
+          font-size: 0.7rem;
+        }
+        b{
+          font-size: 0.42rem;
+        }
+      }
+    }
+  }
+}
+
+.good-chart{
+  &.sub-active{
+    .good-chart-content{
+      dd{
+        h4{
+          .animation(opacity_Animation,200ms,linear,500ms,1,normal);
+          animation-fill-mode: both;
+        }
+        .chart-pillar{
+          em{
+            &:before{
+              .animation(bottom_top_Animation,400ms,linear,700ms,1,normal);
+              animation-fill-mode: both;
+            }
+          }
+          span{
+            .animation(opacity_Animation,400ms,linear,1100ms,1,normal);
+            animation-fill-mode: both;
+          }
+        }
+        .nth-child(@num) when (@num < 6){
+          &:nth-child(@{num}){
+            h4{
+              animation-delay: 500ms + 400*(@num - 1);
+            }
+            .chart-pillar{
+              em{
+                &:before{
+                  animation-delay: 700ms + 400*(@num - 1);
+                }
+              }
+              span{
+                animation-delay: 1100ms + 400*(@num - 1);
+              }
+            }
+          }
+          .nth-child(( @num + 1 ));
+        }
+        .nth-child(2);
+      }
+    }
+  }
+}
