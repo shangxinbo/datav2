@@ -40,7 +40,7 @@ let API = {
     '/api/chord': null,
     '/api/area_user': 'report/getCityStatJson.html',
     '/api/map_user': 'report/getMapUserJson.html',
-    '/api/total_account': 'report/total_account.html',
+    '/api/total_account': 'report/getUserstaticsJson.html',
     '/api/video_data': 'report/getAccountOverviewJson.html'
 }
 
@@ -68,7 +68,6 @@ app
             if (API[req.path] == null) {
                 getLocalData()
             } else {
-                
                 request({ url: API[req.path], qs: req.params, jar: cookieTokenJar }, function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         try {
