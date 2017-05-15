@@ -68,7 +68,7 @@ app
             if (API[req.path] == null) {
                 getLocalData()
             } else {
-                request({ url: API[req.path], qs: req.params, jar: cookieTokenJar }, function (error, response, body) {
+                request({ url: API[req.path], qs: req.query, jar: cookieTokenJar }, function (error, response, body) {
                     if (!error && response.statusCode == 200) {
                         try {
                             let data = JSON.parse(body)
