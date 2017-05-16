@@ -27,27 +27,6 @@
     import API from 'src/services/api'
     import * as d3 from 'd3'
 
-    function levelColor(d) {
-        if (d == 4 || d == 3)
-            return 'rgba(0,218,195,0.9)'
-        else if (d == 1 || d == 2)
-            return '#8e26d0'
-        else
-            return '#2258f5'
-    }
-    function flatten(root) {
-        let nodes = [], i = 0
-
-        function recurse(node) {
-            if (node.children) node.children.forEach(recurse)
-            if (!node.id) node.id = ++i
-            nodes.push(node)
-        }
-
-        recurse(root)
-        return nodes
-    }
-
     function rFn(d) {
         if (d.group == 0) {
             return 16
@@ -59,155 +38,138 @@
             return (d.pv + '').length * 1.5
         }
     }
+    function levelColor(d) {          //颜色值
+        if (d == 4 || d == 3)
+            return 'rgba(0,218,195,0.9)'
+        else if (d == 1 || d == 2)
+            return '#8e26d0'
+        else
+            return '#2258f5'
+    }
 
     export default {
         data() {
             return {
-                active: 1,
-                nodeTree: {},
-                links: [],
-                nodeJson: {},
-                simulation:null
+                active: 1
             }
         },
         mounted() {
-            this.getData()
-            let _this = this
-            setInterval(function(){
-                let nodes = Object.assign({},_this.nodeTree)
-                let links = _this.links.slice()
-                let arr = []
-                nodes.children.forEach(el=>{
-                    el._children = el.children
-                    links.forEach(it =>{
-                        if(it.source != el.index)
-                            arr.push(links.findIndex(it.source))
-                    })
-                    delete el.children
-                })
-                
-                arr.forEach(e =>{
-                    links.splice(e,1)
-                })
-                
-                let nodeList = [], id = 0
-                function recurse(node) {
-                    nodeList.push(node)
-                    if (node.children) {
-                        node.children.forEach(recurse)
-                    }
-                    delete (node.children)
-                }
-                console.log(nodeList,links)
-                recurse(nodes)
-                d3.select("#force svg").html('')
-                _this.render(nodeList,links)
-            },2000)
-        },
-        methods: {
-            init(){
-                let svg = d3.select("#force svg")
-                this.simulation = d3.forceSimulation()
-                    .force('link', d3.forceLink().id(function(d) { return d.index }))
-                    .force("collide", d3.forceCollide(function (d) { return d.r + 8 }).radius(2))
-                    .force("charge", d3.forceManyBody({strength:10}))
-                    .force("center", d3.forceCenter(370, 268))
-            },
-            getData() {
-                mAjax(this, {
-                    url: API.force_direct + '?param=1',
-                    success: data => {
-                        let nodes = data.nodes, links = data.links
-                        //将平行nodes变成nodes tree
-                        links.forEach((el, i) => {
-                            let s = links[i].source, t = links[i].target
-                            if (!nodes[s].children) {
-                                nodes[s].children = []
-                            }
-                            nodes[s].children.push(nodes[t])
-                        })
+            let svg = d3.select("svg")
+            let g = svg.append("g").attr("transform", "translate(370,268)")
+            let link = g.append("g").selectAll(".link")
+            let node = g.append("g").selectAll(".node")
 
-                        this.nodeTree = Object.assign({},nodes[0])
-                        this.links = links
-                        //递归遍历tree，讲树形关系解析成序号
-                        let nodeList = [], id = 0
-                        function recurse(node) {
-                            if (!node.id) {
-                                node.id = id++
-                                nodeList.push(node)
-                            }
-                            if (node.children) {
-                                node.children.forEach(recurse)
-                            }
-                            delete (node.children)
+            let nodes = []
+            let links = []
+
+            let simulation = d3.forceSimulation(nodes)
+                .force("charge", d3.forceManyBody().strength(-100))
+                .force("link", d3.forceLink(links).distance(function (d) {
+                    if (d.target.group == 4 || d.target.group == 3) {
+                        return Math.random() * 20 + 20
+                    } else {
+                        return 20
+                    }
+                }))
+                .force("x", d3.forceX())
+                .force("y", d3.forceY())
+                .alphaTarget(0.4)
+                .velocityDecay(0.9)
+
+
+            mAjax(this, {
+                url: API.force_direct + '?param=1',
+                success: data => {
+                    //将平行nodes变成nodes tree
+                    nodes = data.nodes, links = data.links
+                    links.forEach((el, i) => {
+                        let s = links[i].source, t = links[i].target
+                        if (!nodes[s].children) {
+                            nodes[s].children = []
                         }
-                        recurse(nodes[0])
-                        this.render(nodeList,links)
+                        nodes[s].children.push(nodes[t])
+                    })
+
+                    //递归遍历tree，讲树形关系解析成序号
+                    let nodeList = [], id = 0, ss = []
+                    function recurse(node, parent) {
+                        if (!node.id) {
+                            node.id = ++id
+                            nodeList.push(node)
+                        }
+                        if (parent) {
+                            ss.push({ source: parent, target: node })
+                        } else {
+                            ss.push({ source: 0, target: node })
+                        }
+                        if (node.children) {
+                            node.children.forEach(el => {
+                                recurse(el, node)
+                            })
+                        }
                     }
+                    recurse(nodes[0])
+                    nodes = nodeList
+                    links = ss
+                    restart()
+
+                    // d3.interval(function () {
+                    //     let ns = nodes.slice()
+                    //     for (let i = 0; i < ns[0].children.length; i++) {
+                    //         if (ns[0].children[i].children.length > 0) {
+                    //             ns[0].children[i]._children = ns[0].children[i].children
+                    //             ns[0].children[i].children = []
+                    //             break
+                    //         }
+                    //     }
+                    //     let nodeList = [], id = 0, ss = []
+                    //     function recurse(node, parent) {
+                    //         nodeList.push(node)
+                    //         if (parent) {
+                    //             ss.push({ source: parent, target: node })
+                    //         } else {
+                    //             ss.push({ source: 0, target: node })
+                    //         }
+                    //         if (node.children) {
+                    //             node.children.forEach(el => {
+                    //                 recurse(el, node)
+                    //             })
+                    //         }
+                    //     }
+                    //     recurse(ns[0])
+                    //     nodes = nodeList
+                    //     links = ss
+                    //     restart()
+                    // }, 2000, d3.now() + 1000)
+
+                }
+            })
+
+            let item
+            function restart() {
+                //d3.select("svg").select('g').selectAll(".node").remove()
+                node = node.data(nodes, function (d) { return d.id })
+                node.exit().remove()
+                item = node.enter().append("g").attr("class", "node").merge(node)
+
+                // //节点圆形
+                item.append("circle").attr('class', 'c1').attr("r", function (d) {
+                    return rFn(d)
+                }).style("fill", function (d) {
+                    return levelColor(d.group)
                 })
-            },
-            render(nodeList,links) {
-                
-                let svg = d3.select("#force svg")
-                this.simulation = d3.forceSimulation()
-                    .force('link', d3.forceLink().id(function(d) { return d.index }))
-                    .force("collide", d3.forceCollide(function (d) { return d.r + 8 }).radius(2))
-                    .force("charge", d3.forceManyBody({strength:10}))
-                    .force("center", d3.forceCenter(370, 268))
-
-                svg.append('g').attr('class', 'g1')
-                svg.append('g').attr('class', 'g2')
-                let link = svg.select('.g1').selectAll(".link")
-                    .data(links)
-                    .enter()
-                    .append("line")
-                    .attr("class", "link")
-                    .style('stroke-width', 2)
-                    .style('stroke', function (d) {
-                        return '#2258f5'
-                    })
-
-                let node = svg.select('.g2').selectAll(".node")
-                    .data(nodeList)
-                    .enter()
-                    .append("g")
-                    .attr("class", "node")
-                    .attr("r", function (d) {
-                        return d.children ? 4.5 : Math.sqrt(d.pv) / 10
-                    })
-                link.exit().remove()
-
-                //节点圆形
-                node.append("circle")
-                    .attr('class', 'c1')
-                    .attr("r", function (d) {
-                        return rFn(d)
-                    })
-                    .style("fill", function (d) {
-                        return levelColor(d.group)
-                    })
-                //节点圆环
-                node.append("circle")
-                    .attr('class', 'c2')
-                    .style('cursor', function (d) {
-                        if (d.group < 4) return 'pointer'
-                    })
-                    .attr("r", function (d) {
-                        return rFn(d)
-                    })
-                    .style("fill", 'rgba(0,0,0,0)')
-                    .style('stroke-width', 8)
-                    .style('stroke', function (d) {
-                        return 'rgba(255,255,255,0.4)'
-                    })
-                    .style('display', 'none')
+                // //节点圆环
+                item.append("circle").attr('class', 'c2').style('cursor', function (d) {
+                    if (d.group < 4) return 'pointer'
+                }).attr("r", function (d) {
+                    return rFn(d)
+                }).style("fill", 'rgba(0,0,0,0)').style('stroke-width', 8).attr('stroke', function (d) {
+                    return 'rgba(255,255,255,0.4)'
+                }).style('display', 'none')
 
                 //节点名称
-                node.append('text')
-                    .attr('class', 't1')
-                    .attr('x', 28)
-                    .attr('y', 5)
-                    .style('fill', '#b2b2b2')
+                item.append('text').attr('class', 't1').attr('x', 15).attr('y', 5)
+                    .attr('fill', '#b2b2b2')
                     .style('font-size', '12px')
                     .text(function (d) {
                         if (d.name.length > 8) {
@@ -215,50 +177,39 @@
                         } else {
                             return d.name
                         }
-
                     })
-                //节点pv
-                node.append('text')
+                // //节点pv
+                item.enter().append('text')
                     .attr('class', 't2')
-                    .attr('x', 28)
-                    .attr('y', 15)
-                    .style('fill', '#fff')
-                    .style('font-size', '12px')
+                    .attr('x', 15)
+                    .attr('y', 6)
+                    .attr('fill', '#fff')
+                    .attr('font-size', '12px')
                     .text(function (d) {
                         return d.pv
                     })
                     .style('display', 'none')
 
-
-                node.exit().remove()
-
-                let ticked = function () {
-                    link
-                        .attr("x1", function (d) { return d.source.x })
-                        .attr("y1", function (d) { return d.source.y })
-                        .attr("x2", function (d) { return d.target.x })
-                        .attr("y2", function (d) { return d.target.y })
-
-                    node.attr("transform", function (d) {
-                        return "translate(" + d.x + "," + d.y + ")"
-                    })
-                }
-
-                this.simulation
-                    .nodes(nodeList)
-                    .on("tick", ticked)
-
-                this.simulation.force("link")
-                    .links(links)
-                    .distance(function(d){
-                        if(d.target.group==4||d.target.group==3){
-                            return Math.random() * 70 + 12
-                        }else{
-                            return Math.random() * 30 + 12
-                        }
-                        
-                    })
+                // Apply the general update pattern to the links.
+                link = link.data(links, function (d) { return d.source.id + "-" + d.target.id })
+                link.exit().remove()
+                link = link.enter().append("line").attr('stroke-width', 2).attr('stroke', '#2258f5').merge(link)
+                // Update and restart the simulation.
+                simulation.nodes(nodes).on("tick", ticked)
+                simulation.force("link").links(links)
+                simulation.alpha(1).restart()
             }
+
+            function ticked() {
+                item.attr("transform", function (d) {
+                    return "translate(" + d.x + "," + d.y + ")"
+                })
+                link.attr("x1", function (d) { return d.source.x })
+                    .attr("y1", function (d) { return d.source.y })
+                    .attr("x2", function (d) { return d.target.x })
+                    .attr("y2", function (d) { return d.target.y })
+            }
+
         }
     }
 
