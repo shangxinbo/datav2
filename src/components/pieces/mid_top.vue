@@ -20,23 +20,6 @@
         opacity: 0;
         margin-top: 25px
     }
-
-    .portrait {
-        animation: portrait_li_Animation 5s ease 0ms infinite normal;
-    }
-
-    @keyframes portrait_li_Animation {
-        8%,
-        92% {
-            transform: rotateX(0deg);
-            opacity: 1;
-        }
-        0%,
-        100% {
-            transform: rotateX(90deg);
-            opacity: 0;
-        }
-    }
 </style>
 <template>
     <li>
@@ -80,7 +63,6 @@
                 <div style="width:540px;height:385px;"></div>
             </div>
             <ul class="portrait-warp">
-                <!--<transition name="portrait" >-->
                 <li v-for="(item,index) in userLists">
                     <span class="point"></span>
                     <span class="point"></span>
@@ -101,7 +83,6 @@
                         </div>
                     </div>
                 </li>
-                <!--</transition>-->
             </ul>
         </div>
     </li>
