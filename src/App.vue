@@ -1,5 +1,5 @@
 <style lang="less">
-    @import 'assets/less/index.less';
+    @import 'assets/less/common.less';
 </style>
 <template>
     <div style="height:100%;width:100%;">

@@ -8,3 +8,11 @@ yarn-error.log*
 test/unit/coverage
 test/e2e/reports
 selenium-debug.log
+
+base.css
+good-tip.css
+index.css
+meeting.css
+system.css
+view.css
+welocme.css

@@ -115,338 +115,715 @@ video {
   font-style: normal;
   font-weight: normal;
 }
-html,
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 100px !important;
+}
 body {
+  width: 38.4rem;
+  height: 10.8rem;
+  line-height: 1;
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei";
+  position: relative;
+  font-size: 100px !important;
+  -webkit-text-size-adjust: none;
+  -webkit-user-select: none;
+}
+.warp {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+.warp > div {
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+.warp > div.active {
+  display: block !important;
+  opacity: 1;
+}
+.warp-background {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.warp-background .logo {
+  width: 1.6rem;
+  height: 1.1rem;
+  position: absolute;
+  left: 1.85rem;
+  top: 50%;
+  z-index: 50;
+  transform: translateY(-50%);
+}
+.warp-background .logo img {
+  display: block;
+  width: 100%;
+}
+.warp-background .background {
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.system {
+  width: 25.08rem;
+  height: 8.48rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.system .bg {
+  width: 100%;
+}
+.system-content {
+  width: 100%;
+  height: 100%;
+  color: #FFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.system-content h2 {
+  width: 100%;
+  font-size: 0.5rem;
+  text-align: center;
+  position: absolute;
+  bottom: 1.4rem;
+}
+.planet-line {
+  display: block;
+  width: 9.58rem;
+  height: 1.58rem;
+  position: absolute;
+  left: 50%;
+  bottom: 3.4rem;
+  margin-left: -4.79rem;
+}
+.planet-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.system-planet-warp {
+  width: 2.8rem;
+  height: 2.8rem;
+  position: absolute;
+  left: 50%;
+  bottom: 2.24rem;
+  margin-left: -1.4rem;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  perspective-origin: 50% 0;
+}
+.system-planet-warp .planet-iframe {
+  box-shadow: 0 0 1.1rem rgba(0, 220, 222, 0.5);
+  background-color: #00FFFF;
+}
+.satellite {
+  width: 4.26rem;
+  height: 4.26rem;
+  box-sizing: border-box;
+  border: 3px solid #00FCFD;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -1.8rem 0 0 -2.13rem;
+  transform-style: preserve-3d;
+  transform: rotateX(88.5deg) rotateY(-13.5deg);
+  backface-visibility: hidden;
+}
+.satellite span {
+  display: block;
+  width: 0.24rem;
+  height: 0.24rem;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: -0.13rem;
+  margin-left: -0.12rem;
+  transform-origin: 0.13rem 2.25rem;
+  transform-style: preserve-3d;
+  transform: rotateZ(0deg);
+  animation: rotate 5s linear 0s infinite;
+}
+.satellite span:after {
+  display: block;
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -0.12rem;
+  top: 0;
+  border-radius: 50%;
+  background: radial-gradient(at 7px 18px, #00E1FF, #000);
+  transform: rotateX(90deg) rotateY(0deg);
+  animation: particle 5s infinite linear;
+  box-shadow: 0 0 15px rgba(0, 220, 222, 0.5);
+}
+@keyframes rotate {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}
+@keyframes particle {
+  0% {
+    transform: rotateX(90deg) rotateY(0) scale(0.5);
+  }
+  25% {
+    transform: rotateX(90deg) rotateY(-90deg) scale(0.75);
+  }
+  50% {
+    transform: rotateX(90deg) rotateY(-180deg) scale(1);
+  }
+  75% {
+    transform: rotateX(90deg) rotateY(-270deg) scale(0.75);
+  }
+  100% {
+    transform: rotateX(90deg) rotateY(-360deg) scale(0.5);
+  }
+}
+.planet-left,
+.planet-right {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 50%;
+  margin-top: -1rem;
+}
+.planet-left h3,
+.planet-right h3 {
+  width: 2.8rem;
+  font-size: 0.4rem;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  margin-left: -1.4rem;
+  bottom: -0.6rem;
+}
+.planet-left {
+  left: 644px;
+}
+.planet-left .planet-iframe {
+  box-shadow: 0 0 1.1rem rgba(113, 255, 170, 0.5);
+  background-color: #AFFF6B;
+}
+.planet-right {
+  right: 644px;
+}
+.planet-right .planet-iframe {
+  box-shadow: 0 0 1.1rem rgba(0, 174, 255, 0.5);
+  background-color: #2DD0FF;
+}
+.system-left,
+.system-right {
+  width: 3.8rem;
+  height: 4.8rem;
+  position: absolute;
+}
+.system-left .line,
+.system-right .line {
+  display: block;
   width: 100%;
   height: 100%;
 }
-body {
-  line-height: 1;
-  font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei";
-  -webkit-text-size-adjust: none;
+.small-planet-warp {
+  width: 0.68rem;
+  height: 0.68rem;
+  border-radius: 50%;
+  position: absolute;
+}
+.small-planet-warp strong {
+  display: block;
+  width: 2.2rem;
+  height: 0.68rem;
+  font-size: 0.3rem;
+  line-height: 0.68rem;
+  font-weight: normal;
+  position: absolute;
+  top: 0;
+}
+.small-planet-warp span {
+  display: block;
+  width: 0.24rem;
+  height: 0.24rem;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 0.1rem;
+}
+.small-planet-warp span:before,
+.small-planet-warp span:after {
+  display: block;
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+}
+.small-planet-warp span:before {
+  width: 0.14rem;
+  height: 0.14rem;
+  top: -0.21rem;
+}
+.small-planet-warp span:after {
+  width: 0.08rem;
+  height: 0.08rem;
+  top: -0.13rem;
+}
+.small-planet {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: rotate_Animation 8s linear 0s infinite normal;
+}
+.system-left {
+  left: 4.05rem;
+  bottom: 1.35rem;
+}
+.system-left .small-planet-warp {
+  background-color: #8AFF6B;
+  box-shadow: 0 0 0.45rem rgba(138, 255, 107, 0.5);
+}
+.system-left .small-planet-warp:nth-of-type(1) {
+  top: 0.82rem;
+  left: -0.46rem;
+}
+.system-left .small-planet-warp:nth-of-type(2) {
+  top: 2.13rem;
+  left: -0.35rem;
+}
+.system-left .small-planet-warp:nth-of-type(3) {
+  bottom: 0.7rem;
+  left: 0.4rem;
+}
+.system-left .small-planet-warp:nth-of-type(4) {
+  bottom: -0.22rem;
+  left: 1.82rem;
+}
+.system-left .small-planet-warp strong {
+  left: -2.44rem;
+  text-align: right;
+}
+.system-left .small-planet-warp span {
+  left: 0.25rem;
+  background-color: #79E85B;
+}
+.system-left .small-planet-warp span:before,
+.system-left .small-planet-warp span:after {
+  background-color: #79E85B;
+}
+.system-left .small-planet-warp span:before {
+  left: -0.13rem;
+}
+.system-left .small-planet-warp span:after {
+  right: -0.07rem;
+}
+.system-right {
+  right: 4.05rem;
+  bottom: 1.8rem;
+}
+.system-right .small-planet-warp {
+  background-color: #2DD0FF;
+  box-shadow: 0 0 0.45rem rgba(45, 208, 255, 0.5);
+}
+.system-right .small-planet-warp:nth-of-type(1) {
+  top: 0.4rem;
+  right: -0.3rem;
+}
+.system-right .small-planet-warp:nth-of-type(2) {
+  top: 1.6rem;
+  right: -0.4rem;
+}
+.system-right .small-planet-warp:nth-of-type(3) {
+  bottom: 1.32rem;
+  right: -0.05rem;
+}
+.system-right .small-planet-warp:nth-of-type(4) {
+  bottom: 0.37rem;
+  right: 0.8rem;
+}
+.system-right .small-planet-warp:nth-of-type(5) {
+  bottom: -0.3rem;
+  right: 2.2rem;
+}
+.system-right .small-planet-warp strong {
+  right: -2.44rem;
+}
+.system-right .small-planet-warp span {
+  right: 0.25rem;
+  background-color: #26BEF6;
+}
+.system-right .small-planet-warp span:before,
+.system-right .small-planet-warp span:after {
+  background-color: #26BEF6;
+}
+.system-right .small-planet-warp span:before {
+  right: -0.13rem;
+}
+.system-right .small-planet-warp span:after {
+  left: -0.07rem;
+}
+.system-number {
+  width: 6rem;
+  height: 0.6rem;
+  text-align: center;
+  position: absolute;
+  top: 1.8rem;
+}
+.system-number h3 {
+  width: 100%;
+  font-size: 0.24rem;
+  position: absolute;
+  top: -0.42rem;
+}
+.system-number p {
+  width: 100%;
+  height: 100%;
+  font-size: 0;
+}
+.system-number span {
+  display: inline-block;
+  vertical-align: top;
+  width: 0.4rem;
+  height: 0.56rem;
+  border-radius: 0.04rem;
+  margin-right: 0.02rem;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  transition: background-position 0.2s linear;
+  will-change: background-position;
+}
+.system-number span:last-child {
+  margin-right: 0;
+}
+.system-number span.num0 {
+  background-position: 0 0;
+}
+.system-number span.num1 {
+  background-position: 0 -56px;
+}
+.system-number span.num2 {
+  background-position: 0 -112px;
+}
+.system-number span.num3 {
+  background-position: 0 -168px;
+}
+.system-number span.num4 {
+  background-position: 0 -224px;
+}
+.system-number span.num5 {
+  background-position: 0 -280px;
+}
+.system-number span.num6 {
+  background-position: 0 -336px;
+}
+.system-number span.num7 {
+  background-position: 0 -392px;
+}
+.system-number span.num8 {
+  background-position: 0 -448px;
+}
+.system-number span.num9 {
+  background-position: 0 -504px;
+}
+.system-number em {
+  display: inline-block;
+  vertical-align: top;
+  width: 0.2rem;
+  height: 100%;
+  font-size: 0.4rem;
+  line-height: 2.1;
+  margin-right: 0.02rem;
+}
+.system-number.left {
+  left: 5.2rem;
+}
+.system-number.left span,
+.system-number.left em {
+  color: #6bff87;
+}
+.system-number.left span {
+  background-color: rgba(0, 255, 162, 0.25);
+  border: 0.02rem solid rgba(0, 255, 162, 0.4);
+  background-image: url("../img/number01.png");
+}
+.system-number.right {
+  right: 5.2rem;
+}
+.system-number.right span,
+.system-number.right em {
+  color: #57FFFF;
+}
+.system-number.right span {
+  background-color: rgba(0, 225, 255, 0.25);
+  border: 0.02rem solid rgba(0, 225, 255, 0.4);
+  background-image: url("../img/number02.png");
+}
+.system-icon {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.warp-content {
+  display: block;
+}
+.warp-content > ul {
+  height: 100%;
+  margin-left: 0.06rem;
+  float: right;
+}
+.warp-content > ul > li {
+  display: block;
+  position: relative;
+}
+.warp-content iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+.warp-content-right {
+  width: 7.68rem;
+}
+.warp-content-right > li {
+  width: 100%;
+}
+.warp-content-right > li:nth-child(1) {
+  height: 6.42rem;
+}
+.warp-content-right > li:nth-child(2) {
+  margin-top: 0.06rem;
+  height: 4.32rem;
+}
+.warp-content-middle {
+  width: 15.42rem;
+}
+.warp-content-middle > li {
+  width: 7.68rem;
+  height: 4.32rem;
+  margin-left: 0.06rem;
+  float: left;
+}
+.warp-content-middle > li:nth-child(1) {
+  width: 100%;
+  height: 6.42rem;
+  margin: 0 0 0.06rem 0;
+}
+.warp-content-middle > li:nth-child(2) {
+  margin-left: 0;
+}
+.warp-content-left {
+  width: 9.88rem;
+}
+.warp-content-left > li {
+  width: 100%;
+  height: 5.37rem;
+}
+.warp-content-left > li:nth-child(1) {
+  margin-bottom: 0.06rem;
 }
 .main {
   width: 100%;
   height: 100%;
   overflow: hidden;
   position: relative;
-  background: -o-radial-gradient(#00081B, #000 75%);
-  background: -moz-radial-gradient(#00081B, #000 75%);
-  background: -webkit-radial-gradient(#00081B, #000 75%);
-  background: radial-gradient(#00081B, #000 75%);
+  background-color: rgba(0, 0, 0, 0.8);
 }
 .main h1 {
-  font-size: 0.58rem;
-  color: #FFF;
-  position: absolute;
-  left: 1.3rem;
-  top: 10.5%;
-}
-.page li {
-  width: 1rem;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  z-index: 99;
-}
-.page li a {
-  display: block;
-  width: 100%;
-  height: 1.3rem;
-  background-color: rgba(255, 255, 255, 0.12);
-  position: absolute;
-  top: 50%;
-  margin-top: -0.65rem;
-  -o-transition: all 300ms ease;
-  -moz-transition: all 300ms ease;
-  -webkit-transition: all 300ms ease;
-  transition: all 300ms ease;
-}
-.page li i {
-  width: 0.33rem;
-  height: 0.6rem;
-  margin-top: 0.35rem;
-}
-.page li:first-child {
-  left: 0;
-}
-.page li:first-child a {
-  left: -1.1rem;
-}
-.page li:first-child i {
-  float: left;
-  margin-left: 0.25rem;
-  background: url("../img/page_left.png") no-repeat 0 0 / contain;
-}
-.page li:first-child:hover a {
-  left: 0;
-}
-.page li:last-child {
-  right: 0;
-}
-.page li:last-child a {
-  right: -1.1rem;
-}
-.page li:last-child i {
-  float: right;
-  margin-right: 0.25rem;
-  background: url("../img/page_right.png") no-repeat 0 0 / contain;
-}
-.page li:last-child:hover a {
-  right: 0;
-}
-.nav-warp {
-  width: 100%;
-  height: 0.74rem;
-  position: absolute;
-  top: 0;
-  z-index: 100;
-}
-.nav-warp .nav {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.12);
-  position: absolute;
-  top: -0.8rem;
-  -o-transition: top 300ms ease;
-  -moz-transition: top 300ms ease;
-  -webkit-transition: top 300ms ease;
-  transition: top 300ms ease;
-}
-.nav-warp:hover .nav {
-  top: 0;
-}
-.nav-warp a {
-  float: left;
-  height: 100%;
-  padding: 0 0.35rem;
   font-size: 0.2rem;
-  line-height: 0.74rem;
-  color: #858585;
-}
-.nav-warp a:hover {
   color: #FFF;
-  text-decoration: none;
+  position: absolute;
+  left: 0.5rem;
+  top: 0.5rem;
 }
-.nav-warp a.active {
-  color: #FFF;
-  background-color: #000;
+.main h1.small {
+  left: 0.4rem;
+  top: 0.35rem;
 }
 .text-number {
-  color: #00DEFF;
-}
-.text-number h2 {
-  height: 0.3rem;
-  font-size: 0.3rem;
-  padding-bottom: 0.3rem;
-  position: relative;
-}
-.text-number h2 span {
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
+  color: #00E1FF;
 }
 .text-number .number {
   overflow: hidden;
   font-family: "geoFont";
 }
-.text-number .big {
-  float: left;
-  font-size: 0.6rem;
-  margin-left: -0.02rem;
-}
+.text-number .big,
 .text-number .small {
   float: left;
-  height: 0.6rem;
-  padding-left: 0.25rem;
-  font-size: 0.2rem;
-  line-height: 1.5;
 }
 .text-number em {
   display: block;
 }
-.left-content {
+.area-user-content {
   float: left;
   position: absolute;
-  left: 1.65rem;
-  top: 23%;
+  left: 0.45rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
-.left-content .text-number {
-  padding-top: 0.55rem;
+.area-user-content .text-number {
+  padding-top: 0.25rem;
 }
-.right-content {
-  float: right;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 5.17rem;
-  height: 100%;
-  border-left: 1px solid #002F4D;
-  background-color: #001021;
-  color: #00DEFF;
-  position: relative;
-}
-.right-content .title {
-  width: 100%;
-  font-size: 0.4rem;
-  color: #FFF;
-  text-align: center;
-  position: absolute;
-  left: 0;
-  top: 6.95%;
-}
-.number-warp {
-  padding-left: 0.6rem;
-  position: absolute;
-  left: 0;
-  top: 12.6%;
-}
-.number-warp .text-number {
-  padding-top: 0.4rem;
-}
-.number-warp .text-number h2 {
-  padding-bottom: 0.2rem;
-}
-.portrayal-warp {
-  position: absolute;
-  top: 57.5%;
-  left: 0.6rem;
-}
-.portrayal {
-  padding-left: 1.7rem;
-  position: relative;
-}
-.portrayal p {
-  font-size: 0.26rem;
-  line-height: 0.26rem;
-  padding-top: 0.21rem;
-}
-.portrayal p:first-child {
+.area-user-content .text-number:first-child {
   padding-top: 0;
 }
-.portrayal p span {
-  float: left;
-  font-size: 0.2rem;
-  width: 0.6rem;
-  padding-right: 0.05rem;
-  text-align: right;
+.area-user-content .text-number h2 {
+  font-size: 0.12rem;
+  padding-bottom: 0.14rem;
 }
-.man::before,
-.woman::before {
-  font-family: "geoFont";
-  display: block;
-  width: 1.25rem;
-  height: 1.2rem;
-  overflow: hidden;
-  font-size: 1.64rem;
-  text-indent: -0.09rem;
-  line-height: 0.82;
+.area-user-content .text-number .number {
+  height: 0.26rem;
+}
+.area-user-content .text-number .big {
+  font-size: 0.26rem;
+}
+.area-user-content .text-number .small {
+  font-size: 12px;
+  line-height: 1.4;
+  padding-left: 0.1rem;
+  transform: scale(0.75);
+  transform-origin: 0 0;
+}
+.top-content {
   position: absolute;
-  left: 0;
-  top: 50%;
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  top: 0.85rem;
+  left: 0.4rem;
 }
-.man::before {
-  content: "\f1e0";
-}
-.woman::before {
-  content: "\f1e1";
-}
-.portrayal-tag {
-  width: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  font-size: 0.24rem;
-  margin-top: 0.2rem;
-  overflow: hidden;
-}
-.portrayal-tag span {
+.top-content .text-number {
   float: left;
-  width: 1rem;
-  margin-top: 0.25rem;
-  padding-left: 0.24rem;
-  padding-right: 0.2rem;
-  position: relative;
+  width: 2.3rem;
 }
-.portrayal-tag span:before {
-  font-family: "geoFont";
-  display: block;
-  content: "\25cf";
-  font-size: 0.11rem;
-  position: absolute;
-  left: 0;
-  top: 0.07rem;
+.top-content .text-number:first-child {
+  width: 2.6rem;
 }
-.left-chart {
-  float: left;
-  width: 72%;
-  height: 100%;
+.top-content .text-number h2 {
+  font-size: 0.12rem;
+  padding-bottom: 0.14rem;
 }
-.chart-button {
+.top-content .text-number .number {
+  height: 0.26rem;
+}
+.top-content .text-number .big {
+  font-size: 0.26rem;
+}
+.top-content .text-number .big i {
+  padding-right: 0.04rem;
+}
+.top-content .text-number .small {
+  font-size: 12px;
+  line-height: 1.4;
+  padding-left: 0.1rem;
+  transform: scale(0.75);
+  transform-origin: 0 0;
+}
+.map-user-button,
+.force-button {
   float: left;
   position: absolute;
-  top: 50%;
-  left: 1.1rem;
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
 }
-.chart-button a {
+.map-user-button a,
+.force-button a {
   display: block;
-  width: 1.14rem;
-  height: 0.42rem;
+  width: 0.84rem;
+  height: 0.32rem;
   border: 1px solid #004366;
   border-radius: 0.05rem;
   text-align: center;
-  font-size: 0.22rem;
-  line-height: 0.42rem;
-  margin-top: 0.3rem;
+  font-size: 0.16rem;
+  line-height: 0.32rem;
   color: #2C6B8C;
-}
-.chart-button a:first-child {
-  margin-top: 0;
-}
-.chart-button a:hover {
-  background-color: #002442;
-  text-decoration: none;
-}
-.chart-button a.active {
-  color: #FFF;
-  background-color: #002442;
-}
-.right-chart {
-  float: right;
-  width: 66.5%;
-  height: 100%;
-}
-.top-content {
-  width: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding-left: 1.35rem;
-  position: absolute;
-  top: 20%;
   overflow: hidden;
 }
-.top-content.special {
-  top: 11%;
-  padding-left: 1.1rem;
+.map-user-button a:hover,
+.force-button a:hover {
+  background-color: rgba(0, 36, 66, 0.75);
+  text-decoration: none;
 }
-.top-content .text-number {
-  width: 5.2rem;
+.map-user-button a.active,
+.force-button a.active {
+  color: #FFF;
+  background-color: rgba(0, 36, 66, 0.75);
+}
+.map-user-button {
+  top: 0.6rem;
+  left: 0.7rem;
+}
+.map-user-button a {
+  margin-top: 0.22rem;
+}
+.map-user-button a:first-child {
+  margin-top: 0;
+}
+.force-button {
+  width: 2.1rem;
+  top: 50%;
+  left: 0.5rem;
+  transform: translateY(-50%);
+}
+.force-button a {
   float: left;
+  margin: 0.18rem 0.18rem 0 0;
 }
-.top-content .text-number:first-child {
-  width: 5.8rem;
+.map-user-content {
+  width: 3.8rem;
+  position: absolute;
+  left: 2.1rem;
+  top: 0.6rem;
+}
+.map-user-content .text-number {
+  margin-top: 0.3rem;
+}
+.map-user-content .text-number:first-child {
+  margin-top: 0;
+}
+.map-user-content .text-number h2 {
+  height: 0.22rem;
+  font-size: 0.22rem;
+  padding-bottom: 0.2rem;
+  position: relative;
+}
+.map-user-content .text-number h2 span {
+  height: 0.22rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.map-user-content .text-number .big {
+  font-size: 0.45rem;
+}
+.map-user-content .text-number .small {
+  height: 0.22rem;
+  padding-left: 0.15rem;
+  font-size: 0.14rem;
+  line-height: 1.5;
 }
 .number-arial {
   width: 100%;
@@ -459,122 +836,49 @@ body {
 .number-arial span {
   display: inline-block;
   vertical-align: top;
-  font-size: 0.6rem;
-  line-height: 0.94;
-  width: 0.34rem;
-  height: 0.53rem;
+  font-size: 0.22rem;
+  line-height: 1.1;
+  width: 0.15rem;
+  height: 0.21rem;
   border: 1px solid #134174;
   background-color: #0C3058;
-  border-radius: 0.05rem;
+  border-radius: 0.03rem;
   margin: 0 1px;
 }
 .number-arial em {
   display: inline-block;
   vertical-align: top;
-  font-size: 0.4rem;
-  line-height: 1.75;
-  height: 0.6rem;
+  height: 0.23rem;
+  font-size: 0.14rem;
+  line-height: 2.3;
   overflow: hidden;
-}
-.bottom-chart,
-.bottom-chart02,
-.bottom-chart03 {
-  width: 100%;
-  overflow: hidden;
-  position: absolute;
-  bottom: 0;
-}
-.bottom-chart {
-  height: 80%;
-}
-.bottom-chart02 {
-  height: 66%;
-}
-.map-user-button {
-  left: 0.8rem;
-  top: 1.1rem;
-  -o-transform: translateY(0);
-  -ms-transform: translateY(0);
-  -moz-transform: translateY(0);
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-}
-.map-user-content {
-  width: 5rem;
-  position: absolute;
-  left: 2.65rem;
-  top: 1.1rem;
-}
-.map-user-content .text-number {
-  margin-top: 0.6rem;
-}
-.map-user-content .text-number:first-child {
-  margin-top: 0;
 }
 .map-user-chart {
-  width: 36%;
-  height: 50%;
+  width: 35%;
+  height: 60%;
   overflow: hidden;
   position: absolute;
-  left: 0.9rem;
-  bottom: 1rem;
-}
-.map-user-chart > div {
-  width: 100%;
-  height: 100%;
+  left: 1.4rem;
+  bottom: 0.2rem;
 }
 #map_user {
   width: 100%;
   height: 100%;
 }
-@keyframes portrait_li_Animation {
-  8%,
-  92% {
-    transform: rotateX(0deg);
-    opacity: 1;
-  }
-  0%,
-  100% {
-    transform: rotateX(90deg);
-    opacity: 0;
-  }
-}
-@keyframes portrait_opacity_Animation {
-  0%,
-  40%,
-  75%,
-  100% {
-    opacity: 1;
-  }
-  25%,
-  90% {
-    opacity: 0.7;
-  }
-  55% {
-    opacity: 0.85;
-  }
-}
 .portrait-warp {
-  width: 10.7rem;
-  height: 7.6rem;
+  width: 8rem;
+  height: 5.7rem;
   position: absolute;
   top: 50%;
-  right: 0.8rem;
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
+  right: 0.65rem;
   transform: translateY(-50%);
 }
 .portrait-warp li {
-  width: 5.32rem;
-  height: 3.4rem;
-  margin: 0.2rem 0 0.2rem -3px;
+  width: 4rem;
+  height: 2.54rem;
+  margin: 0.15rem 0 0.15rem -2px;
   float: right;
   position: relative;
-  -o-animation: portrait_li_Animation 5s ease 0ms infinite normal;
-  -moz-animation: portrait_li_Animation 5s ease 0ms infinite normal;
-  -webkit-animation: portrait_li_Animation 5s ease 0ms infinite normal;
   animation: portrait_li_Animation 5s ease 0ms infinite normal;
 }
 .portrait-warp li:before,
@@ -583,10 +887,8 @@ body {
   content: '';
   width: 100%;
   height: 46%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
   box-sizing: border-box;
-  border: 3px solid #003342;
+  border: 2px solid #003342;
   position: absolute;
 }
 .portrait-warp li:before {
@@ -599,19 +901,19 @@ body {
 }
 .portrait-warp li:nth-child(1):before,
 .portrait-warp li:nth-child(3):before {
-  border-top-right-radius: 0.14rem;
+  border-top-right-radius: 0.1rem;
 }
 .portrait-warp li:nth-child(1):after,
 .portrait-warp li:nth-child(3):after {
-  border-bottom-right-radius: 0.14rem;
+  border-bottom-right-radius: 0.1rem;
 }
 .portrait-warp li:nth-child(2):before,
 .portrait-warp li:nth-child(4):before {
-  border-top-left-radius: 0.14rem;
+  border-top-left-radius: 0.1rem;
 }
 .portrait-warp li:nth-child(2):after,
 .portrait-warp li:nth-child(4):after {
-  border-bottom-left-radius: 0.14rem;
+  border-bottom-left-radius: 0.1rem;
 }
 .portrait-warp li:nth-child(2) img {
   animation-delay: -500ms;
@@ -624,22 +926,18 @@ body {
 }
 .portrait-warp .point {
   display: block;
-  width: 11px;
+  width: 8px;
   height: 10%;
   position: absolute;
   top: 50%;
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
 .portrait-warp .point:before,
 .portrait-warp .point:after {
   display: block;
   content: '';
-  width: 11px;
-  height: 11px;
+  width: 8px;
+  height: 8px;
   background-color: #003342;
   border-radius: 50%;
   position: absolute;
@@ -651,36 +949,29 @@ body {
   bottom: 0;
 }
 .portrait-warp .point:nth-child(1) {
-  left: -4px;
+  left: -3px;
 }
 .portrait-warp .point:nth-child(2) {
-  right: -4px;
+  right: -3px;
 }
 .portrait-warp img {
-  width: 0.82rem;
-  height: 2.58rem;
+  width: 0.63rem;
+  height: 1.93rem;
   float: left;
-  margin: 0.24rem 0 0 0.3rem;
-  -o-animation: portrait_opacity_Animation 5s ease-in-out 0s infinite normal;
-  -moz-animation: portrait_opacity_Animation 5s ease-in-out 0s infinite normal;
-  -webkit-animation: portrait_opacity_Animation 5s ease-in-out 0s infinite normal;
+  margin: 0.17rem 0 0 0.2rem;
   animation: portrait_opacity_Animation 5s ease-in-out 0s infinite normal;
 }
 .top-line {
   width: 90%;
-  height: 0.15rem;
-  margin: 0.15rem 0 0 0.2rem;
+  height: 0.12rem;
+  margin: 0.12rem 0 0 0.2rem;
 }
 .top-line em {
-  width: 0.1rem;
-  height: 0.15rem;
+  width: 0.08rem;
+  height: 0.12rem;
   float: left;
-  margin-right: 0.12rem;
+  margin-right: 0.1rem;
   background-color: #003342;
-  -o-transform: skewX(-40deg);
-  -ms-transform: skewX(-40deg);
-  -moz-transform: skewX(-40deg);
-  -webkit-transform: skewX(-40deg);
   transform: skewX(-40deg);
 }
 .top-line em:nth-child(6) {
@@ -709,50 +1000,50 @@ body {
 }
 .map-user-data {
   float: left;
-  width: 3.65rem;
-  height: 2.75rem;
-  padding-left: 0.3rem;
-  margin-top: 0.1rem;
-  color: #00DEFF;
-  font-size: 0.18rem;
+  width: 2.75rem;
+  height: 2.15rem;
+  padding-left: 0.2rem;
+  color: #00E1FF;
+  font-size: 0.14rem;
   overflow: hidden;
   position: relative;
-  z-index: 20;
+  z-index: 99;
 }
 .map-user-data p {
-  margin-top: 0.1rem;
-  line-height: 0.2rem;
+  margin-top: 0.12rem;
+  cursor: default;
   overflow: hidden;
+  line-height: 0.15rem;
 }
 .map-user-data span {
   float: left;
-  width: 0.55rem;
+  width: 0.45rem;
   text-align: right;
-  margin-left: 0.3rem;
+  margin-left: 0.2rem;
 }
 .map-user-data span:first-child {
-  margin-left: 0;
+  margin-left: -0.04rem;
 }
 .map-user-data em {
   float: left;
-  font-size: 0.2rem;
-  vertical-align: top;
+  font-size: 0.15rem;
 }
 .map-user-data .tag {
-  width: 3.85rem;
+  width: 2.90rem;
   font-size: 0;
-  padding-top: 0.05rem;
-  margin-left: -0.2rem;
-  overflow: hidden;
+  padding-top: 0.02rem;
+  margin-left: -0.15rem;
+  position: relative;
+  float: left;
 }
 .map-user-data strong {
   float: left;
   font-weight: normal;
-  min-width: 0.95rem;
-  max-width: 3.5rem;
-  font-size: 0.18rem;
-  padding-left: 0.13rem;
-  margin: 0.16rem 0 0 0.2rem;
+  min-width: 0.71rem;
+  max-width: 2.65rem;
+  font-size: 0.14rem;
+  padding-left: 0.1rem;
+  margin: 0.12rem 0 0 0.15rem;
   position: relative;
   overflow: hidden;
   white-space: nowrap;
@@ -765,8 +1056,20 @@ body {
   content: "\25cf";
   font-size: 5px;
   position: absolute;
-  left: 0;
-  top: 8px;
+  left: -1px;
+  top: 6px;
+}
+@keyframes portrait_li_Animation {
+  8%,
+  92% {
+    transform: rotateX(0deg);
+    opacity: 1;
+  }
+  0%,
+  100% {
+    transform: rotateX(90deg);
+    opacity: 0;
+  }
 }
 @keyframes portrait_opacity_Animation {
   0%,
@@ -783,143 +1086,4479 @@ body {
     opacity: 0.85;
   }
 }
-.scatter-right {
-  width: 4.9rem;
+.force-chart {
+  width: 75%;
+  height: 100%;
+  float: right;
+  overflow: hidden;
+}
+.area-user-chart {
+  float: right;
+  width: 85%;
+  height: 100%;
+}
+.area-user-chart > div {
+  height: 100%;
+}
+.public-chart-warp {
+  width: 100%;
+  height: 100%;
+}
+.public-chart-warp > div {
+  height: 100%;
+}
+.data-in-chart {
+  width: 100%;
+  height: 100%;
+  padding-top: 9%;
+  box-sizing: border-box;
+}
+.data-in-top {
+  display: flex;
+  width: 80%;
+  height: 2rem;
+  margin: 0 auto;
+}
+.data-in-top > div {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+.data-in-top > div > div:first-child {
+  height: 1.7rem;
+}
+.data-in-top > div > div:last-child {
+  margin-top: 0.05rem;
+}
+.data-in-bottom {
+  width: 100%;
+  height: 40%;
+}
+.video-data {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.video-data video {
+  width: 100%;
+  opacity: 0.8;
+}
+.video-data-content {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   position: absolute;
-  top: 54%;
-  right: 0.8rem;
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+.video-data-content .text-number {
+  color: #FFF;
+  position: absolute;
+  opacity: 0;
+  animation-duration: 37.07s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.video-data-content .text-number h2 {
+  font-size: 0.2rem;
+  padding-bottom: 0.18rem;
+}
+.video-data-content .text-number .big {
+  font-size: 0.4rem;
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei";
+}
+.video-data-content .text-number .big i {
+  padding-right: 0.1rem;
+  font-family: "geoFont";
+}
+.video-data-content .text-number .small {
+  height: 0.4rem;
+  padding-left: 0.15rem;
+  font-size: 0.14rem;
+  line-height: 1.4;
+}
+.video-data-content .text-number:nth-child(1) {
+  left: 1rem;
+  top: 2.2rem;
+  animation-name: number01_Animation;
+}
+.video-data-content .text-number:nth-child(2) {
+  right: 1rem;
+  top: 2.6rem;
+  animation-name: number02_Animation;
+}
+.video-data-content .text-number:nth-child(3) {
+  left: 1rem;
+  top: 1.3rem;
+  animation-name: number03_Animation;
+}
+.video-data-content .text-number:nth-child(4) {
+  right: 1rem;
+  top: 2.2rem;
+  animation-name: number04_Animation;
+}
+.video-data-content .text-number:nth-child(5) {
+  left: 1rem;
+  top: 2.3rem;
+  animation-name: number05_Animation;
+}
+.video-data-content .text-number:nth-child(6) {
+  right: 1rem;
+  top: 0.5rem;
+  animation-name: number06_Animation;
+}
+@keyframes number01_Animation {
+  0%,
+  4% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  4.5%,
+  15% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  15.5%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+@keyframes number02_Animation {
+  0%,
+  20.2% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  20.7%,
+  32% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  32.5%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+@keyframes number03_Animation {
+  0%,
+  38% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  38.5%,
+  48.5% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  49%,
+  100% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+}
+@keyframes number04_Animation {
+  0%,
+  53% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  53.5%,
+  65% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  65.5%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+@keyframes number05_Animation {
+  0%,
+  72% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+  72.5%,
+  83% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  83.5%,
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+}
+@keyframes number06_Animation {
+  0%,
+  88.5% {
+    opacity: 0;
+    transform: translateY(50%);
+  }
+  89%,
+  98.5% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  99%,
+  100% {
+    opacity: 0;
+    transform: translateY(-50%);
+  }
+}
+.total-account-chart {
+  width: 90%;
+  height: 60%;
+  display: flex;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+}
+.total-account-chart > div {
+  flex: 1;
+}
+.scatter-chart-warp {
+  width: 6.8rem;
+  height: 100%;
+  margin-left: 0.05rem;
+  float: left;
+}
+.scatter-chart-warp > div {
+  height: 100%;
+}
+.scatter-right {
+  width: 2.55rem;
+  padding-top: 0.35rem;
+  margin-right: 0.4rem;
   float: right;
 }
 .scatter-right .title {
   color: #FFF;
-  font-size: 0.2rem;
+  font-size: 0.12rem;
   overflow: hidden;
 }
 .scatter-right .title h5 {
-  width: 2rem;
+  width: 1rem;
   float: right;
   text-align: center;
 }
 .scatter-right .title span {
-  font-size: 0.24rem;
+  font-size: 0.13rem;
   display: block;
-  padding-bottom: 0.1rem;
+  padding-bottom: 0.05rem;
 }
 .scatter-data {
   width: 100%;
 }
 .scatter-data li {
-  margin-top: 0.2rem;
+  margin-top: 0.1rem;
   text-align: center;
   overflow: hidden;
-  line-height: 0.6rem;
+  line-height: 0.38rem;
 }
 .scatter-data li span {
-  height: 0.6rem;
-  font-size: 0.2rem;
+  height: 0.38rem;
+  font-size: 0.14rem;
   border-radius: 50%;
   float: left;
   color: #FFF;
 }
 .scatter-data li em {
   float: right;
-  width: 2rem;
-  font-size: 0.36rem;
+  width: 1rem;
+  font-size: 0.26rem;
   font-family: Arial;
 }
 .scatter-data li:nth-child(1) {
   color: rgba(255, 87, 119, 0.5);
 }
 .scatter-data li:nth-child(1) span {
-  width: 0.88rem;
-  padding: 0.14rem 0;
+  width: 0.52rem;
+  padding: 0.07rem 0;
   background-color: rgba(255, 87, 119, 0.5);
+  font-size: 0.16rem;
 }
 .scatter-data li:nth-child(1) em {
-  padding: 0.14rem 0;
+  padding: 0.07rem 0;
 }
 .scatter-data li:nth-child(2) {
-  color: rgba(177, 27, 232, 0.5);
+  color: rgba(177, 27, 232, 0.7);
 }
 .scatter-data li:nth-child(2) span {
-  width: 0.84rem;
-  padding: 0.12rem 0;
-  background-color: rgba(177, 27, 232, 0.5);
-  margin-left: 0.02rem;
+  width: 0.5rem;
+  padding: 0.06rem 0;
+  background-color: rgba(177, 27, 232, 0.7);
+  margin-left: 0.01rem;
+  font-size: 0.16rem;
 }
 .scatter-data li:nth-child(2) em {
-  padding: 0.12rem 0;
+  padding: 0.06rem 0;
 }
 .scatter-data li:nth-child(3) {
   color: rgba(116, 67, 255, 0.7);
 }
 .scatter-data li:nth-child(3) span {
-  width: 0.8rem;
-  padding: 0.1rem 0;
+  width: 0.48rem;
+  padding: 0.05rem 0;
   background-color: rgba(116, 67, 255, 0.7);
-  margin-left: 0.04rem;
+  margin-left: 0.02rem;
+  font-size: 0.15rem;
 }
 .scatter-data li:nth-child(3) em {
-  padding: 0.06rem 0;
+  padding: 0.05rem 0;
 }
 .scatter-data li:nth-child(4) {
   color: rgba(39, 120, 255, 0.6);
 }
 .scatter-data li:nth-child(4) span {
-  width: 0.76rem;
-  padding: 0.08rem 0;
+  width: 0.46rem;
+  padding: 0.04rem 0;
   background-color: rgba(39, 120, 255, 0.6);
-  margin-left: 0.06rem;
+  margin-left: 0.03rem;
+  font-size: 0.15rem;
 }
 .scatter-data li:nth-child(4) em {
-  padding: 0.08rem 0;
+  padding: 0.04rem 0;
 }
 .scatter-data li:nth-child(5) {
   color: rgba(39, 191, 255, 0.5);
 }
 .scatter-data li:nth-child(5) span {
-  width: 0.72rem;
-  padding: 0.06rem 0;
+  width: 0.44rem;
+  padding: 0.03rem 0;
   background-color: rgba(39, 191, 255, 0.6);
-  margin-left: 0.08rem;
+  margin-left: 0.04rem;
+  font-size: 0.15rem;
 }
 .scatter-data li:nth-child(5) em {
-  padding: 0.06rem 0;
+  padding: 0.03rem 0;
 }
 .scatter-data li:nth-child(6) {
   color: rgba(0, 222, 214, 0.5);
 }
 .scatter-data li:nth-child(6) span {
-  width: 0.68rem;
-  padding: 0.04rem 0;
+  width: 0.42rem;
+  padding: 0.02rem 0;
   background-color: rgba(0, 222, 214, 0.5);
-  margin-left: 0.1rem;
+  margin-left: 0.05rem;
 }
 .scatter-data li:nth-child(6) em {
-  padding: 0.04rem 0;
+  padding: 0.02rem 0;
 }
 .scatter-data li:nth-child(7) {
   color: rgba(0, 222, 157, 0.5);
 }
 .scatter-data li:nth-child(7) span {
-  width: 0.64rem;
-  padding: 0.02rem 0;
+  width: 0.4rem;
+  padding: 0.01rem 0;
   background-color: rgba(0, 222, 157, 0.5);
-  margin-left: 0.12rem;
+  margin-left: 0.06rem;
 }
 .scatter-data li:nth-child(7) em {
-  padding: 0.02rem 0;
+  padding: 0.01rem 0;
 }
 .scatter-data li:nth-child(8) {
-  color: rgba(0, 222, 157, 0.5);
+  color: rgba(57, 237, 86, 0.5);
 }
 .scatter-data li:nth-child(8) span {
-  width: 0.6rem;
+  width: 0.38rem;
   background-color: rgba(57, 237, 86, 0.5);
-  margin-left: 0.14rem;
+  margin-left: 0.07rem;
+}
+.view-content {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 2;
+}
+.view-warp01 {
+  background-color: #2D2A56;
+}
+.view-warp02 .view-content {
+  width: 36.6rem;
+  padding: 0 1rem 0 0.8rem;
+}
+.view-warp03 {
+  background-color: #000;
+}
+.view-warp03 .view-content {
+  width: 34.6rem;
+  padding: 0 1.9rem;
+  color: #FFF;
+}
+.view-bg01,
+.view-bg02,
+.view-bg03 {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.view-bg01 img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.view-bg01 > div {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.view-bg01 span {
+  display: block;
+  width: 0.5rem;
+  height: 0.5rem;
+  position: absolute;
+  background: url("../img/view-star.png") no-repeat 0 0 / contain;
+}
+.view-bg01 span:nth-child(1) {
+  left: 2.1rem;
+  top: 0.6rem;
+}
+.view-bg01 span:nth-child(2) {
+  left: 3.4rem;
+  top: 5.45rem;
+}
+.view-bg01 span:nth-child(3) {
+  left: 8.05rem;
+  top: 3.5rem;
+}
+.view-bg01 span:nth-child(4) {
+  left: 14.7rem;
+  bottom: 0.5rem;
+}
+.view-bg01 span:nth-child(5) {
+  left: 15.5rem;
+  top: 1.05rem;
+}
+.view-bg01 span:nth-child(6) {
+  left: 18.55rem;
+  top: 4.5rem;
+}
+.view-bg01 span:nth-child(7) {
+  right: 16.2rem;
+  bottom: 0.4rem;
+}
+.view-bg01 span:nth-child(8) {
+  right: 13.3rem;
+  top: 1.3rem;
+}
+.view-bg01 span:nth-child(9) {
+  right: 7.7rem;
+  bottom: 1.5rem;
+}
+.view-bg01 span:nth-child(10) {
+  right: 7.2rem;
+  top: 3.4rem;
+}
+.view-bg01 span:nth-child(11) {
+  right: 2.4rem;
+  top: 2.7rem;
+}
+.view-bg01 em {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #FFF;
+  box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.3);
+  position: absolute;
+  opacity: 0;
+}
+.view-bg01 em:before {
+  content: '';
+  display: block;
+  border-style: solid;
+  border-width: 0 0 4px 1.6rem;
+  border-color: transparent transparent transparent rgba(255, 255, 255, 0.3);
+  transform: rotate(-45deg);
+  transform-origin: left center;
+  position: absolute;
+  top: 1px;
+  left: 3px;
+}
+.view-bg01 em:nth-child(1) {
+  left: 2.9rem;
+  top: 7.6rem;
+}
+.view-bg01 em:nth-child(2) {
+  left: 5rem;
+  top: 1.4rem;
+}
+.view-bg01 em:nth-child(3) {
+  left: 11.6rem;
+  top: 0.9rem;
+}
+.view-bg01 em:nth-child(4) {
+  left: 13.2rem;
+  top: 5.9rem;
+}
+.view-bg01 em:nth-child(5) {
+  left: 15.8rem;
+  top: 8.8rem;
+}
+.view-bg01 em:nth-child(6) {
+  left: 19.5rem;
+  top: 1.8rem;
+}
+.view-bg01 em:nth-child(7) {
+  right: 15rem;
+  top: 6.7rem;
+}
+.view-bg01 em:nth-child(8) {
+  right: 8.9rem;
+  top: 9rem;
+}
+.view-bg01 em:nth-child(9) {
+  right: 8.7rem;
+  top: 3.5rem;
+}
+.view-bg01 em:nth-child(10) {
+  right: 3.7rem;
+  top: 5.9rem;
+}
+.view-bg02,
+.view-bg03 {
+  will-change: transform;
+}
+.view-warp01 h2 {
+  width: 100%;
+  text-align: center;
+  font-size: 0.48rem;
+  color: #FFF;
+  position: absolute;
+  left: 0;
+  top: 0.48rem;
+  z-index: 3;
+}
+.planet-warp {
+  position: absolute;
+}
+.planet-warp em {
+  width: 100%;
+  height: 100%;
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.planet-warp .planet {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+.planet-warp .planet span {
+  display: block;
+  border-radius: 50%;
+  position: absolute;
+}
+.planet-warp strong {
+  font-weight: normal;
+  display: block;
+  position: absolute;
+}
+.planet-one {
+  position: absolute;
+  width: 1.7rem;
+  height: 1.7rem;
+  z-index: 2;
+}
+.planet-one .planet-warp {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.planet-one .planet-warp em {
+  background-color: #694A57;
+}
+.planet-one .planet-warp:after {
+  display: block;
+  content: '';
+  width: 1.11rem;
+  height: 0.77rem;
+  background: url("../img/planet-light.png") no-repeat 0 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.planet-one .planet {
+  background-color: #FBD76B;
+}
+.planet-one .planet span {
+  background-color: #F7B55D;
+}
+.planet-one .planet span:nth-child(1) {
+  width: 0.4rem;
+  height: 0.4rem;
+  left: 0.24rem;
+  bottom: 0.46rem;
+}
+.planet-one .planet span:nth-child(2) {
+  width: 0.17rem;
+  height: 0.17rem;
+  left: 0.73rem;
+  bottom: 0.2rem;
+}
+.planet-one .planet span:nth-child(3) {
+  width: 0.28rem;
+  height: 0.28rem;
+  right: 0.46rem;
+  bottom: 0.2rem;
+}
+.planet-one .planet span:nth-child(4) {
+  width: 0.12rem;
+  height: 0.12rem;
+  right: 0.6rem;
+  top: 0.3rem;
+}
+.planet-one strong {
+  width: 100%;
+  font-size: 0.3rem;
+  line-height: 1.2;
+  text-align: center;
+  color: #7B3B10;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.planet-two {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.planet-two .planet-warp {
+  width: 1rem;
+  height: 1rem;
+}
+.planet-two .planet-warp em {
+  background-color: #41E994;
+}
+.planet-two .planet {
+  background-color: #BEEAE2;
+}
+.planet-two .planet span {
+  background-color: #8EDDB9;
+}
+.planet-two .planet span:nth-child(1) {
+  width: 0.28rem;
+  height: 0.28rem;
+  left: 0.15rem;
+  bottom: 0.15rem;
+}
+.planet-two .planet span:nth-child(2) {
+  width: 0.2rem;
+  height: 0.2rem;
+  left: 0.5rem;
+  top: 0.15rem;
+}
+.planet-two .planet span:nth-child(3) {
+  width: 0.12rem;
+  height: 0.12rem;
+  right: 0.15rem;
+  bottom: 0.25rem;
+}
+.planet-two strong {
+  width: 100%;
+  font-size: 0.2rem;
+  line-height: 1.2;
+  text-align: center;
+  color: #0A562D;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.planet-three {
+  width: 100%;
+  height: 100%;
+  font-size: 0.18rem;
+  color: #3BFFFD;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+}
+.planet-three .planet-warp {
+  width: 0.2rem;
+  height: 0.2rem;
+}
+.planet-three .planet-warp:before {
+  display: block;
+  content: '';
+  width: 0.34rem;
+  height: 0.34rem;
+  border-radius: 50%;
+  border: 1px solid rgba(59, 255, 253, 0.3);
+  position: absolute;
+  left: -0.08rem;
+  top: -0.08rem;
+}
+.planet-three .planet-warp i {
+  display: block;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  border-top: 1px solid #3BFFFD;
+  position: absolute;
+  opacity: 0.4;
+}
+.planet-three .planet-warp i.line01 {
+  left: 0.1rem;
+  top: 0.1rem;
+  transform-origin: left center;
+}
+.planet-three .planet {
+  background-color: #3BFFFD;
+}
+.planet-three .planet span {
+  background-color: #26E5E3;
+}
+.planet-three .planet span:nth-child(1) {
+  width: 0.04rem;
+  height: 0.04rem;
+  left: 0.02rem;
+  bottom: 0.06rem;
+}
+.planet-three .planet span:nth-child(2) {
+  width: 0.07rem;
+  height: 0.07rem;
+  left: 0.05rem;
+  bottom: 0.01rem;
+}
+.planet-three .planet span:nth-child(3) {
+  width: 0.04rem;
+  height: 0.04rem;
+  right: 0.03rem;
+  top: 0.05rem;
+}
+.planet-three strong {
+  white-space: nowrap;
+  margin-top: -0.1rem;
+}
+.planet-main {
+  float: left;
+  height: 100%;
+  position: relative;
+}
+.planet-main:nth-child(1) {
+  width: 8.05rem;
+}
+.planet-main:nth-child(1) .planet-one {
+  left: 300px;
+  top: 480px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(1) {
+  left: 235px;
+  top: 575px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(1) .line01 {
+  width: 0.3rem;
+  transform: rotate(-120deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(1) .line02 {
+  width: 0.4rem;
+  right: 24px;
+  top: -16px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(1) strong {
+  right: 67px;
+  top: -16px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(2) {
+  left: 240px;
+  top: 518px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(2) .line01 {
+  width: 0.4rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(2) .line02 {
+  width: 0.2rem;
+  right: 16px;
+  top: -29px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(2) strong {
+  right: 42px;
+  top: -29px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(3) {
+  left: 266px;
+  top: 460px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(3) .line01 {
+  width: 0.6rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(3) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: -49px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(3) strong {
+  right: 67px;
+  top: -49px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(4) {
+  left: 317px;
+  top: 427px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(4) .line01 {
+  width: 0.6rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(4) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: -49px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(4) strong {
+  right: 67px;
+  top: -49px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(5) {
+  left: 372px;
+  top: 412px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(5) .line01 {
+  width: 0.8rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(5) .line02 {
+  width: 0.4rem;
+  right: 23px;
+  top: -68px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(5) strong {
+  right: 70px;
+  top: -68px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(6) {
+  right: 363px;
+  top: 419px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(6) .line01 {
+  width: 1rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(6) .line02 {
+  width: 0.4rem;
+  left: 28px;
+  top: -88px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(6) strong {
+  left: 75px;
+  top: -88px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(7) {
+  right: 309px;
+  top: 453px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(7) .line01 {
+  width: 0.8rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(7) .line02 {
+  width: 0.4rem;
+  left: 23px;
+  top: -68px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(7) strong {
+  left: 70px;
+  top: -68px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(8) {
+  right: 277px;
+  top: 503px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(8) .line01 {
+  width: 0.6rem;
+  transform: rotate(-70deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(8) .line02 {
+  width: 0.4rem;
+  left: 30px;
+  top: -46px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(8) strong {
+  left: 74px;
+  top: -46px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(9) {
+  right: 268px;
+  top: 557px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(9) .line01 {
+  width: 0.6rem;
+  transform: rotate(40deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(9) .line02 {
+  width: 0.4rem;
+  left: 56px;
+  top: 48px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(9) strong {
+  left: 100px;
+  top: 48px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(10) {
+  right: 281px;
+  bottom: 441px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(10) .line01 {
+  width: 0.6rem;
+  transform: rotate(40deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(10) .line02 {
+  width: 0.4rem;
+  left: 56px;
+  top: 48px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(10) strong {
+  left: 100px;
+  top: 48px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(11) {
+  right: 318px;
+  bottom: 396px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(11) .line01 {
+  width: 0.6rem;
+  transform: rotate(60deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(11) .line02 {
+  width: 0.4rem;
+  left: 40px;
+  top: 62px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(11) strong {
+  left: 88px;
+  top: 62px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(12) {
+  right: 372px;
+  bottom: 367px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(12) .line01 {
+  width: 0.8rem;
+  transform: rotate(80deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(12) .line02 {
+  width: 0.4rem;
+  left: 24px;
+  top: 88px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(12) strong {
+  left: 72px;
+  top: 88px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(13) {
+  left: 353px;
+  bottom: 362px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(13) .line01 {
+  width: 0.8rem;
+  transform: rotate(100deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(13) .line02 {
+  width: 0.4rem;
+  right: 23px;
+  top: 88px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(13) strong {
+  right: 73px;
+  top: 88px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(14) {
+  left: 294px;
+  bottom: 385px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(14) .line01 {
+  width: 0.6rem;
+  transform: rotate(100deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(14) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: 68px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(14) strong {
+  right: 67px;
+  top: 68px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(15) {
+  left: 251px;
+  bottom: 431px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(15) .line01 {
+  width: 0.4rem;
+  transform: rotate(105deg);
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(15) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: 48px;
+}
+.planet-main:nth-child(1) .planet-three .planet-warp:nth-child(15) strong {
+  right: 67px;
+  top: 48px;
+}
+.planet-main:nth-child(2) {
+  width: 7.95rem;
+}
+.planet-main:nth-child(2) .planet-one {
+  left: 368px;
+  top: 480px;
+}
+.planet-main:nth-child(2) .planet-two {
+  transform-origin: 56% 54%;
+}
+.planet-main:nth-child(2) .planet-two .planet-warp:nth-child(1) {
+  left: 277px;
+  top: 402px;
+}
+.planet-main:nth-child(2) .planet-two .planet-warp:nth-child(2) {
+  right: 191px;
+  top: 361px;
+}
+.planet-main:nth-child(2) .planet-two .planet-warp:nth-child(3) {
+  right: 140px;
+  bottom: 362px;
+}
+.planet-main:nth-child(2) .planet-two .planet-warp:nth-child(4) {
+  left: 339px;
+  bottom: 294px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(1) {
+  left: 294px;
+  top: 516px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(1) .line01 {
+  width: 0.6rem;
+  transform: rotate(190deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(1) .line02 {
+  width: 0.4rem;
+  right: 69px;
+  top: 0;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(1) strong {
+  right: 120px;
+  top: 0;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(2) {
+  left: 247px;
+  top: 477px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(2) .line01 {
+  width: 0.6rem;
+  transform: rotate(220deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(2) .line02 {
+  width: 0.3rem;
+  right: 56px;
+  top: -28px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(2) strong {
+  right: 96px;
+  top: -28px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(3) {
+  left: 242px;
+  top: 415px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(3) .line01 {
+  width: 0.6rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(3) .line02 {
+  width: 0.3rem;
+  right: 20px;
+  top: -48px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(3) strong {
+  right: 60px;
+  top: -48px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(4) {
+  left: 285px;
+  top: 367px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(4) .line01 {
+  width: 0.6rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(4) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: -48px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(4) strong {
+  right: 70px;
+  top: -48px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(5) {
+  left: 351px;
+  top: 371px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(5) .line01 {
+  width: 1.2rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(5) .line02 {
+  width: 0.4rem;
+  right: 30px;
+  top: -108px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(5) strong {
+  right: 77px;
+  top: -108px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(6) {
+  right: 293px;
+  top: 349px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(6) .line01 {
+  width: 1.2rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(6) .line02 {
+  width: 0.4rem;
+  right: -50px;
+  top: -108px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(6) strong {
+  right: -167px;
+  top: -108px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(7) {
+  right: 237px;
+  top: 321px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(7) .line01 {
+  width: 0.6rem;
+  transform: rotate(-70deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(7) .line02 {
+  width: 0.4rem;
+  right: -50px;
+  top: -46px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(7) strong {
+  right: -167px;
+  top: -46px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(8) {
+  right: 180px;
+  top: 338px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(8) .line01 {
+  width: 0.3rem;
+  transform: rotate(-60deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(8) .line02 {
+  width: 0.4rem;
+  right: -45px;
+  top: -16px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(8) strong {
+  right: -167px;
+  top: -16px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(9) {
+  right: 152px;
+  top: 387px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(9) .line01 {
+  width: 0.3rem;
+  transform: rotate(-60deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(9) .line02 {
+  width: 0.4rem;
+  right: -45px;
+  top: -16px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(9) strong {
+  right: -164px;
+  top: -16px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(10) {
+  right: 165px;
+  top: 445px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(10) .line01 {
+  width: 0.3rem;
+  transform: rotate(40deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(10) .line02 {
+  width: 0.4rem;
+  right: -53px;
+  top: 30px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(10) strong {
+  right: -170px;
+  top: 30px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(11) {
+  right: 210px;
+  top: 479px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(11) .line01 {
+  width: 0.3rem;
+  transform: rotate(60deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(11) .line02 {
+  width: 0.4rem;
+  right: -45px;
+  top: 36px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(11) strong {
+  right: -160px;
+  top: 36px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(12) {
+  right: 118px;
+  bottom: 355px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(12) .line01 {
+  width: 0.4rem;
+  transform: rotate(80deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(12) .line02 {
+  width: 0.4rem;
+  right: -37px;
+  top: 48px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(12) strong {
+  right: -187px;
+  top: 48px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(13) {
+  right: 172px;
+  bottom: 321px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(13) .line01 {
+  width: 0.5rem;
+  transform: rotate(80deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(13) .line02 {
+  width: 0.4rem;
+  right: -38px;
+  top: 59px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(13) strong {
+  right: -230px;
+  top: 59px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(14) {
+  right: 232px;
+  bottom: 343px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(14) .line01 {
+  width: 1.2rem;
+  transform: rotate(80deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(14) .line02 {
+  width: 0.4rem;
+  right: -50px;
+  top: 128px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(14) strong {
+  right: -187px;
+  top: 128px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(15) {
+  left: 406px;
+  bottom: 255px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(15) .line01 {
+  width: 1.2rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(15) .line02 {
+  width: 0.4rem;
+  right: 70px;
+  top: 114px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(15) strong {
+  right: 117px;
+  top: 114px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(16) {
+  left: 354px;
+  bottom: 257px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(16) .line01 {
+  width: 0.6rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(16) .line02 {
+  width: 0.4rem;
+  right: 40px;
+  top: 62px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(16) strong {
+  right: 87px;
+  top: 62px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(17) {
+  left: 310px;
+  bottom: 290px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(17) .line01 {
+  width: 0.4rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(17) .line02 {
+  width: 0.4rem;
+  right: 30px;
+  top: 45px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(17) strong {
+  right: 77px;
+  top: 45px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(18) {
+  left: 300px;
+  bottom: 342px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(18) .line01 {
+  width: 0.4rem;
+  transform: rotate(130deg);
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(18) .line02 {
+  width: 0.4rem;
+  right: 36px;
+  top: 40px;
+}
+.planet-main:nth-child(2) .planet-three .planet-warp:nth-child(18) strong {
+  right: 86px;
+  top: 40px;
+}
+.planet-main:nth-child(3) {
+  width: 8.05rem;
+}
+.planet-main:nth-child(3) .planet-one {
+  left: 411px;
+  top: 480px;
+}
+.planet-main:nth-child(3) .planet-two {
+  transform-origin: 60% 54%;
+}
+.planet-main:nth-child(3) .planet-two .planet-warp:nth-child(1) {
+  left: 321px;
+  top: 375px;
+}
+.planet-main:nth-child(3) .planet-two .planet-warp:nth-child(2) {
+  right: 95px;
+  top: 438px;
+}
+.planet-main:nth-child(3) .planet-two .planet-warp:nth-child(3) {
+  left: 398px;
+  bottom: 290px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(1) {
+  left: 306px;
+  top: 500px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(1) .line01 {
+  width: 0.6rem;
+  transform: rotate(100deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(1) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: 68px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(1) strong {
+  right: 67px;
+  top: 68px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(2) {
+  left: 260px;
+  top: 460px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(2) .line01 {
+  width: 0.4rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(2) .line02 {
+  width: 0.4rem;
+  right: 30px;
+  top: 44px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(2) strong {
+  right: 77px;
+  top: 44px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(3) {
+  left: 250px;
+  top: 400px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(3) .line01 {
+  width: 0.3rem;
+  transform: rotate(-160deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(3) .line02 {
+  width: 0.4rem;
+  right: 38px;
+  top: 0;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(3) strong {
+  right: 90px;
+  top: 0;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(4) {
+  left: 281px;
+  top: 345px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(4) .line01 {
+  width: 0.4rem;
+  transform: rotate(-120deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(4) .line02 {
+  width: 0.4rem;
+  right: 30px;
+  top: -25px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(4) strong {
+  right: 77px;
+  top: -25px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(5) {
+  left: 330px;
+  top: 315px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(5) .line01 {
+  width: 0.5rem;
+  transform: rotate(-120deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(5) .line02 {
+  width: 0.4rem;
+  right: 34px;
+  top: -32px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(5) strong {
+  right: 80px;
+  top: -32px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(6) {
+  left: 391px;
+  top: 320px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(6) .line01 {
+  width: 0.8rem;
+  transform: rotate(-110deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(6) .line02 {
+  width: 0.4rem;
+  right: 36px;
+  top: -64px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(6) strong {
+  right: 82px;
+  top: -64px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(7) {
+  left: 441px;
+  top: 350px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(7) .line01 {
+  width: 1.4rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(7) .line02 {
+  width: 0.4rem;
+  right: 35px;
+  top: -128px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(7) strong {
+  right: 77px;
+  top: -128px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(8) {
+  right: 203px;
+  top: 439px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(8) .line01 {
+  width: 0.4rem;
+  transform: rotate(-120deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(8) .line02 {
+  width: 0.4rem;
+  right: 30px;
+  top: -24px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(8) strong {
+  right: 77px;
+  top: -24px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(9) {
+  right: 172px;
+  top: 406px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(9) .line01 {
+  width: 0.4rem;
+  transform: rotate(-120deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(9) .line02 {
+  width: 0.4rem;
+  right: 30px;
+  top: -24px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(9) strong {
+  right: 77px;
+  top: -24px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(10) {
+  right: 127px;
+  top: 396px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(10) .line01 {
+  width: 0.6rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(10) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: -48px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(10) strong {
+  right: 67px;
+  top: -48px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(11) {
+  right: 84px;
+  top: 413px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(11) .line01 {
+  width: 0.6rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(11) .line02 {
+  width: 0.4rem;
+  left: 20px;
+  top: -48px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(11) strong {
+  left: 67px;
+  top: -48px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(12) {
+  right: 58px;
+  top: 449px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(12) .line01 {
+  width: 0.6rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(12) .line02 {
+  width: 0.4rem;
+  left: 20px;
+  top: -48px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(12) strong {
+  left: 67px;
+  top: -48px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(13) {
+  right: 57px;
+  top: 498px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(13) .line01 {
+  width: 0.6rem;
+  transform: rotate(-60deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(13) .line02 {
+  width: 0.4rem;
+  left: 40px;
+  top: -42px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(13) strong {
+  left: 86px;
+  top: -42px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(14) {
+  right: 92px;
+  top: 538px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(14) .line01 {
+  width: 0.6rem;
+  transform: rotate(40deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(14) .line02 {
+  width: 0.4rem;
+  left: 54px;
+  top: 48px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(14) strong {
+  left: 100px;
+  top: 48px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(15) {
+  right: 148px;
+  top: 557px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(15) .line01 {
+  width: 0.6rem;
+  transform: rotate(60deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(15) .line02 {
+  width: 0.4rem;
+  left: 40px;
+  top: 62px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(15) strong {
+  left: 90px;
+  top: 62px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(16) {
+  left: 518px;
+  bottom: 338px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(16) .line01 {
+  width: 0.5rem;
+  transform: rotate(30deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(16) .line02 {
+  width: 0.4rem;
+  left: 53px;
+  top: 35px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(16) strong {
+  left: 105px;
+  top: 35px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(17) {
+  left: 511px;
+  bottom: 294px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(17) .line01 {
+  width: 0.4rem;
+  transform: rotate(50deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(17) .line02 {
+  width: 0.4rem;
+  left: 35px;
+  top: 40px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(17) strong {
+  left: 85px;
+  top: 40px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(18) {
+  left: 480px;
+  bottom: 260px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(18) .line01 {
+  width: 0.6rem;
+  transform: rotate(60deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(18) .line02 {
+  width: 0.4rem;
+  left: 40px;
+  top: 62px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(18) strong {
+  left: 90px;
+  top: 62px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(19) {
+  left: 436px;
+  bottom: 247px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(19) .line01 {
+  width: 0.8rem;
+  transform: rotate(100deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(19) .line02 {
+  width: 0.4rem;
+  right: 23px;
+  top: 87px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(19) strong {
+  right: 75px;
+  top: 87px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(20) {
+  left: 391px;
+  bottom: 262px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(20) .line01 {
+  width: 0.6rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(20) .line02 {
+  width: 0.4rem;
+  right: 40px;
+  top: 62px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(20) strong {
+  right: 85px;
+  top: 62px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(21) {
+  left: 359px;
+  bottom: 296px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(21) .line01 {
+  width: 0.4rem;
+  transform: rotate(150deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(21) .line02 {
+  width: 0.4rem;
+  right: 42px;
+  top: 29px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(21) strong {
+  right: 90px;
+  top: 29px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(22) {
+  left: 353px;
+  bottom: 341px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(22) .line01 {
+  width: 0.4rem;
+  transform: rotate(-140deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(22) .line02 {
+  width: 0.4rem;
+  right: 40px;
+  top: -15px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(22) strong {
+  right: 90px;
+  top: -15px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(23) {
+  left: 375px;
+  bottom: 379px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(23) .line01 {
+  width: 0.6rem;
+  transform: rotate(-120deg);
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(23) .line02 {
+  width: 0.4rem;
+  right: 40px;
+  top: -42px;
+}
+.planet-main:nth-child(3) .planet-three .planet-warp:nth-child(23) strong {
+  right: 85px;
+  top: -42px;
+}
+.planet-main:nth-child(4) {
+  width: 8.15rem;
+}
+.planet-main:nth-child(4) .planet-one {
+  left: 420px;
+  top: 480px;
+}
+.planet-main:nth-child(4) .planet-two {
+  transform-origin: 61% 54%;
+}
+.planet-main:nth-child(4) .planet-two .planet-warp:nth-child(1) {
+  right: 271px;
+  top: 351px;
+}
+.planet-main:nth-child(4) .planet-two .planet-warp:nth-child(2) {
+  right: 97px;
+  bottom: 383px;
+}
+.planet-main:nth-child(4) .planet-two .planet-warp:nth-child(3) {
+  left: 297px;
+  bottom: 372px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(1) {
+  right: 379px;
+  top: 352px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(1) .line01 {
+  width: 0.4rem;
+  transform: rotate(-160deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(1) .line02 {
+  width: 0.4rem;
+  right: 47px;
+  top: -4px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(1) strong {
+  right: 98px;
+  top: -4px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(2) {
+  right: 348px;
+  top: 319px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(2) .line01 {
+  width: 0.4rem;
+  transform: rotate(-150deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(2) .line02 {
+  width: 0.4rem;
+  right: 44px;
+  top: -10px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(2) strong {
+  right: 94px;
+  top: -10px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(3) {
+  right: 303px;
+  top: 310px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(3) .line01 {
+  width: 0.6rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(3) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: -48px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(3) strong {
+  right: 67px;
+  top: -48px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(4) {
+  right: 260px;
+  top: 325px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(4) .line01 {
+  width: 0.6rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(4) .line02 {
+  width: 0.4rem;
+  left: 20px;
+  top: -48px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(4) strong {
+  left: 67px;
+  top: -48px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(5) {
+  right: 234px;
+  top: 362px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(5) .line01 {
+  width: 0.6rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(5) .line02 {
+  width: 0.4rem;
+  left: 20px;
+  top: -48px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(5) strong {
+  left: 67px;
+  top: -48px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(6) {
+  right: 70px;
+  bottom: 382px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(6) .line01 {
+  width: 0.5rem;
+  transform: rotate(50deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(6) .line02 {
+  width: 0.3rem;
+  left: 42px;
+  top: 48px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(6) strong {
+  left: 82px;
+  top: 48px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(7) {
+  right: 106px;
+  bottom: 349px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(7) .line01 {
+  width: 0.6rem;
+  transform: rotate(60deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(7) .line02 {
+  width: 0.4rem;
+  left: 40px;
+  top: 62px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(7) strong {
+  left: 90px;
+  top: 62px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(8) {
+  right: 159px;
+  bottom: 346px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(8) .line01 {
+  width: 0.95rem;
+  transform: rotate(70deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(8) .line02 {
+  width: 0.4rem;
+  right: -62px;
+  top: 99px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(8) strong {
+  right: -163px;
+  top: 99px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(9) {
+  right: 203px;
+  bottom: 373px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(9) .line01 {
+  width: 1.6rem;
+  transform: rotate(80deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(9) .line02 {
+  width: 0.4rem;
+  right: -58px;
+  top: 168px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(9) strong {
+  right: -177px;
+  top: 168px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(10) {
+  left: 392px;
+  bottom: 350px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(10) .line01 {
+  width: 1.2rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(10) .line02 {
+  width: 0.4rem;
+  right: 69px;
+  top: 113px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(10) strong {
+  right: 120px;
+  top: 113px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(11) {
+  left: 328px;
+  bottom: 331px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(11) .line01 {
+  width: 0.5rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(11) .line02 {
+  width: 0.5rem;
+  right: 35px;
+  top: 53px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(11) strong {
+  right: 95px;
+  top: 53px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(12) {
+  left: 266px;
+  bottom: 367px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(12) .line01 {
+  width: 0.4rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(12) .line02 {
+  width: 0.4rem;
+  right: 29px;
+  top: 44px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(12) strong {
+  right: 80px;
+  top: 44px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(13) {
+  left: 255px;
+  bottom: 418px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(13) .line01 {
+  width: 0.4rem;
+  transform: rotate(120deg);
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(13) .line02 {
+  width: 0.4rem;
+  right: 29px;
+  top: 44px;
+}
+.planet-main:nth-child(4) .planet-three .planet-warp:nth-child(13) strong {
+  right: 80px;
+  top: 44px;
+}
+.planet-main:nth-child(5) {
+  width: 6.2rem;
+}
+.planet-main:nth-child(5) .planet-one {
+  left: 2.1rem;
+  top: 4.8rem;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(1) {
+  left: 170px;
+  top: 460px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(1) .line01 {
+  width: 0.6rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(1) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: -49px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(1) strong {
+  right: 67px;
+  top: -49px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(2) {
+  left: 220px;
+  top: 427px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(2) .line01 {
+  width: 0.6rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(2) .line02 {
+  width: 0.4rem;
+  right: 20px;
+  top: -49px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(2) strong {
+  right: 67px;
+  top: -49px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(3) {
+  left: 276px;
+  top: 412px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(3) .line01 {
+  width: 0.8rem;
+  transform: rotate(-100deg);
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(3) .line02 {
+  width: 0.4rem;
+  right: 23px;
+  top: -68px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(3) strong {
+  right: 70px;
+  top: -68px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(4) {
+  right: 274px;
+  top: 420px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(4) .line01 {
+  width: 1rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(4) .line02 {
+  width: 0.4rem;
+  left: 28px;
+  top: -88px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(4) strong {
+  left: 75px;
+  top: -88px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(5) {
+  right: 220px;
+  top: 453px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(5) .line01 {
+  width: 0.8rem;
+  transform: rotate(-80deg);
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(5) .line02 {
+  width: 0.4rem;
+  left: 23px;
+  top: -68px;
+}
+.planet-main:nth-child(5) .planet-three .planet-warp:nth-child(5) strong {
+  left: 70px;
+  top: -68px;
+}
+.view-chart {
+  float: left;
+  width: 9.8rem;
+  height: 4rem;
+  padding: 1.4rem 1.2rem 0;
+  overflow: hidden;
+  position: relative;
+}
+.view-chart h2 {
+  width: 9.8rem;
+  font-weight: bold;
+  font-size: 0.3rem;
+  text-align: center;
+  color: #03F6FF;
+  position: absolute;
+  top: 0.5rem;
+  will-change: opacity;
+}
+.chart-line {
+  width: 9.8rem;
+  height: 3.3rem;
+  position: absolute;
+  left: 1.2rem;
+  top: 1.4rem;
+  z-index: 3;
+}
+.chart-line:before,
+.chart-line:after {
+  content: '';
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  will-change: clip;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+.chart-line:before {
+  border-top: none;
+  border-right: none;
+}
+.chart-line:after {
+  border-left: none;
+  border-bottom: none;
+}
+.chart-line span {
+  display: block;
+  width: 100%;
+  height: 1px;
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.15);
+  position: absolute;
+  left: 0;
+  will-change: clip;
+}
+.chart-line span:nth-child(1) {
+  top: 0.47rem;
+}
+.chart-line span:nth-child(2) {
+  top: 0.94rem;
+}
+.chart-line span:nth-child(3) {
+  top: 1.41rem;
+}
+.chart-line span:nth-child(4) {
+  top: 1.88rem;
+}
+.chart-line span:nth-child(5) {
+  top: 2.35rem;
+}
+.chart-line span:nth-child(6) {
+  top: 2.82rem;
+}
+.chart-left,
+.chart-right {
+  width: 0.8rem;
+  height: 3.3rem;
+  position: absolute;
+  top: 1.4rem;
+  z-index: 4;
+  will-change: opacity,transform;
+}
+.chart-left h3,
+.chart-right h3 {
+  width: 0.8rem;
+  font-size: 0.2rem;
+  position: absolute;
+  top: -0.4rem;
+}
+.chart-left span,
+.chart-right span {
+  display: block;
+  font-family: "geoFont";
+  font-size: 0.16rem;
+  text-shadow: 1px 1px 1px #000;
+  position: absolute;
+}
+.chart-left span:nth-child(1),
+.chart-right span:nth-child(1) {
+  top: -0.07rem;
+}
+.chart-left span:nth-child(2),
+.chart-right span:nth-child(2) {
+  top: 0.4rem;
+}
+.chart-left span:nth-child(3),
+.chart-right span:nth-child(3) {
+  top: 0.87rem;
+}
+.chart-left span:nth-child(4),
+.chart-right span:nth-child(4) {
+  top: 1.34rem;
+}
+.chart-left span:nth-child(5),
+.chart-right span:nth-child(5) {
+  top: 1.81rem;
+}
+.chart-left span:nth-child(6),
+.chart-right span:nth-child(6) {
+  top: 2.28rem;
+}
+.chart-left span:nth-child(7),
+.chart-right span:nth-child(7) {
+  top: 2.75rem;
+}
+.chart-left span:nth-child(8),
+.chart-right span:nth-child(8) {
+  top: 3.22rem;
+}
+.chart-left {
+  left: 0.4rem;
+  text-align: right;
+  color: #FFED00;
+}
+.chart-left h3,
+.chart-left span {
+  padding-right: 0.1rem;
+  right: 0;
+}
+.chart-right {
+  right: 0.4rem;
+  color: #03F6FF;
+}
+.chart-right h3,
+.chart-right span {
+  padding-left: 0.1rem;
+  left: 0;
+}
+.chart-top {
+  font-size: 0.2rem;
+  position: absolute;
+  right: 1.2rem;
+  top: 1rem;
+  color: #FFED00;
+}
+.chart-top span {
+  float: right;
+  margin-left: 1.3rem;
+  position: relative;
+}
+.chart-top span:before {
+  display: block;
+  content: '';
+  width: 0.7rem;
+  height: 3px;
+  position: absolute;
+  left: -0.8rem;
+  top: 9px;
+}
+.chart-top span:nth-child(1):before {
+  background-color: #7DCDF3;
+}
+.chart-top span:nth-child(2):before {
+  background-color: #FF1C1C;
+}
+.chart-content {
+  width: 8.8rem;
+  height: 3.3rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: space-between;
+}
+.chart-content li {
+  width: 0.3rem;
+  height: 100%;
+  position: relative;
+}
+.chart-content h4 {
+  width: 1rem;
+  font-size: 0.14rem;
+  text-align: center;
+  color: #03F6FF;
+  position: absolute;
+  left: 50%;
+  bottom: -0.24rem;
+  transform: translateX(-50%);
+}
+.chart-pillar {
+  width: 100%;
+  color: #03F6FF;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 6;
+}
+.chart-pillar span {
+  display: block;
+  width: 0.8rem;
+  text-align: center;
+  font-family: "geoFont";
+  font-size: 0.16rem;
+  position: absolute;
+  left: 50%;
+  top: -0.25rem;
+  text-shadow: 1px 1px 1px #000;
+  margin-left: -0.4rem;
+}
+.chart-pillar span.top {
+  top: -0.45rem;
+}
+.chart-pillar em {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.chart-pillar em:before {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: #08C9EB;
+}
+.chart-piece {
+  width: 0.2rem;
+  height: 0.2rem;
+  color: #FFED00;
+  margin: 0 0 -0.1rem -0.1rem;
+  position: absolute;
+  left: 50%;
+  z-index: 7;
+}
+.chart-piece:before,
+.chart-piece:after {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #A2F1FF;
+  position: absolute;
+  z-index: 9;
+}
+.chart-piece i {
+  display: block;
+  width: 0.1rem;
+  height: 0.1rem;
+  border-radius: 50%;
+  background-color: #FFED00;
+  position: absolute;
+  left: 0.05rem;
+  top: 0.05rem;
+  z-index: 10;
+}
+.chart-piece span {
+  display: block;
+  width: 0.6rem;
+  text-align: center;
+  font-family: "geoFont";
+  font-size: 0.16rem;
+  text-shadow: 1px 1px 1px #000;
+  position: absolute;
+  left: 50%;
+  top: -0.25rem;
+  margin-left: -0.3rem;
+  z-index: 11;
+}
+.chart-piece span.bottom {
+  top: auto;
+  bottom: -0.25rem;
+}
+.chart-piece em {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  z-index: 8;
+  transform-origin: left center !important;
+}
+.chart-piece em:before {
+  display: block;
+  content: '';
+  width: 100%;
+  height: 100%;
+  background-color: #7DCDF3;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+#view-chart01 li:nth-child(1) .chart-pillar {
+  height: 7.48%;
+}
+#view-chart01 li:nth-child(1) .chart-piece {
+  bottom: 45%;
+}
+#view-chart01 li:nth-child(1) .chart-piece em {
+  width: 1.07rem;
+  transform: rotate(5.1deg);
+}
+#view-chart01 li:nth-child(2) .chart-pillar {
+  height: 44.31%;
+}
+#view-chart01 li:nth-child(2) .chart-piece {
+  bottom: 42.14%;
+}
+#view-chart01 li:nth-child(2) .chart-piece em {
+  width: 1.2rem;
+  transform: rotate(28deg);
+}
+#view-chart01 li:nth-child(3) .chart-pillar {
+  height: 70.32%;
+}
+#view-chart01 li:nth-child(3) .chart-piece {
+  bottom: 25%;
+}
+#view-chart01 li:nth-child(3) .chart-piece em {
+  width: 1.08rem;
+  transform: rotate(10.1deg);
+}
+#view-chart01 li:nth-child(4) .chart-pillar {
+  height: 87.48%;
+}
+#view-chart01 li:nth-child(4) .chart-piece {
+  bottom: 19.29%;
+}
+#view-chart01 li:nth-child(4) .chart-piece em {
+  width: 1.08rem;
+  transform: rotate(8.8deg);
+}
+#view-chart01 li:nth-child(5) .chart-pillar {
+  height: 46.49%;
+}
+#view-chart01 li:nth-child(5) .chart-piece {
+  bottom: 14.29%;
+}
+#view-chart01 li:nth-child(5) .chart-piece em {
+  width: 1.08rem;
+  transform: rotate(10.1deg);
+}
+#view-chart01 li:nth-child(6) .chart-pillar {
+  height: 40.18%;
+}
+#view-chart01 li:nth-child(6) .chart-piece {
+  bottom: 8.57%;
+}
+#view-chart01 li:nth-child(6) .chart-piece em {
+  width: 1.06rem;
+  transform: rotate(3.8deg);
+}
+#view-chart01 li:nth-child(7) .chart-pillar {
+  height: 33.34%;
+}
+#view-chart01 li:nth-child(7) .chart-piece {
+  bottom: 6.43%;
+}
+#view-chart01 li:nth-child(7) .chart-piece em {
+  width: 1.07rem;
+  transform: rotate(5.1deg);
+}
+#view-chart01 li:nth-child(8) .chart-pillar {
+  height: 28.93%;
+}
+#view-chart01 li:nth-child(8) .chart-piece {
+  bottom: 3.57%;
+}
+#view-chart01 li:nth-child(8) .chart-piece em {
+  width: 1.06rem;
+  transform: rotate(2.5deg);
+}
+#view-chart01 li:nth-child(9) .chart-pillar {
+  height: 23.18%;
+}
+#view-chart01 li:nth-child(9) .chart-piece {
+  bottom: 2.14%;
+}
+#view-chart02 li:nth-child(1) .chart-pillar {
+  height: 22.55%;
+}
+#view-chart02 li:nth-child(1) .chart-piece {
+  bottom: 65.71%;
+}
+#view-chart02 li:nth-child(1) .chart-piece em {
+  width: 1.13rem;
+  transform: rotate(19.5deg);
+}
+#view-chart02 li:nth-child(2) .chart-pillar {
+  height: 38.33%;
+}
+#view-chart02 li:nth-child(2) .chart-piece {
+  bottom: 54.29%;
+}
+#view-chart02 li:nth-child(2) .chart-piece em {
+  width: 1.06rem;
+  transform: rotate(-3.8deg);
+}
+#view-chart02 li:nth-child(3) .chart-pillar {
+  height: 53.78%;
+}
+#view-chart02 li:nth-child(3) .chart-piece {
+  bottom: 56.43%;
+}
+#view-chart02 li:nth-child(3) .chart-piece em {
+  width: 1.33rem;
+  transform: rotate(37deg);
+}
+#view-chart02 li:nth-child(4) .chart-pillar {
+  height: 62.86%;
+}
+#view-chart02 li:nth-child(4) .chart-piece {
+  bottom: 32.14%;
+}
+#view-chart02 li:nth-child(4) .chart-piece em {
+  width: 1.07rem;
+  transform: rotate(7.6deg);
+}
+#view-chart02 li:nth-child(5) .chart-pillar {
+  height: 43.13%;
+}
+#view-chart02 li:nth-child(5) .chart-piece {
+  bottom: 27.86%;
+}
+#view-chart02 li:nth-child(5) .chart-piece em {
+  width: 1.14rem;
+  transform: rotate(20.7deg);
+}
+#view-chart02 li:nth-child(6) .chart-pillar {
+  height: 33.46%;
+}
+#view-chart02 li:nth-child(6) .chart-piece {
+  bottom: 15.71%;
+}
+#view-chart02 li:nth-child(6) .chart-piece em {
+  width: 1.07rem;
+  transform: rotate(7.6deg);
+}
+#view-chart02 li:nth-child(7) .chart-pillar {
+  height: 26.35%;
+}
+#view-chart02 li:nth-child(7) .chart-piece {
+  bottom: 11.43%;
+}
+#view-chart02 li:nth-child(7) .chart-piece em {
+  width: 1.08rem;
+  transform: rotate(8.8deg);
+}
+#view-chart02 li:nth-child(8) .chart-pillar {
+  height: 15.31%;
+}
+#view-chart02 li:nth-child(8) .chart-piece {
+  bottom: 6.43%;
+}
+#view-chart02 li:nth-child(8) .chart-piece em {
+  width: 1.07rem;
+  transform: rotate(7.6deg);
+}
+#view-chart02 li:nth-child(9) .chart-pillar {
+  height: 10.19%;
+}
+#view-chart02 li:nth-child(9) .chart-piece {
+  bottom: 2.14%;
+}
+#view-chart03 li:nth-child(1) .chart-pillar {
+  height: 68.93%;
+}
+#view-chart03 li:nth-child(1) .chart-piece {
+  bottom: 37.86%;
+}
+#view-chart03 li:nth-child(1) .chart-piece em {
+  width: 1.17rem;
+  transform: rotate(25deg);
+}
+#view-chart03 li:nth-child(2) .chart-pillar {
+  height: 46.08%;
+}
+#view-chart03 li:nth-child(2) .chart-piece {
+  bottom: 22.86%;
+}
+#view-chart03 li:nth-child(2) .chart-piece em {
+  width: 1.17rem;
+  transform: rotate(25deg);
+}
+#view-chart03 li:nth-child(3) .chart-pillar {
+  height: 47.23%;
+}
+#view-chart03 li:nth-child(3) .chart-piece {
+  bottom: 7.86%;
+}
+#view-chart03 li:nth-child(3) .chart-piece em {
+  width: 1.06rem;
+  transform: rotate(-2.5deg);
+}
+#view-chart03 li:nth-child(4) .chart-pillar {
+  height: 50.08%;
+}
+#view-chart03 li:nth-child(4) .chart-piece {
+  bottom: 9.29%;
+}
+#view-chart03 li:nth-child(4) .chart-piece em {
+  width: 2.85rem;
+  transform: rotate(-68.1deg);
+}
+#view-chart03 li:nth-child(5) .chart-pillar {
+  height: 14.23%;
+}
+#view-chart03 li:nth-child(5) .chart-piece {
+  bottom: 89.29%;
+}
+#view-chart03 li:nth-child(5) .chart-piece em {
+  width: 1.08rem;
+  transform: rotate(10.1deg);
+}
+#view-chart03 li:nth-child(6) .chart-pillar {
+  height: 28.35%;
+}
+#view-chart03 li:nth-child(6) .chart-piece {
+  bottom: 83.57%;
+}
+#view-chart03 li:nth-child(6) .chart-piece em {
+  width: 1.26rem;
+  transform: rotate(32.8deg);
+}
+#view-chart03 li:nth-child(7) .chart-pillar {
+  height: 11.06%;
+}
+#view-chart03 li:nth-child(7) .chart-piece {
+  bottom: 62.86%;
+}
+#view-chart03 li:nth-child(7) .chart-piece em {
+  width: 1.37rem;
+  transform: rotate(39.4deg);
+}
+#view-chart03 li:nth-child(8) .chart-pillar {
+  height: 6.32%;
+}
+#view-chart03 li:nth-child(8) .chart-piece {
+  bottom: 36.43%;
+}
+#view-chart03 li:nth-child(8) .chart-piece em {
+  width: 1.06rem;
+  transform: rotate(-2.5deg);
+}
+#view-chart03 li:nth-child(9) .chart-pillar {
+  height: 5.52%;
+}
+#view-chart03 li:nth-child(9) .chart-piece {
+  bottom: 37.86%;
+}
+#view-chart04 li:nth-child(1) .chart-pillar {
+  height: 39.57%;
+}
+#view-chart04 li:nth-child(1) .chart-piece {
+  bottom: 51.43%;
+}
+#view-chart04 li:nth-child(1) .chart-piece em {
+  width: 2.03rem;
+  transform: rotate(33.1deg);
+}
+#view-chart04 li:nth-child(2) .chart-pillar {
+  height: 15.31%;
+}
+#view-chart04 li:nth-child(2) .chart-piece {
+  bottom: 17.86%;
+}
+#view-chart04 li:nth-child(2) .chart-piece em {
+  width: 1.76rem;
+  transform: rotate(-14.8deg);
+}
+#view-chart04 li:nth-child(3) .chart-pillar {
+  height: 60.67%;
+}
+#view-chart04 li:nth-child(3) .chart-piece {
+  bottom: 31.43%;
+}
+#view-chart04 li:nth-child(3) .chart-piece em {
+  width: 1.72rem;
+  transform: rotate(8.7deg);
+}
+#view-chart04 li:nth-child(4) .chart-pillar {
+  height: 25.2%;
+}
+#view-chart04 li:nth-child(4) .chart-piece {
+  bottom: 23.57%;
+}
+#view-chart04 li:nth-child(4) .chart-piece em {
+  width: 1.71rem;
+  transform: rotate(4.8deg);
+}
+#view-chart04 li:nth-child(5) .chart-pillar {
+  height: 14.31%;
+}
+#view-chart04 li:nth-child(5) .chart-piece {
+  bottom: 19.29%;
+}
+#view-chart04 li:nth-child(5) .chart-piece em {
+  width: 1.72rem;
+  transform: rotate(9.4deg);
+}
+#view-chart04 li:nth-child(6) .chart-pillar {
+  height: 7.18%;
+}
+#view-chart04 li:nth-child(6) .chart-piece {
+  bottom: 10.71%;
+}
+#view-chart05 li:nth-child(1) .chart-pillar {
+  height: 45.98%;
+}
+#view-chart05 li:nth-child(1) .chart-piece {
+  bottom: 58.57%;
+}
+#view-chart05 li:nth-child(1) .chart-piece em {
+  width: 2.27rem;
+  transform: rotate(20.7deg);
+}
+#view-chart05 li:nth-child(2) .chart-pillar {
+  height: 51.18%;
+}
+#view-chart05 li:nth-child(2) .chart-piece {
+  bottom: 34.29%;
+}
+#view-chart05 li:nth-child(2) .chart-piece em {
+  width: 2.16rem;
+  transform: rotate(10.7deg);
+}
+#view-chart05 li:nth-child(3) .chart-pillar {
+  height: 78.64%;
+}
+#view-chart05 li:nth-child(3) .chart-piece {
+  bottom: 22.14%;
+}
+#view-chart05 li:nth-child(3) .chart-piece em {
+  width: 2.13rem;
+  transform: rotate(-1.3deg);
+}
+#view-chart05 li:nth-child(4) .chart-pillar {
+  height: 88.99%;
+}
+#view-chart05 li:nth-child(4) .chart-piece {
+  bottom: 23.57%;
+}
+#view-chart05 li:nth-child(4) .chart-piece em {
+  width: 2.13rem;
+  transform: rotate(-5.1deg);
+}
+#view-chart05 li:nth-child(5) .chart-pillar {
+  height: 71.43%;
+}
+#view-chart05 li:nth-child(5) .chart-piece {
+  bottom: 29.29%;
+}
+.view-last .chart-line span:nth-child(1) {
+  top: 0.658rem;
+}
+.view-last .chart-line span:nth-child(2) {
+  top: 1.316rem;
+}
+.view-last .chart-line span:nth-child(3) {
+  top: 1.974rem;
+}
+.view-last .chart-line span:nth-child(4) {
+  top: 2.632rem;
+}
+.view-last .chart-left span:nth-child(1) {
+  top: -0.07rem;
+}
+.view-last .chart-left span:nth-child(2) {
+  top: 0.588rem;
+}
+.view-last .chart-left span:nth-child(3) {
+  top: 1.246rem;
+}
+.view-last .chart-left span:nth-child(4) {
+  top: 1.904rem;
+}
+.view-last .chart-left span:nth-child(5) {
+  top: 2.562rem;
+}
+.view-last .chart-left span:nth-child(6) {
+  top: 3.22rem;
+}
+.view-last .chart-content {
+  width: 10.1rem;
+  margin-left: -0.15rem;
+}
+.view-last h5 {
+  width: 9.8rem;
+  font-size: 0.16rem;
+  text-align: center;
+  color: #03F6FF;
+  position: absolute;
+  bottom: 0.2rem;
+  left: 1.5rem;
+}
+.view-curve {
+  width: 9.8rem;
+  height: 3.3rem;
+  position: absolute;
+  left: 1.2rem;
+  top: 1.4rem;
+  z-index: 6;
+}
+.view-curve img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.view-curve-ks {
+  width: 1.2rem;
+  height: 1.44rem;
+  position: absolute;
+  top: 1.88rem;
+  right: 2.64rem;
+}
+.view-curve-ks img {
+  width: 100%;
+  height: 100%;
+}
+.ppt-left {
+  width: 7.2rem;
+  height: 100%;
+  font-size: 0.24rem;
+  margin-right: 1.75rem;
+  float: left;
+  overflow: hidden;
+  position: relative;
+}
+.ppt-left ul {
+  padding: 1rem 1.55rem 0.6rem;
+  overflow: hidden;
+}
+.ppt-left li {
+  line-height: 0.5rem;
+  text-align: center;
+}
+.ppt-left li:nth-child(1) {
+  float: left;
+}
+.ppt-left li:nth-child(2) {
+  float: right;
+}
+.ppt-left li span {
+  display: block;
+  width: 1.8rem;
+  height: 0.5rem;
+  border-radius: 0.1rem;
+  background-color: #2186FA;
+  margin-top: 0.25rem;
+}
+.ppt-left .view-arrow {
+  display: block;
+  width: 0.47rem;
+  height: 0.65rem;
+  margin: 0 auto;
+}
+.ppt-left p {
+  margin-top: 0.6rem;
+  text-align: center;
+}
+.ppt-left .view-jigsaw {
+  width: 7.18rem;
+  position: absolute;
+  left: 0.01rem;
+  bottom: 0;
+}
+.ppt-left .view-jigsaw span {
+  display: block;
+  position: absolute;
+  top: 0.9rem;
+}
+.ppt-left .view-jigsaw span:nth-child(1) {
+  left: 1.1rem;
+}
+.ppt-left .view-jigsaw span:nth-child(2) {
+  right: 1.1rem;
+}
+.ppt-center {
+  width: 11.6rem;
+  height: 100%;
+  float: left;
+  position: relative;
+}
+.ppt-center .view-lamp {
+  width: 4.3rem;
+  height: 5.35rem;
+  position: absolute;
+  left: 3.25rem;
+  bottom: 2rem;
+}
+.ppt-center .view-lamp img {
+  position: absolute;
+}
+.ppt-center .view-lamp img:nth-child(1) {
+  width: 3.13rem;
+  height: 4.62rem;
+  bottom: 0;
+  left: 0.58rem;
+}
+.ppt-center .view-lamp img:nth-child(2) {
+  width: 4.3rem;
+  height: 3.91rem;
+  top: 0;
+  left: 0;
+}
+.ppt-center .view-lamp p {
+  width: 1.3rem;
+  font-size: 0.42rem;
+  line-height: 1.3;
+  position: absolute;
+  left: 50%;
+  top: 1.8rem;
+  margin-left: -0.65rem;
+}
+.ppt-center dt {
+  float: left;
+  height: 0.52rem;
+  padding: 0 0.24rem;
+  border-radius: 0.1rem;
+  font-size: 0.26rem;
+  line-height: 0.52rem;
+  background-color: #4F61FA;
+}
+.ppt-center dd {
+  clear: both;
+  padding-top: 0.12rem;
+  font-size: 0.2rem;
+  line-height: 1.3;
+}
+.ppt-center dl {
+  position: absolute;
+}
+.ppt-center dl:nth-last-child(odd) {
+  text-align: right;
+}
+.ppt-center dl:nth-last-child(odd) dt {
+  float: right;
+}
+.ppt-center dl:nth-child(1) {
+  left: 4.2rem;
+  top: 1.47rem;
+}
+.ppt-center dl:nth-child(2) {
+  right: 8rem;
+  top: 2.75rem;
+}
+.ppt-center dl:nth-child(3) {
+  left: 7.2rem;
+  top: 2.75rem;
+}
+.ppt-center dl:nth-child(4) {
+  right: 8.7rem;
+  top: 4.5rem;
+}
+.ppt-center dl:nth-child(5) {
+  left: 7.9rem;
+  top: 4.5rem;
+}
+.ppt-center dl:nth-child(6) {
+  right: 8.7rem;
+  top: 6.2rem;
+}
+.ppt-center dl:nth-child(7) {
+  left: 7.9rem;
+  top: 6.2rem;
+}
+.ppt-center dl:nth-child(8) {
+  right: 7.7rem;
+  top: 7.75rem;
+}
+.ppt-center dl:nth-child(9) {
+  left: 7rem;
+  top: 7.75rem;
+}
+.ppt-right {
+  width: 12.3rem;
+  height: 100%;
+  float: right;
+  position: relative;
+}
+.ppt-right .view-farmer {
+  width: 1.42rem;
+  height: 3.4rem;
+  position: absolute;
+  right: 5.3rem;
+  top: 3.73rem;
+}
+.ppt-right .view-farmer p {
+  font-size: 0.26rem;
+  position: absolute;
+  bottom: 0;
+  left: 0.25rem;
+}
+.ppt-right dt {
+  width: 1.6rem;
+  height: 1.6rem;
+  font-size: 0.26rem;
+  line-height: 1.2;
+  border-radius: 50%;
+  background-color: #4F61FA;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.ppt-right dd {
+  font-size: 0.2rem;
+  line-height: 1.4;
+}
+.ppt-right dl {
+  position: absolute;
+  padding-left: 1.85rem;
+}
+.ppt-right dl:nth-last-child(odd) {
+  text-align: right;
+  padding-left: 0;
+  padding-right: 1.85rem;
+}
+.ppt-right dl:nth-last-child(odd) dt {
+  left: auto;
+  right: 0;
+}
+.ppt-right dl:nth-child(1) {
+  right: 6.6rem;
+  top: 1.5rem;
+}
+.ppt-right dl:nth-child(2) {
+  left: 6.95rem;
+  top: 1.5rem;
+}
+.ppt-right dl:nth-child(3) {
+  right: 7.35rem;
+  top: 4.2rem;
+}
+.ppt-right dl:nth-child(4) {
+  left: 7.75rem;
+  top: 4.34rem;
+}
+.ppt-right dl:nth-child(5) {
+  right: 6.6rem;
+  bottom: 1.45rem;
+}
+.ppt-right dl:nth-child(6) {
+  left: 6.95rem;
+  bottom: 1.73rem;
+}
+@keyframes star_Animation {
+  0%,
+  100% {
+    transform: scale(0.4);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+  50% {
+    transform: scale(0.8);
+  }
+  75% {
+    transform: scale(1.5);
+  }
+}
+@keyframes meteor_Animation {
+  0%,
+  20% {
+    opacity: 0;
+    transform: scale(0) translate(2rem, -2rem);
+  }
+  40% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+    transform: scale(1) translate(-8rem, 8rem);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1) translate(-8.2rem, 8.2rem);
+  }
+}
+@keyframes halo_Animation {
+  from {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+@keyframes halo_Animation02 {
+  from {
+    opacity: 0.15;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+@keyframes planet_two_Animation {
+  from {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(360deg);
+  }
+}
+@keyframes planet_three_Animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes rotate_Animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+@keyframes view_scale_Animation {
+  0%,
+  50%,
+  100% {
+    transform: scale(1) translate(0, 0);
+  }
+  25% {
+    transform: scale(1.05) translate(2%, -1%);
+  }
+  75% {
+    transform: scale(1.05) translate(-2%, 1%);
+  }
+}
+@keyframes clip_Animation01 {
+  0% {
+    clip: rect(1px, 1px, 1px, 0px);
+  }
+  60% {
+    clip: rect(1px, 1px, 330px, 0px);
+  }
+  100% {
+    clip: rect(1px, 979px, 330px, 0px);
+  }
+}
+@keyframes clip_Animation02 {
+  0% {
+    clip: rect(329px, 980px, 330px, 979px);
+  }
+  60% {
+    clip: rect(0px, 980px, 330px, 979px);
+  }
+  100% {
+    clip: rect(0px, 980px, 330px, 0px);
+  }
+}
+@keyframes clip_Animation03 {
+  0% {
+    clip: rect(0px, 1px, 1px, 1px);
+  }
+  100% {
+    clip: rect(0px, 979px, 1px, 1px);
+  }
+}
+@keyframes clip_Animation04 {
+  0% {
+    clip: rect(0px, 979px, 1px, 979px);
+  }
+  100% {
+    clip: rect(0px, 979px, 1px, 1px);
+  }
+}
+@keyframes piece_line_Animation {
+  0% {
+    clip: rect(0px, 0px, 330px, 0px);
+  }
+  100% {
+    clip: rect(0px, 230px, 330px, 0px);
+  }
+}
+@keyframes view_curve_Animation {
+  0% {
+    clip: rect(0px, 1px, 330px, 1px);
+  }
+  100% {
+    clip: rect(0px, 979px, 330px, 1px);
+  }
+}
+@keyframes chart_piece_Animation {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.5);
+  }
+}
+@keyframes opacity_cycle_Animation {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes opacity_Animation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes opacity_hide_Animation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes left_right_Animation {
+  from {
+    opacity: 0;
+    transform: translate(-200%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes right_left_Animation {
+  from {
+    opacity: 0;
+    transform: translate(200%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes bottom_top_Animation {
+  from {
+    transform: translate(0, 100%);
+  }
+  to {
+    transform: translate(0, 0);
+  }
+}
+@keyframes bottom_top_Animation2 {
+  from {
+    opacity: 0;
+    transform: translate(0, 100%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes top_bottom_Animation {
+  from {
+    opacity: 0;
+    transform: translate(0, -100%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+}
+@keyframes viewLamp_Animation {
+  from {
+    clip: rect(2.15rem, 2.15rem, 1.95rem, 1.95rem);
+  }
+  to {
+    clip: rect(0rem, 4.3rem, 3.91rem, 0rem);
+  }
+}
+.active .view-bg01 span {
+  animation: star_Animation 4000ms ease-in-out 0ms infinite normal;
+  animation-fill-mode: backwards;
+}
+.active .view-bg01 span:nth-child(2) {
+  animation-delay: 300ms;
+}
+.active .view-bg01 span:nth-child(3) {
+  animation-delay: 600ms;
+}
+.active .view-bg01 span:nth-child(4) {
+  animation-delay: 900ms;
+}
+.active .view-bg01 span:nth-child(5) {
+  animation-delay: 1200ms;
+}
+.active .view-bg01 span:nth-child(6) {
+  animation-delay: 1500ms;
+}
+.active .view-bg01 span:nth-child(7) {
+  animation-delay: 1800ms;
+}
+.active .view-bg01 span:nth-child(8) {
+  animation-delay: 2100ms;
+}
+.active .view-bg01 span:nth-child(9) {
+  animation-delay: 2400ms;
+}
+.active .view-bg01 span:nth-child(10) {
+  animation-delay: 2700ms;
+}
+.active .view-bg01 span:nth-child(11) {
+  animation-delay: 3000ms;
+}
+.active .view-bg01 em {
+  animation: meteor_Animation 4000ms linear 0ms infinite normal;
+  animation-fill-mode: backwards;
+}
+.active .view-bg01 em:nth-child(2) {
+  animation-delay: 600ms;
+}
+.active .view-bg01 em:nth-child(3) {
+  animation-delay: 1200ms;
+}
+.active .view-bg01 em:nth-child(4) {
+  animation-delay: 1800ms;
+}
+.active .view-bg01 em:nth-child(5) {
+  animation-delay: 2400ms;
+}
+.active .view-bg01 em:nth-child(6) {
+  animation-delay: 3000ms;
+}
+.active .view-bg01 em:nth-child(7) {
+  animation-delay: 3600ms;
+}
+.active .view-bg01 em:nth-child(8) {
+  animation-delay: 4200ms;
+}
+.active .view-bg01 em:nth-child(9) {
+  animation-delay: 4800ms;
+}
+.active .view-bg01 em:nth-child(10) {
+  animation-delay: 5400ms;
+}
+.active.view-warp01 h2 {
+  animation: top_bottom_Animation 400ms linear 0ms 1 normal;
+}
+.active .planet-one {
+  animation: opacity_Animation 600ms linear 400ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .planet-one .planet-warp em {
+  animation: halo_Animation 4000ms linear 0ms infinite normal;
+}
+.active .planet-one .planet-warp em:nth-child(2) {
+  animation-delay: 1000ms;
+}
+.active .planet-one .planet-warp em:nth-child(3) {
+  animation-delay: 2000ms;
+}
+.active .planet-one .planet-warp em:nth-child(4) {
+  animation-delay: 3000ms;
+}
+.active .planet-one .planet-warp .planet {
+  animation: rotate_Animation 8000ms linear 0ms infinite normal;
+}
+.active .planet-two {
+  animation: planet_two_Animation 500ms linear 1000ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .planet-two .planet-warp em {
+  animation: halo_Animation02 2000ms linear 0ms infinite normal;
+}
+.active .planet-two .planet-warp em:nth-child(2) {
+  animation-delay: 1000ms;
+}
+.active .planet-two .planet-warp .planet {
+  animation: rotate_Animation 8000ms linear 0ms infinite normal;
+}
+.active .planet-two .planet-warp:nth-child(2) .planet {
+  animation-delay: -2000ms;
+}
+.active .planet-two .planet-warp:nth-child(3) .planet {
+  animation-delay: -4000ms;
+}
+.active .planet-two .planet-warp:nth-child(4) .planet {
+  animation-delay: -6000ms;
+}
+.active .planet-three .planet-warp {
+  animation: opacity_Animation 300ms linear 1500ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .planet-three .planet-warp .planet {
+  animation: planet_three_Animation 1500ms linear 0ms infinite normal;
+}
+.active .planet-three .planet-warp:nth-child(2) {
+  animation-delay: 1650ms;
+}
+.active .planet-three .planet-warp:nth-child(2) .planet {
+  animation-delay: -600ms;
+}
+.active .planet-three .planet-warp:nth-child(3) {
+  animation-delay: 1800ms;
+}
+.active .planet-three .planet-warp:nth-child(3) .planet {
+  animation-delay: -1200ms;
+}
+.active .planet-three .planet-warp:nth-child(4) {
+  animation-delay: 1950ms;
+}
+.active .planet-three .planet-warp:nth-child(4) .planet {
+  animation-delay: -1800ms;
+}
+.active .planet-three .planet-warp:nth-child(5) {
+  animation-delay: 2100ms;
+}
+.active .planet-three .planet-warp:nth-child(5) .planet {
+  animation-delay: -2400ms;
+}
+.active .planet-three .planet-warp:nth-child(6) {
+  animation-delay: 2250ms;
+}
+.active .planet-three .planet-warp:nth-child(6) .planet {
+  animation-delay: -3000ms;
+}
+.active .planet-three .planet-warp:nth-child(7) {
+  animation-delay: 2400ms;
+}
+.active .planet-three .planet-warp:nth-child(7) .planet {
+  animation-delay: -3600ms;
+}
+.active .planet-three .planet-warp:nth-child(8) {
+  animation-delay: 2550ms;
+}
+.active .planet-three .planet-warp:nth-child(8) .planet {
+  animation-delay: -4200ms;
+}
+.active .planet-three .planet-warp:nth-child(9) {
+  animation-delay: 2700ms;
+}
+.active .planet-three .planet-warp:nth-child(9) .planet {
+  animation-delay: -4800ms;
+}
+.active .planet-three .planet-warp:nth-child(10) {
+  animation-delay: 2850ms;
+}
+.active .planet-three .planet-warp:nth-child(10) .planet {
+  animation-delay: -5400ms;
+}
+.active .planet-three .planet-warp:nth-child(11) {
+  animation-delay: 3000ms;
+}
+.active .planet-three .planet-warp:nth-child(11) .planet {
+  animation-delay: -6000ms;
+}
+.active .planet-three .planet-warp:nth-child(12) {
+  animation-delay: 3150ms;
+}
+.active .planet-three .planet-warp:nth-child(12) .planet {
+  animation-delay: -6600ms;
+}
+.active .planet-three .planet-warp:nth-child(13) {
+  animation-delay: 3300ms;
+}
+.active .planet-three .planet-warp:nth-child(13) .planet {
+  animation-delay: -7200ms;
+}
+.active .planet-three .planet-warp:nth-child(14) {
+  animation-delay: 3450ms;
+}
+.active .planet-three .planet-warp:nth-child(14) .planet {
+  animation-delay: -7800ms;
+}
+.active .planet-three .planet-warp:nth-child(15) {
+  animation-delay: 3600ms;
+}
+.active .planet-three .planet-warp:nth-child(15) .planet {
+  animation-delay: -8400ms;
+}
+.active .planet-three .planet-warp:nth-child(16) {
+  animation-delay: 3750ms;
+}
+.active .planet-three .planet-warp:nth-child(16) .planet {
+  animation-delay: -9000ms;
+}
+.active .planet-three .planet-warp:nth-child(17) {
+  animation-delay: 3900ms;
+}
+.active .planet-three .planet-warp:nth-child(17) .planet {
+  animation-delay: -9600ms;
+}
+.active .planet-three .planet-warp:nth-child(18) {
+  animation-delay: 4050ms;
+}
+.active .planet-three .planet-warp:nth-child(18) .planet {
+  animation-delay: -10200ms;
+}
+.active .planet-three .planet-warp:nth-child(19) {
+  animation-delay: 4200ms;
+}
+.active .planet-three .planet-warp:nth-child(19) .planet {
+  animation-delay: -10800ms;
+}
+.active .planet-three .planet-warp:nth-child(20) {
+  animation-delay: 4350ms;
+}
+.active .planet-three .planet-warp:nth-child(20) .planet {
+  animation-delay: -11400ms;
+}
+.active .planet-three .planet-warp:nth-child(21) {
+  animation-delay: 4500ms;
+}
+.active .planet-three .planet-warp:nth-child(21) .planet {
+  animation-delay: -12000ms;
+}
+.active .planet-three .planet-warp:nth-child(22) {
+  animation-delay: 4650ms;
+}
+.active .planet-three .planet-warp:nth-child(22) .planet {
+  animation-delay: -12600ms;
+}
+.active .planet-three .planet-warp:nth-child(23) {
+  animation-delay: 4800ms;
+}
+.active .planet-three .planet-warp:nth-child(23) .planet {
+  animation-delay: -13200ms;
+}
+.active .view-bg02 {
+  animation: view_scale_Animation 8000ms linear 0ms infinite normal;
+}
+.active .view-chart h2 {
+  animation: opacity_Animation 400ms linear 1500ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .chart-line:before,
+.active .chart-line:after {
+  animation: clip_Animation01 1000ms linear 0ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .chart-line:after {
+  animation-name: clip_Animation02;
+}
+.active .chart-line span {
+  animation: clip_Animation03 400ms linear 1000ms 1 normal;
+  animation-fill-mode: both;
+}
+.active .chart-line span:nth-of-type(even) {
+  -webkit-animation-name: clip_Animation04;
+  animation-name: clip_Animation04;
+}
+.active .chart-left,
+.active .chart-right,
+.active .chart-top {
+  animation: left_right_Animation 400ms linear 1500ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .chart-right,
+.active .chart-top {
+  animation-name: right_left_Animation;
+}
+.active .chart-content li h4 {
+  animation: opacity_Animation 200ms linear 2000ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .chart-content li .chart-pillar em:before {
+  animation: bottom_top_Animation 400ms linear 2200ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .chart-content li .chart-pillar span {
+  animation: opacity_Animation 400ms linear 2600ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .chart-content li .chart-piece {
+  animation: opacity_Animation 300ms linear 2200ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .chart-content li .chart-piece:before,
+.active .chart-content li .chart-piece:after {
+  animation: chart_piece_Animation 1800ms linear 0ms infinite normal;
+}
+.active .chart-content li .chart-piece:after {
+  animation-delay: 900ms;
+}
+.active .chart-content li .chart-piece em {
+  animation: piece_line_Animation 500ms linear 2400ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .chart-content li .chart-piece em:before {
+  animation: opacity_cycle_Animation 1500ms linear 0ms infinite normal;
+}
+.active .chart-content li:nth-child(2) h4 {
+  animation-delay: 2400ms;
+}
+.active .chart-content li:nth-child(2) .chart-pillar em:before {
+  animation-delay: 2600ms;
+}
+.active .chart-content li:nth-child(2) .chart-pillar span {
+  animation-delay: 3000ms;
+}
+.active .chart-content li:nth-child(2) .chart-piece {
+  animation-delay: 2600ms;
+}
+.active .chart-content li:nth-child(2) .chart-piece:before {
+  animation-delay: 250ms;
+}
+.active .chart-content li:nth-child(2) .chart-piece:after {
+  animation-delay: 1150ms;
+}
+.active .chart-content li:nth-child(2) .chart-piece em {
+  animation-delay: 2800ms;
+}
+.active .chart-content li:nth-child(2) .chart-piece em:before {
+  animation-delay: 800ms;
+}
+.active .chart-content li:nth-child(3) h4 {
+  animation-delay: 2800ms;
+}
+.active .chart-content li:nth-child(3) .chart-pillar em:before {
+  animation-delay: 3000ms;
+}
+.active .chart-content li:nth-child(3) .chart-pillar span {
+  animation-delay: 3400ms;
+}
+.active .chart-content li:nth-child(3) .chart-piece {
+  animation-delay: 3000ms;
+}
+.active .chart-content li:nth-child(3) .chart-piece:before {
+  animation-delay: 500ms;
+}
+.active .chart-content li:nth-child(3) .chart-piece:after {
+  animation-delay: 1400ms;
+}
+.active .chart-content li:nth-child(3) .chart-piece em {
+  animation-delay: 3200ms;
+}
+.active .chart-content li:nth-child(3) .chart-piece em:before {
+  animation-delay: 1600ms;
+}
+.active .chart-content li:nth-child(4) h4 {
+  animation-delay: 3200ms;
+}
+.active .chart-content li:nth-child(4) .chart-pillar em:before {
+  animation-delay: 3400ms;
+}
+.active .chart-content li:nth-child(4) .chart-pillar span {
+  animation-delay: 3800ms;
+}
+.active .chart-content li:nth-child(4) .chart-piece {
+  animation-delay: 3400ms;
+}
+.active .chart-content li:nth-child(4) .chart-piece:before {
+  animation-delay: 750ms;
+}
+.active .chart-content li:nth-child(4) .chart-piece:after {
+  animation-delay: 1650ms;
+}
+.active .chart-content li:nth-child(4) .chart-piece em {
+  animation-delay: 3600ms;
+}
+.active .chart-content li:nth-child(4) .chart-piece em:before {
+  animation-delay: 2400ms;
+}
+.active .chart-content li:nth-child(5) h4 {
+  animation-delay: 3600ms;
+}
+.active .chart-content li:nth-child(5) .chart-pillar em:before {
+  animation-delay: 3800ms;
+}
+.active .chart-content li:nth-child(5) .chart-pillar span {
+  animation-delay: 4200ms;
+}
+.active .chart-content li:nth-child(5) .chart-piece {
+  animation-delay: 3800ms;
+}
+.active .chart-content li:nth-child(5) .chart-piece:before {
+  animation-delay: 1000ms;
+}
+.active .chart-content li:nth-child(5) .chart-piece:after {
+  animation-delay: 1900ms;
+}
+.active .chart-content li:nth-child(5) .chart-piece em {
+  animation-delay: 4000ms;
+}
+.active .chart-content li:nth-child(5) .chart-piece em:before {
+  animation-delay: 3200ms;
+}
+.active .chart-content li:nth-child(6) h4 {
+  animation-delay: 4000ms;
+}
+.active .chart-content li:nth-child(6) .chart-pillar em:before {
+  animation-delay: 4200ms;
+}
+.active .chart-content li:nth-child(6) .chart-pillar span {
+  animation-delay: 4600ms;
+}
+.active .chart-content li:nth-child(6) .chart-piece {
+  animation-delay: 4200ms;
+}
+.active .chart-content li:nth-child(6) .chart-piece:before {
+  animation-delay: 1250ms;
+}
+.active .chart-content li:nth-child(6) .chart-piece:after {
+  animation-delay: 2150ms;
+}
+.active .chart-content li:nth-child(6) .chart-piece em {
+  animation-delay: 4400ms;
+}
+.active .chart-content li:nth-child(6) .chart-piece em:before {
+  animation-delay: 4000ms;
+}
+.active .chart-content li:nth-child(7) h4 {
+  animation-delay: 4400ms;
+}
+.active .chart-content li:nth-child(7) .chart-pillar em:before {
+  animation-delay: 4600ms;
+}
+.active .chart-content li:nth-child(7) .chart-pillar span {
+  animation-delay: 5000ms;
+}
+.active .chart-content li:nth-child(7) .chart-piece {
+  animation-delay: 4600ms;
+}
+.active .chart-content li:nth-child(7) .chart-piece:before {
+  animation-delay: 1500ms;
+}
+.active .chart-content li:nth-child(7) .chart-piece:after {
+  animation-delay: 2400ms;
+}
+.active .chart-content li:nth-child(7) .chart-piece em {
+  animation-delay: 4800ms;
+}
+.active .chart-content li:nth-child(7) .chart-piece em:before {
+  animation-delay: 4800ms;
+}
+.active .chart-content li:nth-child(8) h4 {
+  animation-delay: 4800ms;
+}
+.active .chart-content li:nth-child(8) .chart-pillar em:before {
+  animation-delay: 5000ms;
+}
+.active .chart-content li:nth-child(8) .chart-pillar span {
+  animation-delay: 5400ms;
+}
+.active .chart-content li:nth-child(8) .chart-piece {
+  animation-delay: 5000ms;
+}
+.active .chart-content li:nth-child(8) .chart-piece:before {
+  animation-delay: 1750ms;
+}
+.active .chart-content li:nth-child(8) .chart-piece:after {
+  animation-delay: 2650ms;
+}
+.active .chart-content li:nth-child(8) .chart-piece em {
+  animation-delay: 5200ms;
+}
+.active .chart-content li:nth-child(8) .chart-piece em:before {
+  animation-delay: 5600ms;
+}
+.active .chart-content li:nth-child(9) h4 {
+  animation-delay: 5200ms;
+}
+.active .chart-content li:nth-child(9) .chart-pillar em:before {
+  animation-delay: 5400ms;
+}
+.active .chart-content li:nth-child(9) .chart-pillar span {
+  animation-delay: 5800ms;
+}
+.active .chart-content li:nth-child(9) .chart-piece {
+  animation-delay: 5400ms;
+}
+.active .chart-content li:nth-child(9) .chart-piece:before {
+  animation-delay: 2000ms;
+}
+.active .chart-content li:nth-child(9) .chart-piece:after {
+  animation-delay: 2900ms;
+}
+.active .view-curve img {
+  animation: view_curve_Animation 2600ms linear 2000ms 1 normal;
+  animation-fill-mode: both;
+}
+.active .view-curve img:nth-child(2) {
+  animation-delay: 4600ms;
+}
+.active .view-curve-ks {
+  animation: opacity_Animation 400ms linear 7200ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .view-curve-ks img {
+  animation: opacity_cycle_Animation 2000ms ease 0ms infinite normal;
+}
+.active h5 {
+  animation: opacity_Animation 400ms linear 0ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .view-bg03 {
+  animation: opacity_Animation 300ms linear 1500ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .view-lamp img {
+  animation-fill-mode: backwards !important;
+}
+.active .view-lamp img:nth-child(1) {
+  animation: opacity_Animation 500ms linear 200ms 1 normal;
+}
+.active .view-lamp img:nth-child(2) {
+  animation: viewLamp_Animation 500ms linear 1000ms 1 normal;
+}
+.active .view-lamp p {
+  animation: opacity_Animation 300ms linear 700ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .ppt-center dl {
+  animation: opacity_Animation 300ms linear 1800ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .ppt-center dl:nth-child(2),
+.active .ppt-center dl:nth-child(3) {
+  animation-delay: 2100ms;
+}
+.active .ppt-center dl:nth-child(4),
+.active .ppt-center dl:nth-child(5) {
+  animation-delay: 2400ms;
+}
+.active .ppt-center dl:nth-child(6),
+.active .ppt-center dl:nth-child(7) {
+  animation-delay: 2700ms;
+}
+.active .ppt-center dl:nth-child(8),
+.active .ppt-center dl:nth-child(9) {
+  animation-delay: 3000ms;
+}
+.active .view-jigsaw {
+  animation: bottom_top_Animation 300ms linear 3300ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .view-jigsaw span {
+  animation: right_left_Animation 300ms linear 3600ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .view-jigsaw span:nth-child(2) {
+  animation-name: left_right_Animation;
+}
+.active .ppt-left p,
+.active .ppt-left .view-arrow {
+  animation: bottom_top_Animation2 300ms linear 3900ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .ppt-left .view-arrow {
+  animation-delay: 4200ms;
+}
+.active .ppt-left li {
+  animation: left_right_Animation 300ms linear 4500ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .ppt-left li:nth-child(2) {
+  animation-name: right_left_Animation;
+}
+.active .view-farmer {
+  animation: top_bottom_Animation 300ms linear 3300ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .view-farmer p {
+  animation: opacity_Animation 300ms linear 3600ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .ppt-right dl {
+  animation: top_bottom_Animation 300ms linear 4500ms 1 normal;
+  animation-fill-mode: backwards;
+}
+.active .ppt-right dl:nth-child(3),
+.active .ppt-right dl:nth-child(4) {
+  animation-delay: 4200ms;
+}
+.active .ppt-right dl:nth-child(5),
+.active .ppt-right dl:nth-child(6) {
+  animation-delay: 3900ms;
+}
+.good-warp {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+}
+.good-warp > li {
+  display: none;
+  width: 25.08rem;
+  height: 8.48rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.good-warp > li.sub-active {
+  display: block;
+}
+.good-warp .bg {
+  width: 100%;
+}
+.good-view-chart {
+  margin: 2.22rem 0 0 2.86rem;
+  width: 19.14rem;
+  height: 5rem;
+  border-left: 2px solid rgba(255, 255, 255, 0.3);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  box-sizing: border-box;
+  color: #FFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.good-view-chart > img {
+  position: absolute;
+  top: -1.1rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.good-view-chart .title01 {
+  width: 7.75em;
+}
+.good-view-chart .title02 {
+  width: 7.33em;
+}
+.good-chart-left,
+.good-chart-left02 {
+  width: 0.74rem;
+  height: 100%;
+  font-size: 0.2rem;
+  line-height: 0.24rem;
+  position: absolute;
+  left: -0.74rem;
+  top: 0;
+}
+.good-chart-left span,
+.good-chart-left02 span {
+  display: block;
+  padding-right: 0.26rem;
+  text-align: right;
+  height: 0.24rem;
+  position: absolute;
+  right: 0;
+}
+.good-chart-left span:nth-child(1) {
+  top: -0.1rem;
+}
+.good-chart-left span:nth-child(2) {
+  top: 0.45rem;
+}
+.good-chart-left span:nth-child(3) {
+  top: 1rem;
+}
+.good-chart-left span:nth-child(4) {
+  top: 1.55rem;
+}
+.good-chart-left span:nth-child(5) {
+  top: 2.1rem;
+}
+.good-chart-left span:nth-child(6) {
+  top: 2.65rem;
+}
+.good-chart-left span:nth-child(7) {
+  top: 3.2rem;
+}
+.good-chart-left span:nth-child(8) {
+  top: 3.75rem;
+}
+.good-chart-left span:nth-child(9) {
+  top: 4.3rem;
+}
+.good-chart-left span:nth-child(10) {
+  top: 4.85rem;
+}
+.good-chart-left02 span:nth-child(1) {
+  top: -0.1rem;
+}
+.good-chart-left02 span:nth-child(2) {
+  top: 0.33rem;
+}
+.good-chart-left02 span:nth-child(3) {
+  top: 0.76rem;
+}
+.good-chart-left02 span:nth-child(4) {
+  top: 1.19rem;
+}
+.good-chart-left02 span:nth-child(5) {
+  top: 1.62rem;
+}
+.good-chart-left02 span:nth-child(6) {
+  top: 2.05rem;
+}
+.good-chart-left02 span:nth-child(7) {
+  top: 2.48rem;
+}
+.good-chart-left02 span:nth-child(8) {
+  top: 2.91rem;
+}
+.good-chart-left02 span:nth-child(9) {
+  top: 3.34rem;
+}
+.good-chart-left02 span:nth-child(10) {
+  top: 3.77rem;
+}
+.good-chart-content {
+  width: 15.5rem;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+.good-chart-content h4 {
+  width: 100%;
+  font-size: 0.3rem;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  bottom: -0.4rem;
+}
+.good-chart-content .chart-pillar {
+  color: #FFF;
+}
+.good-chart-content .chart-pillar span {
+  width: 2.5rem;
+  font-family: Arial;
+  font-weight: bold;
+  line-height: 1;
+  margin-left: -1.25rem;
+  top: 0;
+  transform: translateY(-135%);
+}
+.good-chart-content .chart-pillar b {
+  font-family: "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei";
+  font-weight: normal;
+  line-height: 1;
+  padding-left: 0.1rem;
+}
+.good-chart-content dd {
+  width: 1.34rem;
+  height: 100%;
+  position: relative;
+}
+#good-chart01 dd:nth-child(1) .chart-pillar {
+  height: 54.56%;
+}
+#good-chart01 dd:nth-child(1) .chart-pillar em:before {
+  background-color: #3A32E2;
+}
+#good-chart01 dd:nth-child(1) .chart-pillar span {
+  font-size: 0.5rem;
+}
+#good-chart01 dd:nth-child(1) .chart-pillar b {
+  font-size: 0.3rem;
+}
+#good-chart01 dd:nth-child(2) .chart-pillar {
+  height: 59.89%;
+}
+#good-chart01 dd:nth-child(2) .chart-pillar em:before {
+  background-color: #4720D7;
+}
+#good-chart01 dd:nth-child(2) .chart-pillar span {
+  font-size: 0.55rem;
+}
+#good-chart01 dd:nth-child(2) .chart-pillar b {
+  font-size: 0.33rem;
+}
+#good-chart01 dd:nth-child(3) .chart-pillar {
+  height: 68.22%;
+}
+#good-chart01 dd:nth-child(3) .chart-pillar em:before {
+  background-color: #6520D7;
+}
+#good-chart01 dd:nth-child(3) .chart-pillar span {
+  font-size: 0.6rem;
+}
+#good-chart01 dd:nth-child(3) .chart-pillar b {
+  font-size: 0.36rem;
+}
+#good-chart01 dd:nth-child(4) .chart-pillar {
+  height: 70.67%;
+}
+#good-chart01 dd:nth-child(4) .chart-pillar em:before {
+  background-color: #8C20D7;
+}
+#good-chart01 dd:nth-child(4) .chart-pillar span {
+  font-size: 0.65rem;
+}
+#good-chart01 dd:nth-child(4) .chart-pillar b {
+  font-size: 0.39rem;
+}
+#good-chart01 dd:nth-child(5) .chart-pillar {
+  height: 84.94%;
+}
+#good-chart01 dd:nth-child(5) .chart-pillar em:before {
+  background-color: #B41FCB;
+}
+#good-chart01 dd:nth-child(5) .chart-pillar span {
+  font-size: 0.7rem;
+}
+#good-chart01 dd:nth-child(5) .chart-pillar b {
+  font-size: 0.42rem;
+}
+#good-chart02 dd {
+  width: 2rem;
+}
+#good-chart02 dd:nth-child(1) .chart-pillar {
+  height: 52.33%;
+}
+#good-chart02 dd:nth-child(1) .chart-pillar em:before {
+  background-color: #7a20d7;
+}
+#good-chart02 dd:nth-child(1) .chart-pillar span {
+  font-size: 0.55rem;
+}
+#good-chart02 dd:nth-child(1) .chart-pillar b {
+  font-size: 0.33rem;
+}
+#good-chart02 dd:nth-child(2) .chart-pillar {
+  height: 57.33%;
+}
+#good-chart02 dd:nth-child(2) .chart-pillar em:before {
+  background-color: #9d20d7;
+}
+#good-chart02 dd:nth-child(2) .chart-pillar span {
+  font-size: 0.6rem;
+}
+#good-chart02 dd:nth-child(2) .chart-pillar b {
+  font-size: 0.36rem;
+}
+#good-chart02 dd:nth-child(3) .chart-pillar {
+  height: 73.17%;
+}
+#good-chart02 dd:nth-child(3) .chart-pillar em:before {
+  background-color: #b41fcb;
+}
+#good-chart02 dd:nth-child(3) .chart-pillar span {
+  font-size: 0.65rem;
+}
+#good-chart02 dd:nth-child(3) .chart-pillar b {
+  font-size: 0.39rem;
+}
+#good-chart02 dd:nth-child(4) .chart-pillar {
+  height: 88.33%;
+}
+#good-chart02 dd:nth-child(4) .chart-pillar em:before {
+  background-color: #bc2393;
+}
+#good-chart02 dd:nth-child(4) .chart-pillar span {
+  font-size: 0.7rem;
+}
+#good-chart02 dd:nth-child(4) .chart-pillar b {
+  font-size: 0.42rem;
+}
+.good-chart.sub-active .good-chart-content dd h4 {
+  animation: opacity_Animation 200ms linear 500ms 1 normal;
+  animation-fill-mode: both;
+}
+.good-chart.sub-active .good-chart-content dd .chart-pillar em:before {
+  animation: bottom_top_Animation 400ms linear 700ms 1 normal;
+  animation-fill-mode: both;
+}
+.good-chart.sub-active .good-chart-content dd .chart-pillar span {
+  animation: opacity_Animation 400ms linear 1100ms 1 normal;
+  animation-fill-mode: both;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(2) h4 {
+  animation-delay: 900ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(2) .chart-pillar em:before {
+  animation-delay: 1100ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(2) .chart-pillar span {
+  animation-delay: 1500ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(3) h4 {
+  animation-delay: 1300ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(3) .chart-pillar em:before {
+  animation-delay: 1500ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(3) .chart-pillar span {
+  animation-delay: 1900ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(4) h4 {
+  animation-delay: 1700ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(4) .chart-pillar em:before {
+  animation-delay: 1900ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(4) .chart-pillar span {
+  animation-delay: 2300ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(5) h4 {
+  animation-delay: 2100ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(5) .chart-pillar em:before {
+  animation-delay: 2300ms;
+}
+.good-chart.sub-active .good-chart-content dd:nth-child(5) .chart-pillar span {
+  animation-delay: 2700ms;
+}
+.annual-meeting li {
+  display: none;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.annual-meeting li.sub-active {
+  display: block;
+}
+.annual-meeting li .photo,
+.annual-meeting li .bg {
+  width: 100%;
+  height: 100%;
+}
+.annual-meeting li .text1-1,
+.annual-meeting li .text1-2 {
+  width: 7.84rem;
+  height: 1.68rem;
+  opacity: 0;
+  position: absolute;
+}
+.annual-meeting li .text1-1 {
+  left: 8.54rem;
+  bottom: 3.37rem;
+}
+.annual-meeting li .text1-2 {
+  left: 10.4rem;
+  bottom: 1.66rem;
+}
+.annual-meeting li .text2-1,
+.annual-meeting li .text2-2,
+.annual-meeting li .text2-3 {
+  opacity: 0;
+  position: absolute;
+  left: 25.64rem;
+}
+.annual-meeting li .text2-1 {
+  width: 6.08rem;
+  height: 1.54rem;
+  top: 0.92rem;
+}
+.annual-meeting li .text2-2 {
+  width: 6.59rem;
+  height: 1.53rem;
+  top: 3.13rem;
+}
+.annual-meeting li .text2-3 {
+  width: 5.06rem;
+  height: 1.53rem;
+  top: 5.34rem;
+}
+.annual-meeting li .text3-1 {
+  width: 6.46rem;
+  height: 2.1rem;
+  opacity: 0;
+  position: absolute;
+  left: 7.06rem;
+  bottom: 4.57rem;
+}
+.annual-meeting li .text3-2 {
+  width: 9rem;
+  height: 1.68rem;
+  opacity: 0;
+  position: absolute;
+  left: 9.02rem;
+  bottom: 2.86rem;
+}
+.annual-meeting li .text4-1 {
+  width: 21.16rem;
+  height: 1.97rem;
+  opacity: 0;
+  position: absolute;
+  right: 2.36rem;
+  bottom: 2.92rem;
+}
+.annual-meeting li .text5-1,
+.annual-meeting li .text5-2 {
+  height: 0.9rem;
+  opacity: 0;
+  position: absolute;
+}
+.annual-meeting li .text5-1 {
+  width: 5.52rem;
+  left: 11.43rem;
+  bottom: 1.86rem;
+}
+.annual-meeting li .text5-2 {
+  width: 6.46rem;
+  left: 13.4rem;
+  bottom: 0.76rem;
+}
+.annual-meeting li .text6-1,
+.annual-meeting li .text6-2,
+.annual-meeting li .text7-1,
+.annual-meeting li .text7-2 {
+  width: 8.9rem;
+  height: 1.91rem;
+  opacity: 0;
+  position: absolute;
+}
+.annual-meeting li .text6-1 {
+  right: 10.74rem;
+  bottom: 3.41rem;
+}
+.annual-meeting li .text6-2 {
+  right: 8.63rem;
+  bottom: 1.47rem;
+}
+.annual-meeting li .text7-1 {
+  left: 5.8rem;
+  bottom: 2.92rem;
+}
+.annual-meeting li .text7-2 {
+  left: 7.92rem;
+  bottom: 0.98rem;
+}
+.annual-meeting li .text8-1 {
+  width: 6.46rem;
+  height: 2.09rem;
+  opacity: 0;
+  position: absolute;
+  right: 8.72rem;
+  bottom: 3.31rem;
+}
+.annual-meeting li .text8-2 {
+  width: 6.29rem;
+  height: 1.95rem;
+  opacity: 0;
+  position: absolute;
+  right: 5.7rem;
+  bottom: 1.33rem;
+}
+.annual-meeting li .text9-1,
+.annual-meeting li .text9-2 {
+  width: 11.31rem;
+  height: 1.91rem;
+  opacity: 0;
+  position: absolute;
+}
+.annual-meeting li .text9-1 {
+  left: 7.9rem;
+  bottom: 3.37rem;
+}
+.annual-meeting li .text9-2 {
+  left: 10rem;
+  bottom: 1.43rem;
+}
+@keyframes annualPhoto {
+  100% {
+    transform: scale(1.08);
+  }
+}
+@keyframes annualTextLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-25%);
+  }
+  8% {
+    opacity: 1;
+    transform: translateX(-5%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+@keyframes annualTextRight {
+  0% {
+    opacity: 0;
+    transform: translateX(25%);
+  }
+  8% {
+    opacity: 1;
+    transform: translateX(5%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+.annual-meeting .sub-active .photo {
+  animation: annualPhoto 10s linear 0s 1 normal;
+  animation-fill-mode: both;
+}
+.annual-meeting .sub-active .text1-1,
+.annual-meeting .sub-active .text3-1,
+.annual-meeting .sub-active .text4-1,
+.annual-meeting .sub-active .text5-1,
+.annual-meeting .sub-active .text6-1,
+.annual-meeting .sub-active .text7-1,
+.annual-meeting .sub-active .text8-1,
+.annual-meeting .sub-active .text9-1 {
+  animation: annualTextLeft 10s linear 0s 1 normal;
+  animation-fill-mode: both;
+}
+.annual-meeting .sub-active .text1-2,
+.annual-meeting .sub-active .text3-2,
+.annual-meeting .sub-active .text5-2,
+.annual-meeting .sub-active .text6-2,
+.annual-meeting .sub-active .text7-2,
+.annual-meeting .sub-active .text8-2,
+.annual-meeting .sub-active .text9-2 {
+  animation: annualTextRight 10s linear 0s 1 normal;
+  animation-fill-mode: both;
+}
+.annual-meeting .sub-active .text2-1,
+.annual-meeting .sub-active .text2-2,
+.annual-meeting .sub-active .text2-3 {
+  animation: opacity_Animation 0.5s linear 0s 1 normal;
+  animation-fill-mode: both;
+}
+.annual-meeting .sub-active .text2-2 {
+  animation-delay: 0.5s;
+}
+.annual-meeting .sub-active .text2-3 {
+  animation-delay: 1s;
+}
+.welcome-warp img {
+  display: block;
+  width: 25.08rem;
+  height: 8.48rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
