@@ -118,33 +118,29 @@
                 <div class="system-number left">
                     <h3>近7天风控产品调用量</h3>
                     <p>
-                        <span class="num7"></span>
-                        <span class="num0"></span>
-                        <span class="num7"></span>
+                        <span :class="'num' + num1[0]"></span>
                         <em>,</em>
-                        <span class="num7"></span>
-                        <span class="num0"></span>
-                        <span class="num7"></span>
+                        <span :class="'num' + num1[1]"></span>
+                        <span :class="'num' + num1[2]"></span>
+                        <span :class="'num' + num1[3]"></span>
                         <em>,</em>
-                        <span class="num7">7</span>
-                        <span class="num0">0</span>
-                        <span class="num7">7</span>
+                        <span :class="'num' + num1[4]"></span>
+                        <span :class="'num' + num1[5]"></span>
+                        <span :class="'num' + num1[6]"></span>
                     </p>
                 </div>
                 <div class="system-number right">
                     <h3>近7天风控产品调用量</h3>
                     <p>
-                        <span class="num7"></span>
-                        <span class="num0"></span>
-                        <span class="num7"></span>
+                        <span :class="'num' + num2[0]"></span>
                         <em>,</em>
-                        <span class="num7"></span>
-                        <span class="num0"></span>
-                        <span class="num7"></span>
+                        <span :class="'num' + num2[1]"></span>
+                        <span :class="'num' + num2[2]"></span>
+                        <span :class="'num' + num2[3]"></span>
                         <em>,</em>
-                        <span class="num7"></span>
-                        <span class="num0"></span>
-                        <span class="num7"></span>
+                        <span :class="'num' + num2[4]"></span>
+                        <span :class="'num' + num2[5]"></span>
+                        <span :class="'num' + num2[6]"></span>
                     </p>
                 </div>
             </div>
@@ -168,8 +164,16 @@
     import systemIcon10 from 'assets/img/system-icon10.png'
     import systemIcon11 from 'assets/img/system-icon11.png'
     import systemIcon12 from 'assets/img/system-icon12.png'
+    import { mAjax } from 'src/services/functions'
+    import API from 'src/services/api'
+
+    let arr = [51,65,62,58,59,63,69,55,61,54]
+
     export default {
         data() {
+            let date = new Date().getDate().toString()
+            let index1 = date.charAt(date.length-1)
+            let index2 = (parseInt(date.charAt(date.length-1))+1)%10
             return {
                 bg,
                 planetLine1,
@@ -187,6 +191,34 @@
                 systemIcon10,
                 systemIcon11,
                 systemIcon12,
+                pre1:arr[index1],
+                pre2:arr[index2],
+                num:0
+            }
+        },
+        computed:{
+            num1(){
+                let r = this.pre1*100000 + this.num 
+                return r.toString().split("")
+            },
+            num2(){
+                let r = this.pre2*100000 + Math.round(this.num*0.9) 
+                return r.toString().split("")
+            }
+        },
+        created(){
+            this.getData()
+            setInterval(this.getData,2000)
+        },
+        methods:{
+            getData(){
+                let _this = this
+                mAjax(this,{
+                    url: API.yanzhen,
+                    success: function (data) {
+                        _this.num = data.count_inner
+                    }
+                })
             }
         }
     }

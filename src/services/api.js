@@ -7,4 +7,5 @@ export default {
     total_account: API_PRE + '/total_account',
     area_user:API_PRE + '/area_user',
     force_direct: API_PRE + '/force_direct',
+    yanzhen:API_PRE + '/yanzhen'
 }

@@ -5,7 +5,7 @@ const glob = require('glob')
 const bodyParser = require('body-parser')
 const proxy_port = require('../config/dev.env').MOCK_SERVER_PORT
 const app = express()
-const request = require('request').defaults({ baseUrl: 'https://datav.geotmt.com/gmanager/background/' })
+const request = require('request').defaults({ baseUrl: 'https://datav.geotmt.com' })
 const crypto = require('crypto')
 const fs = require('fs')
 
@@ -16,7 +16,7 @@ function md5(text) {
 let cookieTokenJar = request.jar()
 let cookieSetOver = false
 request.post({
-    url: '/loginCheck.html',
+    url: '/gmanager/background/loginCheck.html',
     form: {
         userName: 'shangxinbo',
         pwdplain: 'sxb123456',
@@ -31,17 +31,18 @@ request.post({
 })
 
 let API = {
-    '/api/timeline': 'report/getMoneyTimeJson.html',
-    '/api/force_direct': 'report/getTagMap.html',
-    '/api/speed': 'report/getAccountCount.html',
-    '/api/data_in': 'report/getAccountDayCount.html',
-    '/api/data_off': 'report/getConsumeJson.html',
-    '/api/user_time': 'report/getUserTimeJson.html',
+    '/api/timeline': '/gmanager/background/report/getMoneyTimeJson.html',
+    '/api/force_direct': '/gmanager/background/report/getTagMap.html',
+    '/api/speed': '/gmanager/background/report/getAccountCount.html',
+    '/api/data_in': '/gmanager/background/report/getAccountDayCount.html',
+    '/api/data_off': '/gmanager/background/report/getConsumeJson.html',
+    '/api/user_time': '/gmanager/background/report/getUserTimeJson.html',
     '/api/chord': null,
-    '/api/area_user': 'report/getCityStatJson.html',
-    '/api/map_user': 'report/getMapUserJson.html',
-    '/api/total_account': 'report/getUserstaticsJson.html',
-    '/api/video_data': 'report/getAccountOverviewJson.html'
+    '/api/area_user': '/gmanager/background/report/getCityStatJson.html',
+    '/api/map_user': '/gmanager/background/report/getMapUserJson.html',
+    '/api/total_account': '/gmanager/background/report/getUserstaticsJson.html',
+    '/api/video_data': '/gmanager/background/report/getAccountOverviewJson.html',
+    '/api/yanzhen': '/yanzhen-screen/yanzhen/index/total/datainfo'
 }
 
 function cacheData(dir,body) {
