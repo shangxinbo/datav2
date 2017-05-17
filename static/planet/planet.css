@@ -1,0 +1,33 @@
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,select,textarea,th,td{margin:0;padding:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
+address,cite,dfn,em,i,var{font-style:normal;}
+small{font-size:12px;}
+dl,ol,ul,li{list-style-type:none;}
+a{text-decoration:none;outline:none;}
+a:hover{text-decoration:underline;}
+sup{vertical-align:text-top;}
+sub{vertical-align:text-bottom;}
+button,input,select,textarea{font-size:100%;outline:none;}
+input[type="submit"],input[type="reset"],input[type="button"],button{-webkit-appearance:none;}
+textarea{resize:none;}
+table{border-collapse:collapse;border-spacing:0;}
+img{border:none;vertical-align:top;}
+article,aside,details,figcaption,figure,footer,header,main,nav,section,summary{display:block;}
+audio,canvas,video{display:inline-block;}
+
+
+body{
+    overflow: hidden;
+}
+.planet-big{
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.planet{
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+}
