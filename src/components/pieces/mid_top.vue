@@ -35,7 +35,7 @@
                         </transition>
                     </h2>
                     <p class="number">
-                        <span class="big">{{pv_change|bigNumFormat}}</span>
+                        <count class="big" :num="pv"></count>
                     </p>
                 </div>
                 <div class="text-number" v-show="cur_province">
@@ -48,7 +48,7 @@
                         </transition>
                     </h2>
                     <p class="number">
-                        <span class="big">{{uv_change|bigNumFormat}}</span>
+                        <count class="big" :num="uv"></count>
                     </p>
                 </div>
             </div>
@@ -106,6 +106,7 @@
     import girl5 from 'assets/img/girl05.png'
     import girl6 from 'assets/img/girl06.png'
     import TWEEN from 'tween.js'
+    import count from 'components/utils/count'
 
     echarts.registerMap('china', china)
 
@@ -127,10 +128,11 @@
                 },
                 map: null,
                 pv_animate1: true,
-                pv_animate2: false,
-                pv_change: 0,
-                uv_change: 0
+                pv_animate2: false
             }
+        },
+        components: {
+            count
         },
         watch: {
             type(newVal, oldVal) {
@@ -142,39 +144,7 @@
                 this.changeUsers()
                 this.changeTitle()
                 this.changeMap()
-            },
-            pv(newVal, oldVal) {
-                let _this = this
-                function animate(time) {
-                    requestAnimationFrame(animate)
-                    TWEEN.update(time)
-                }
-
-                new TWEEN.Tween({ tweeningNumber: oldVal })
-                    .easing(TWEEN.Easing.Quadratic.Out)
-                    .to({ tweeningNumber: newVal }, 500)
-                    .onUpdate(function () {
-                        _this.pv_change = this.tweeningNumber.toFixed(0)
-                    })
-                    .start()
-                animate()
-            },
-            uv(newVal, oldVal) {
-                let _this = this
-                function animate(time) {
-                    requestAnimationFrame(animate)
-                    TWEEN.update(time)
-                }
-
-                new TWEEN.Tween({ tweeningNumber: oldVal })
-                    .easing(TWEEN.Easing.Quadratic.Out)
-                    .to({ tweeningNumber: newVal }, 500)
-                    .onUpdate(function () {
-                        _this.uv_change = this.tweeningNumber.toFixed(0)
-                    })
-                    .start()
-                animate()
-            },
+            }
         },
         filters: {
             getUserPic(sex) {
@@ -185,9 +155,6 @@
                 } else {
                     return boysPic[Math.floor(Math.random() * 6)]
                 }
-            },
-            bigNumFormat(num) {
-                return num.toString().split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(/\,$/, '').split('').reverse().join('')
             }
         },
         methods: {

@@ -4,8 +4,8 @@
 <template>
     <div style="height:100%;width:100%;">
         <div class="warp">
-            <welcome :class="{active:page==1}"></welcome>
-            <index :class="{active:page==2}"></index>
+            <!--<welcome :class="{active:page==1}"></welcome>-->
+            <index :class="{active:page==1}"></index>
             <pic1 :class="{active:page==3}"></pic1>
             <pic2 :class="{active:page==4}"></pic2>
             <pic3 :class="{active:page==5}"></pic3>
