@@ -12,12 +12,12 @@
                         <span>沉默激活</span>
                     </li>
                 </ul>
-                <img class="view-arrow" src="img/view-arrow.png" />
+                <img class="view-arrow" :src="arrow" />
                 <p>存量客户行为标签匹配</p>
                 <div class="view-jigsaw">
                     <span>行内属性</span>
                     <span>行外行为</span>
-                    <img src="img/view-jigsaw.png" />
+                    <img :src="jigsaw" />
                 </div>
             </div>
             <div class="ppt-center">
@@ -69,8 +69,8 @@
                         <br />网贷逾期等信息</dd>
                 </dl>
                 <div class="view-lamp">
-                    <img src="img/view-lamp.png" />
-                    <img src="img/view-lamp02.png" />
+                    <img :src="lamp" />
+                    <img :src="lamp02" />
                     <p>反欺诈
                         <br />规则集</p>
                 </div>
@@ -139,11 +139,31 @@
                         <br />3个月交易总金额：中档</dd>
                 </dl>
                 <div class="view-farmer">
-                    <img src="img/view-farmer.png" />
+                    <img :src="farmer" />
                     <p>农民画像</p>
                 </div>
             </div>
         </div>
-        <img class="view-bg03" src="img/view-bg03.jpg" />
+        <img class="view-bg03" :src="bg03" />
     </div>
 </template>
+<script>
+    import arrow from 'assets/img/view-arrow.png'
+    import jigsaw from 'assets/img/view-jigsaw.png'
+    import lamp from 'assets/img/view-lamp.png'
+    import lamp02 from 'assets/img/view-lamp02.png'
+    import farmer from 'assets/img/view-farmer.png'
+    import bg03 from 'assets/img/view-bg03.jpg'
+    export default {
+        data(){
+            return {
+                arrow,
+                jigsaw,
+                lamp,
+                lamp02,
+                farmer,
+                bg03
+            }
+        }
+    }
+</script>
