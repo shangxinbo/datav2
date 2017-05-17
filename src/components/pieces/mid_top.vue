@@ -105,7 +105,6 @@
     import girl4 from 'assets/img/girl04.png'
     import girl5 from 'assets/img/girl05.png'
     import girl6 from 'assets/img/girl06.png'
-    import TWEEN from 'tween.js'
     import count from 'components/utils/count'
 
     echarts.registerMap('china', china)
