@@ -1,17 +1,54 @@
+<style scoped>
+    .fade1-leave-active {
+        transition: opacity 0.5s, margin-top 0.5s;
+        opacity: 0;
+        margin-top: -25px;
+    }
+
+    .fade1-enter-active {
+        opacity: 1;
+        margin-top: 0px;
+    }
+
+    .fade2-enter-active {
+        transition: opacity 0.5s, margin-top 0.5s;
+        opacity: 1;
+        margin-top: 0px
+    }
+
+    .fade2-leave-active {
+        opacity: 0;
+        margin-top: 25px
+    }
+</style>
 <template>
     <li>
         <div class="main">
             <div id="index_map" class="map-user-content">
-                <div class="text-number" v-show="province">
-                    <h2>{{province}}本日访问量</h2>
+                <div class="text-number" v-show="cur_province">
+                    <h2>
+                        <transition name="fade1">
+                            <span ref="pre1" v-show="pv_animate1">{{pre_province}}本日访问量</span>
+                        </transition>
+                        <transition name="fade2" @after-enter="aniend">
+                            <span ref="next1" v-show="pv_animate2">{{next_province}}本日访问量</span>
+                        </transition>
+                    </h2>
                     <p class="number">
-                        <span class="big">123,123,123</span>
+                        <span class="big">{{pv_change|bigNumFormat}}</span>
                     </p>
                 </div>
-                <div class="text-number" v-show="province">
-                    <h2>{{province}}本日用户量</h2>
+                <div class="text-number" v-show="cur_province">
+                    <h2>
+                        <transition name="fade1">
+                            <span ref="pre1" v-show="pv_animate1">{{pre_province}}本日用户量</span>
+                        </transition>
+                        <transition name="fade2" @after-enter="aniend">
+                            <span ref="next1" v-show="pv_animate2">{{next_province}}本日用户量</span>
+                        </transition>
+                    </h2>
                     <p class="number">
-                        <span class="big">123,123,123</span>
+                        <span class="big">{{uv_change|bigNumFormat}}</span>
                     </p>
                 </div>
             </div>
@@ -26,22 +63,23 @@
                 <div style="width:100%;height:100%;"></div>
             </div>
             <ul class="portrait-warp">
-                <li>
+                <li v-for="(item,index) in userLists">
                     <span class="point"></span>
                     <span class="point"></span>
                     <div class="top-line">
                         <em v-for="n in 13"></em>
                     </div>
-                    <img src="../../assets/img/boy01.png" />
+                    <img :src="item.sex|getUserPic" />
                     <div class="map-user-data">
                         <p>
                             <span>性别：</span>
-                            <em>男</em>
+                            <em>{{item.sex}}</em>
                             <span>年龄：</span>
-                            <em>23</em>
+                            <em>{{item.age}}</em>
                         </p>
                         <div class="tag">
-                            <strong style="color:rgba(0,255,255,1)" title="">asdf</strong>
+                            <strong v-for="tag in item.tags1" style="color:rgba(0,255,255,1)" title="tag">{{tag}}</strong>
+                            <strong v-for="tag in item.tags2" style="color:rgba(0,255,255,0.5)" title="tag">{{tag}}</strong>
                         </div>
                     </div>
                 </li>
@@ -55,6 +93,19 @@
     import { province } from 'assets/js/province.json'
     import { mAjax } from 'src/services/functions'
     import API from 'src/services/api'
+    import boy1 from 'assets/img/boy01.png'
+    import boy2 from 'assets/img/boy02.png'
+    import boy3 from 'assets/img/boy03.png'
+    import boy4 from 'assets/img/boy04.png'
+    import boy5 from 'assets/img/boy05.png'
+    import boy6 from 'assets/img/boy06.png'
+    import girl1 from 'assets/img/girl01.png'
+    import girl2 from 'assets/img/girl02.png'
+    import girl3 from 'assets/img/girl03.png'
+    import girl4 from 'assets/img/girl04.png'
+    import girl5 from 'assets/img/girl05.png'
+    import girl6 from 'assets/img/girl06.png'
+    import TWEEN from 'tween.js'
 
     echarts.registerMap('china', china)
 
@@ -63,18 +114,84 @@
             return {
                 type: 1,
                 data: {},
-                provinces: [],
-                cur_province: ''
+                provinces: [],     //所有有数据的省份拼音集合
+                cur_province: '',  //当前省份
+                pre_province: '',
+                next_province: '',
+                userLists: [],      //显示的用户列表
+                pv: 0,
+                uv: 0,
+                timer: {
+                    type: null,
+                    province: null
+                },
+                map: null,
+                pv_animate1: true,
+                pv_animate2: false,
+                pv_change: 0,
+                uv_change: 0
             }
         },
         watch: {
             type(newVal, oldVal) {
                 //切换tab
+                this.getData()
+            },
+            cur_province(newVal, oldVal) {
+                //切换省份
+                this.changeUsers()
+                this.changeTitle()
+                this.changeMap()
+            },
+            pv(newVal, oldVal) {
+                let _this = this
+                function animate(time) {
+                    requestAnimationFrame(animate)
+                    TWEEN.update(time)
+                }
+
+                new TWEEN.Tween({ tweeningNumber: oldVal })
+                    .easing(TWEEN.Easing.Quadratic.Out)
+                    .to({ tweeningNumber: newVal }, 500)
+                    .onUpdate(function () {
+                        _this.pv_change = this.tweeningNumber.toFixed(0)
+                    })
+                    .start()
+                animate()
+            },
+            uv(newVal, oldVal) {
+                let _this = this
+                function animate(time) {
+                    requestAnimationFrame(animate)
+                    TWEEN.update(time)
+                }
+
+                new TWEEN.Tween({ tweeningNumber: oldVal })
+                    .easing(TWEEN.Easing.Quadratic.Out)
+                    .to({ tweeningNumber: newVal }, 500)
+                    .onUpdate(function () {
+                        _this.uv_change = this.tweeningNumber.toFixed(0)
+                    })
+                    .start()
+                animate()
+            },
+        },
+        filters: {
+            getUserPic(sex) {
+                let boysPic = [boy1, boy2, boy3, boy4, boy5, boy6]
+                let girlsPic = [girl1, girl2, girl3, girl4, girl5, girl6]
+                if (sex == '女') {
+                    return girlsPic[Math.floor(Math.random() * 6)]
+                } else {
+                    return boysPic[Math.floor(Math.random() * 6)]
+                }
+            },
+            bigNumFormat(num) {
+                return num.toString().split('').reverse().join('').replace(/(\d{3})/g, '$1,').replace(/\,$/, '').split('').reverse().join('')
             }
         },
         methods: {
             getData() {
-                let type = this.type
                 mAjax(this, {
                     url: API.map_user,
                     data: {
@@ -85,32 +202,73 @@
                         for (var i in this.data) {
                             this.provinces.push(i)
                         }
-                        this.cur_province = this.provinces[0]
+                        let index = 0
+                        this.cur_province = this.provinces[index]
+
+                        this.timer.province = setInterval(() => {
+                            if (index < this.provinces.length - 1) {
+                                index++
+                            } else {
+                                index = 0
+                            }
+                            this.cur_province = this.provinces[index]
+                        }, 5000)
                     }
                 })
             },
             getProvinceName(pinyin) {
-                for (var i = 0; i < province.length; i++) {
+                for (let i = 0; i < province.length; i++) {
                     if (province[i].value == pinyin) {
                         return province[i].name
                     }
                 }
                 return false
             },
-            getProvincePinyin(name) {
-                for (var i = 0; i < province.length; i++) {
-                    if (province[i].name == name) {
-                        return province[i].value
+            changeUsers() {
+                let users = this.data[this.cur_province].users
+                let man = [], woman = []
+                let rand1 = Math.random()
+                users.forEach(el => {
+                    if (el.sex == '女') {
+                        woman.push(el)
+                    } else {
+                        man.push(el)
                     }
+                })
+                if (rand1 > 0.5) {
+                    this.userLists = [woman[0], man[0], man[1], woman[1]]
+                } else {
+                    this.userLists = [man[0], woman[0], woman[1], man[1]]
                 }
-                return false
+            },
+            changeTitle() {
+
+                this.next_province = this.getProvinceName(this.cur_province)
+                this.pv_animate1 = false
+                this.pv_animate2 = true
+                this.pv = this.data[this.cur_province].pv
+                this.uv = this.data[this.cur_province].uv
+            },
+            changeMap() {
+                let name = this.getProvinceName(this.cur_province)
+                this.map.setOption({
+                    series: {
+                        data: [
+                            { name: name, value: 2134, selected: true }
+                        ]
+                    }
+                })
+            },
+            aniend() {
+                this.pre_province = this.getProvinceName(this.cur_province)
+                this.pv_animate2 = false
+                this.pv_animate1 = true
             }
         },
         mounted() {
-            this.getData()
             let mapCont = document.querySelector('.map-user-chart>div')
-            let map = echarts.init(mapCont)
-            map.setOption({
+            this.map = echarts.init(mapCont)
+            this.map.setOption({
                 grid: {
                     left: 'left'
                 },
@@ -144,6 +302,7 @@
                     }
                 ]
             })
+            this.getData()
         }
     }
 
