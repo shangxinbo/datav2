@@ -20,6 +20,23 @@
         opacity: 0;
         margin-top: 25px
     }
+
+    .portrait {
+        animation: portrait_li_Animation 5s ease 0ms infinite normal;
+    }
+
+    @keyframes portrait_li_Animation {
+        8%,
+        92% {
+            transform: rotateX(0deg);
+            opacity: 1;
+        }
+        0%,
+        100% {
+            transform: rotateX(90deg);
+            opacity: 0;
+        }
+    }
 </style>
 <template>
     <li>
@@ -63,13 +80,14 @@
                 <div style="width:540px;height:385px;"></div>
             </div>
             <ul class="portrait-warp">
+                <!--<transition name="portrait" >-->
                 <li v-for="(item,index) in userLists">
                     <span class="point"></span>
                     <span class="point"></span>
                     <div class="top-line">
                         <em v-for="n in 13"></em>
                     </div>
-                    <img :src="item.sex|getUserPic" />
+                    <protrait :sex="item.sex+item.userid"></protrait>
                     <div class="map-user-data">
                         <p>
                             <span>性别：</span>
@@ -83,6 +101,7 @@
                         </div>
                     </div>
                 </li>
+                <!--</transition>-->
             </ul>
         </div>
     </li>
@@ -93,19 +112,8 @@
     import { province } from 'assets/js/province.json'
     import { mAjax } from 'src/services/functions'
     import API from 'src/services/api'
-    import boy1 from 'assets/img/boy01.png'
-    import boy2 from 'assets/img/boy02.png'
-    import boy3 from 'assets/img/boy03.png'
-    import boy4 from 'assets/img/boy04.png'
-    import boy5 from 'assets/img/boy05.png'
-    import boy6 from 'assets/img/boy06.png'
-    import girl1 from 'assets/img/girl01.png'
-    import girl2 from 'assets/img/girl02.png'
-    import girl3 from 'assets/img/girl03.png'
-    import girl4 from 'assets/img/girl04.png'
-    import girl5 from 'assets/img/girl05.png'
-    import girl6 from 'assets/img/girl06.png'
     import count from 'components/utils/count'
+    import protrait from 'components/utils/protrait'
 
     echarts.registerMap('china', china)
 
@@ -131,7 +139,8 @@
             }
         },
         components: {
-            count
+            count,
+            protrait
         },
         watch: {
             type(newVal, oldVal) {
@@ -143,17 +152,9 @@
                 this.changeUsers()
                 this.changeTitle()
                 this.changeMap()
-            }
-        },
-        filters: {
-            getUserPic(sex) {
-                let boysPic = [boy1, boy2, boy3, boy4, boy5, boy6]
-                let girlsPic = [girl1, girl2, girl3, girl4, girl5, girl6]
-                if (sex == '女') {
-                    return girlsPic[Math.floor(Math.random() * 6)]
-                } else {
-                    return boysPic[Math.floor(Math.random() * 6)]
-                }
+            },
+            userLists(newVal, oldVal) {
+                console.log(newVal)
             }
         },
         methods: {

@@ -879,7 +879,7 @@ body {
   margin: 0.15rem 0 0.15rem -2px;
   float: right;
   position: relative;
-  animation: portrait_li_Animation 5s ease 0ms infinite normal;
+  
 }
 .portrait-warp li:before,
 .portrait-warp li:after {
