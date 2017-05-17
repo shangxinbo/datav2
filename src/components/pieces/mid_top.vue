@@ -60,7 +60,7 @@
                 <a :class="{active:type==5}" href="javascript:void(0);">社交</a>
             </div>
             <div class="map-user-chart">
-                <div style="width:100%;height:100%;"></div>
+                <div style="width:540px;height:385px;"></div>
             </div>
             <ul class="portrait-warp">
                 <li v-for="(item,index) in userLists">

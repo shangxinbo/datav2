@@ -23,7 +23,7 @@
                 </div>
             </div>
             <div class="area-user-chart">
-                <div id="area_user"></div>
+                <div id="area_user" style="width:652px;height:432px;"></div>
             </div>
         </div>
     </li>

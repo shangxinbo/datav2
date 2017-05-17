@@ -35,8 +35,8 @@
                 </div>
             </div>
             <div class="total-account-chart">
-                <div id="total_account1"></div>
-                <div id="total_account2"></div>
+                <div id="total_account1" style="width:345px;height:260px;"></div>
+                <div id="total_account2" style="width:345px;height:260px;"></div>
             </div>
         </div>
     </li>

@@ -116,7 +116,7 @@
                     </div>
                 </div>
                 <div class="system-number left">
-                    <h3>近7天风控产品调用量</h3>
+                    <h3>近7天营销产品调用量</h3>
                     <p>
                         <span :class="'num' + num1[0]"></span>
                         <em>,</em>
@@ -167,7 +167,7 @@
     import { mAjax } from 'src/services/functions'
     import API from 'src/services/api'
 
-    let arr = [51,65,62,58,59,63,69,55,61,54]
+    let arr = [51,65,62,58,59,63,64,55,61,54]
 
     export default {
         data() {
