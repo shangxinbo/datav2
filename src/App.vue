@@ -4,10 +4,11 @@
 <template>
     <div style="height:100%;width:100%;">
         <div class="warp">
-            <index :class="{active:page==1}"></index>
-            <pic1 :class="{active:page==2}"></pic1>
-            <pic2 :class="{active:page==3}"></pic2>
-            <pic3 :class="{active:page==4}"></pic3>
+            <welcome :class="{active:page==1}"></welcome>
+            <index :class="{active:page==2}"></index>
+            <pic1 :class="{active:page==3}"></pic1>
+            <pic2 :class="{active:page==4}"></pic2>
+            <pic3 :class="{active:page==5}"></pic3>
         </div>
         <back-video></back-video>
     </div>

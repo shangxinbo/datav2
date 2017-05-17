@@ -1,5 +1,3 @@
-@import (reference) "base.less";
-
 body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,select,textarea,th,td{margin:0;padding:0;}
 h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal}
 address,cite,dfn,em,i,var{font-style:normal;}
@@ -26,6 +24,35 @@ audio,canvas,video{display:inline-block;}
   font-style:normal;
   font-weight:normal;
 }
+//——————————————  less参数  ——————————————--------------------------------------------------
+@black-color:#000;
+@whit-color:#FFF;
+@green-color:#00E1FF;
+
+@yaHei:"Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei";
+@arial:Arial;
+@geoFont:"geoFont";
+
+.wh(@n:100%){
+  width:@n;
+  height:@n;
+}
+.flo(){
+  font-size: 0;
+  line-height: 0;
+  overflow: hidden;
+}
+.borderBox(){
+  box-sizing: border-box;
+}
+
+.transform(@transform-functions){
+  transform:@arguments;
+}
+.animation(@animation-name,@animation-duration,@animation-timing-function,@animation-delay,@animation-iteration-count,@animation-direction){
+  animation: @arguments;
+}
+//——————————————  less参数 End  ——————————————----------------------------------------------
 
 html{
   .wh();
@@ -45,42 +72,7 @@ body{
   .wh();
   overflow: hidden;
   position: relative;
-  z-index: 2;
-  &>div,&>ul{
-    display: none;
-    .wh();
-    overflow: hidden;
-    opacity: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
-    &.active{
-      display: block;
-      opacity: 1;
-    }
-  }
-}
-.warp-background{
-  .wh();
-  overflow: hidden;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
-  .logo{
-    width: 1.6rem;
-    height: 1.1rem;
-    position: absolute;
-    left: 1.85rem;
-    top: 50%;
-    z-index: 50;
-    .transform(translateY(-50%));
-    img{
-      display: block;
-      width: 100%;
-    }
-  }
-  .background{
+  video.background{
     width: 100%;
     overflow: hidden;
     position: absolute;
@@ -88,11 +80,371 @@ body{
     top: 0;
   }
 }
+.logo{
+  width: 1.6rem;
+  height: 1.1rem;
+  position: absolute;
+  left: 1.85rem;
+  top: 50%;
+  z-index: 50;
+  .transform(translateY(-50%));
+  img{
+    display: block;
+    width: 100%;
+  }
+}
+.good-warp{
+  .wh();
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  &>div{
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    .transform(translate(-50%,-50%));
+  }
+}
+.system{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 3;
+  .transform(translate(-50%,-50%));
+}
+.good-tip,.good-chart,.system{
+  width: 25.08rem;
+  height: 8.48rem;
+  .bg{
+    width: 100%;
+  }
+}
+.good-view-chart{
+  margin: 2.22rem 0 0 2.86rem;
+  width: 19.14rem;
+  height: 5rem;
+  border-left: 2px solid fade(#FFF,30%);
+  border-bottom: 2px solid fade(#FFF,30%);
+  box-sizing: border-box;
+  color: #FFF;
+  position: absolute;
+  left: 0;
+  top: 0;
+  &>img{
+    position: absolute;
+    top: -1.1rem;
+    left: 50%;
+    .transform(translateX(-50%));
+  }
+  .title01{
+    width: 7.75em;
+  }
+  .title02{
+    width: 7.33em;
+  }
+}
+.good-chart-left,.good-chart-left02{
+  width: 0.74rem;
+  height: 100%;
+  font-size: 0.2rem;
+  line-height: 0.24rem;
+  position: absolute;
+  left: -0.74rem;
+  top: 0;
+  span{
+    display: block;
+    padding-right: 0.26rem;
+    text-align: right;
+    height: 0.24rem;
+    position: absolute;
+    right: 0;
+  }
+}
+.good-chart-left{
+  span{
+    .nth-child(@num) when (@num < 11){
+      &:nth-child(@{num}){
+        top: -0.1rem + (0.55rem*(@num - 1));
+      }
+      .nth-child(( @num + 1 ));
+    }
+    .nth-child(1);
+  }
+}
+.good-chart-left02{
+  span{
+    .nth-child(@num) when (@num < 11){
+      &:nth-child(@{num}){
+        top: -0.1rem + (0.43rem*(@num - 1));
+      }
+      .nth-child(( @num + 1 ));
+    }
+    .nth-child(1);
+  }
+}
+
+
+
+.good-chart-content{
+  width: 15.5rem;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+  display:flex;
+  justify-content:space-between;
+  h4{
+    width: 100%;
+    font-size: 0.3rem;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    bottom: -0.4rem;
+  }
+  .chart-pillar{
+    color: #FFF;
+    span{
+      width: 2.5rem;
+      font-family: @arial;
+      font-weight: bold;
+      line-height: 1;
+      margin-left: -1.25rem;
+      top: 0;
+      .transform(translateY(-135%));
+    }
+    b{
+      font-family: @yaHei;
+      font-weight: normal;
+      line-height: 1;
+      padding-left: 0.1rem;
+    }
+  }
+  li{
+    width: 1.34rem;
+    height: 100%;
+    position: relative;
+  }
+}
+#good-chart01{
+  li{
+    @left:1800;
+    @pillar01:982;
+    @pillar02:1078;
+    @pillar03:1228;
+    @pillar04:1272;
+    @pillar05:1529;
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@left,4));
+        em{
+          &:before{
+            background-color: #3A32E2;
+          }
+        }
+        span{
+          font-size: 0.5rem;
+        }
+        b{
+          font-size: 0.3rem;
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@left,4));
+        em{
+          &:before{
+            background-color: #4720D7;
+          }
+        }
+        span{
+          font-size: 0.55rem;
+        }
+        b{
+          font-size: 0.33rem;
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@left,4));
+        em{
+          &:before{
+            background-color: #6520D7;
+          }
+        }
+        span{
+          font-size: 0.6rem;
+        }
+        b{
+          font-size: 0.36rem;
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@left,4));
+        em{
+          &:before{
+            background-color: #8C20D7;
+          }
+        }
+        span{
+          font-size: 0.65rem;
+        }
+        b{
+          font-size: 0.39rem;
+        }
+      }
+    }
+    &:nth-child(5){
+      .chart-pillar{
+        height: percentage(round(@pillar05/@left,4));
+        em{
+          &:before{
+            background-color: #B41FCB;
+          }
+        }
+        span{
+          font-size: 0.7rem;
+        }
+        b{
+          font-size: 0.42rem;
+        }
+      }
+    }
+  }
+}
+#good-chart02{
+  li{
+    width: 2rem;
+
+    @left:3*2;
+    @pillar01:0.14;
+    @pillar02:0.44;
+    @pillar03:1.39;
+    @pillar04:2.3;
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@left,4)+0.5);
+        em{
+          &:before{
+            background-color: #7a20d7;
+          }
+        }
+        span{
+          font-size: 0.55rem;
+        }
+        b{
+          font-size: 0.33rem;
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@left,4)+0.5);
+        em{
+          &:before{
+            background-color: #9d20d7;
+          }
+        }
+        span{
+          font-size: 0.6rem;
+        }
+        b{
+          font-size: 0.36rem;
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@left,4)+0.5);
+        em{
+          &:before{
+            background-color: #b41fcb;
+          }
+        }
+        span{
+          font-size: 0.65rem;
+        }
+        b{
+          font-size: 0.39rem;
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@left,4)+0.5);
+        em{
+          &:before{
+            background-color: #bc2393;
+          }
+        }
+        span{
+          font-size: 0.7rem;
+        }
+        b{
+          font-size: 0.42rem;
+        }
+      }
+    }
+  }
+}
+
+
+.good-chart{
+  &.active{
+    .good-chart-content{
+      li{
+        h4{
+          .animation(opacity_Animation,200ms,linear,500ms,1,normal);
+          animation-fill-mode: both;
+        }
+        .chart-pillar{
+          em{
+            &:before{
+              .animation(bottom_top_Animation,400ms,linear,700ms,1,normal);
+              animation-fill-mode: both;
+            }
+          }
+          span{
+            .animation(opacity_Animation,400ms,linear,1100ms,1,normal);
+            animation-fill-mode: both;
+          }
+        }
+        .nth-child(@num) when (@num < 6){
+          &:nth-child(@{num}){
+            h4{
+              animation-delay: 500ms + 400*(@num - 1);
+            }
+            .chart-pillar{
+              em{
+                &:before{
+                  animation-delay: 700ms + 400*(@num - 1);
+                }
+              }
+              span{
+                animation-delay: 1100ms + 400*(@num - 1);
+              }
+            }
+          }
+          .nth-child(( @num + 1 ));
+        }
+        .nth-child(2);
+      }
+    }
+  }
+}
+
 
 
 
 .warp-content{
-  display: block !important;
+  .wh();
+  opacity: 0;
+  position: relative;
+  z-index: 2;
   &>ul{
     height: 100%;
     margin-left: 0.06rem;
@@ -108,6 +460,18 @@ body{
     background-color: fade(@black-color,80%);
   }
 }
+.good-hide{
+  .good-warp{
+    opacity: 0;
+  }
+  .system{
+    opacity: 0;
+  }
+  .warp-content{
+    opacity: 1;
+  }
+}
+
 .warp-content-right{
   width: 7.68rem;
   &>li{
@@ -628,6 +992,42 @@ body{
     opacity: 0.8;
   }
 }
+//今日客户调用量
+.video-data-now{
+  position: absolute;
+  top: 0.12rem;
+  left: 0;
+  height: 0.68rem;
+  z-index: 2;
+  padding:0 0.4rem 0 2rem;
+  &:before{
+    display: block;
+    content: '';
+    .wh();
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: @black-color;
+    opacity: 0.4;
+    border-top-right-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+  }
+  h2{
+    font-size: 0.2rem;
+    color: @whit-color;
+    font-family: @yaHei;
+    position: absolute;
+    top: 0.24rem;
+    left: 0.35rem;
+  }
+  .number{
+    position: relative;
+    color: @whit-color;
+    font-family: @geoFont;
+    font-size: 0.3rem;
+    line-height: 0.68rem;
+  }
+}
 .video-data-content{
   .wh();
   overflow: hidden;
@@ -888,9 +1288,2788 @@ body{
 }
 
 
+@view-green-color: #03F6FF;
+@view-yellow-color: #FFED00;
+@view-red-color: #FF1C1C;
+
+.view-warp01,.view-warp02,.view-warp03,.annual-meeting{
+  display: none;
+  .wh();
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  &.view-warp-show{
+    display: block;
+  }
+}
+.view-content{
+  .wh();
+  position: relative;
+  z-index: 2;
+}
+.view-warp01{
+  background-color: #2D2A56;
+}
+.view-warp02{
+  .view-content{
+    width: 36.6rem;
+    padding: 0 1rem 0 0.8rem;
+  }
+}
+.view-warp03{
+  background-color: @black-color;
+  .view-content{
+    width: 34.6rem;
+    padding: 0 1.9rem;
+    color: @whit-color;
+  }
+}
+.view-bg01,.view-bg02,.view-bg03{
+  .wh();
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.view-bg01{
+  img{
+    display: block;
+    .wh();
+  }
+  &>div{
+    .wh();
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  span{
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    position: absolute;
+    background: url("../img/view-star.png") no-repeat 0 0/contain;
+    &:nth-child(1){
+      left: 2.1rem;
+      top: 0.6rem;
+    }
+    &:nth-child(2){
+      left: 3.4rem;
+      top: 5.45rem;
+    }
+    &:nth-child(3){
+      left: 8.05rem;
+      top: 3.5rem;
+    }
+    &:nth-child(4){
+      left: 14.7rem;
+      bottom: 0.5rem;
+    }
+    &:nth-child(5){
+      left: 15.5rem;
+      top: 1.05rem;
+    }
+    &:nth-child(6){
+      left: 18.55rem;
+      top: 4.5rem;
+    }
+    &:nth-child(7){
+      right: 16.2rem;
+      bottom: 0.4rem;
+    }
+    &:nth-child(8){
+      right: 13.3rem;
+      top: 1.3rem;
+    }
+    &:nth-child(9){
+      right: 7.7rem;
+      bottom: 1.5rem;
+    }
+    &:nth-child(10){
+      right: 7.2rem;
+      top: 3.4rem;
+    }
+    &:nth-child(11){
+      right: 2.4rem;
+      top: 2.7rem;
+    }
+  }
+  em{
+    display: block;
+    .wh(6px);
+    border-radius: 50%;
+    background-color: @whit-color;
+    box-shadow: 0 0 5px 5px fade(@whit-color, 30%);
+    position: absolute;
+    opacity: 0;
+    &:before{
+      content: '';
+      display: block;
+      border-style: solid;
+      border-width: 0 0 4px 1.6rem;
+      border-color: transparent transparent transparent fade(@whit-color, 30%);
+      .transform(rotate(-45deg));
+      transform-origin: left center;
+      position: absolute;
+      top: 1px;
+      left: 3px;
+    }
+    &:nth-child(1){
+      left: 2.9rem;
+      top: 7.6rem;
+    }
+    &:nth-child(2){
+      left: 5rem;
+      top: 1.4rem;
+    }
+    &:nth-child(3){
+      left: 11.6rem;
+      top: 0.9rem;
+    }
+    &:nth-child(4){
+      left: 13.2rem;
+      top: 5.9rem;
+    }
+    &:nth-child(5){
+      left: 15.8rem;
+      top: 8.8rem;
+    }
+    &:nth-child(6){
+      left: 19.5rem;
+      top: 1.8rem;
+    }
+    &:nth-child(7){
+      right: 15rem;
+      top: 6.7rem;
+    }
+    &:nth-child(8){
+      right: 8.9rem;
+      top: 9rem;
+    }
+    &:nth-child(9){
+      right: 8.7rem;
+      top: 3.5rem;
+    }
+    &:nth-child(10){
+      right: 3.7rem;
+      top: 5.9rem;
+    }
+  }
+}
+.view-bg02,.view-bg03{
+  will-change: transform;
+}
+.view-warp01{
+  h2{
+    width: 100%;
+    text-align: center;
+    font-size: 0.48rem;
+    color: @whit-color;
+    position: absolute;
+    left: 0;
+    top: 0.48rem;
+    z-index: 3;
+  }
+}
+
+@planet-yellow:#FBD76B;
+@planet-yellow-crater:#F7B55D;
+@planet-yellow-text: #7B3B10;
+@planet-yellow-halo: #694A57;
+@planet-green:#BEEAE2;
+@planet-green-crater:#8EDDB9;
+@planet-green-text: #0A562D;
+@planet-green-halo: #41E994;
+@planet-blue:#3BFFFD;
+@planet-blue-crater:#26E5E3;
+
+.planet-warp{
+  position: absolute;
+  em{
+    .wh();
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+  .planet{
+    .wh();
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    span{
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+    }
+  }
+  strong{
+    font-weight: normal;
+    display: block;
+    position: absolute;
+  }
+}
+.planet-one{
+  position: absolute;
+  .wh(1.7rem);
+  z-index: 2;
+  .planet-warp{
+    .wh();
+    border-radius: 50%;
+    em{
+      background-color: @planet-yellow-halo;
+    }
+    &:after{
+      display: block;
+      content: '';
+      width: 1.11rem;
+      height: 0.77rem;
+      background: url("../img/planet-light.png") no-repeat 0 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+  .planet{
+    background-color: @planet-yellow;
+    span{
+      background-color: @planet-yellow-crater;
+      &:nth-child(1){
+        .wh(0.4rem);
+        left: 0.24rem;
+        bottom: 0.46rem;
+      }
+      &:nth-child(2){
+        .wh(0.17rem);
+        left: 0.73rem;
+        bottom: 0.2rem;
+      }
+      &:nth-child(3){
+        .wh(0.28rem);
+        right: 0.46rem;
+        bottom: 0.2rem;
+      }
+      &:nth-child(4){
+        .wh(0.12rem);
+        right: 0.6rem;
+        top: 0.3rem;
+      }
+    }
+  }
+  strong{
+    width: 100%;
+    font-size: 0.3rem;
+    line-height: 1.2;
+    text-align: center;
+    color: @planet-yellow-text;
+    left: 0;
+    top: 50%;
+    .transform(translateY(-50%));
+  }
+}
+.planet-two{
+  .wh();
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  .planet-warp{
+    .wh(1rem);
+    em{
+      background-color: @planet-green-halo;
+    }
+  }
+  .planet{
+    background-color: @planet-green;
+    span{
+      background-color: @planet-green-crater;
+      &:nth-child(1){
+        .wh(0.28rem);
+        left: 0.15rem;
+        bottom: 0.15rem;
+      }
+      &:nth-child(2){
+        .wh(0.2rem);
+        left: 0.5rem;
+        top: 0.15rem;
+      }
+      &:nth-child(3){
+        .wh(0.12rem);
+        right: 0.15rem;
+        bottom: 0.25rem;
+      }
+    }
+  }
+  strong{
+    width: 100%;
+    font-size: 0.2rem;
+    line-height: 1.2;
+    text-align: center;
+    color: @planet-green-text;
+    left: 0;
+    top: 50%;
+    .transform(translateY(-50%));
+  }
+}
+.planet-three{
+  .wh();
+  font-size: 0.18rem;
+  color: @planet-blue;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  .planet-warp{
+    .wh(0.2rem);
+    &:before{
+      display: block;
+      content: '';
+      .wh(0.34rem);
+      border-radius: 50%;
+      border: 1px solid fade(@planet-blue,30%);;
+      position: absolute;
+      left: -0.08rem;
+      top: -0.08rem;
+    }
+    i{
+      display: block;
+      .flo();
+      border-top: 1px solid @planet-blue;
+      position: absolute;
+      opacity: 0.4;
+      &.line01{
+        left: 0.1rem;
+        top: 0.1rem;
+        transform-origin: left center;
+      }
+    }
+  }
+  .planet{
+    background-color: @planet-blue;
+    span{
+      background-color: @planet-blue-crater;
+      &:nth-child(1){
+        .wh(0.04rem);
+        left: 0.02rem;
+        bottom: 0.06rem;
+      }
+      &:nth-child(2){
+        .wh(0.07rem);
+        left: 0.05rem;
+        bottom: 0.01rem;
+      }
+      &:nth-child(3){
+        .wh(0.04rem);
+        right: 0.03rem;
+        top: 0.05rem;
+      }
+    }
+  }
+  strong{
+    white-space:nowrap;
+    margin-top: -0.1rem;
+  }
+}
+.planet-main{
+  float: left;
+  height: 100%;
+  position: relative;
+  &:nth-child(1){
+    width: 8.05rem;
+    .planet-one{
+      left: 300px;
+      top: 480px;
+    }
+    .planet-three{
+      .planet-warp{
+        &:nth-child(1){
+          left: 235px;
+          top: 575px;
+          .line01{  width: 0.3rem;  .transform(rotate(-120deg));  }
+          .line02{  width: 0.4rem;  right: 24px;  top: -16px;  }
+          strong{  right: 67px;  top: -16px;  }
+        }
+        &:nth-child(2){
+          left: 240px;
+          top: 518px;
+          .line01{  width: 0.4rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.2rem;  right: 16px;  top: -29px;  }
+          strong{  right: 42px;  top: -29px;}
+        }
+        &:nth-child(3){
+          left: 266px;
+          top: 460px;
+          .line01{  width: 0.6rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: -49px;  }
+          strong{  right: 67px;  top: -49px;}
+        }
+        &:nth-child(4){
+          left: 317px;
+          top: 427px;
+          .line01{  width: 0.6rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: -49px;  }
+          strong{  right: 67px;  top: -49px;}
+        }
+        &:nth-child(5){
+          left: 372px;
+          top: 412px;
+          .line01{  width: 0.8rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 23px;  top: -68px;  }
+          strong{  right: 70px;  top: -68px;}
+        }
+        &:nth-child(6){
+          right: 363px;
+          top: 419px;
+          .line01{  width: 1rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  left: 28px;  top: -88px;  }
+          strong{  left: 75px;  top: -88px;}
+        }
+        &:nth-child(7){
+          right: 309px;
+          top: 453px;
+          .line01{  width: 0.8rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  left: 23px;  top: -68px;  }
+          strong{  left: 70px;  top: -68px;}
+        }
+        &:nth-child(8){
+          right: 277px;
+          top: 503px;
+          .line01{  width: 0.6rem;  .transform(rotate(-70deg));  }
+          .line02{  width: 0.4rem;  left: 30px;  top: -46px;  }
+          strong{  left: 74px;  top: -46px;}
+        }
+        &:nth-child(9){
+          right: 268px;
+          top: 557px;
+          .line01{  width: 0.6rem;  .transform(rotate(40deg));  }
+          .line02{  width: 0.4rem;  left: 56px;  top: 48px;  }
+          strong{  left: 100px;  top: 48px;}
+        }
+        &:nth-child(10){
+          right: 281px;
+          bottom: 441px;
+          .line01{  width: 0.6rem;  .transform(rotate(40deg));  }
+          .line02{  width: 0.4rem;  left: 56px;  top: 48px;  }
+          strong{  left: 100px;  top: 48px;}
+        }
+        &:nth-child(11){
+          right: 318px;
+          bottom: 396px;
+          .line01{  width: 0.6rem;  .transform(rotate(60deg));  }
+          .line02{  width: 0.4rem;  left: 40px;  top: 62px;  }
+          strong{  left: 88px;  top: 62px;}
+        }
+        &:nth-child(12){
+          right: 372px;
+          bottom: 367px;
+          .line01{  width: 0.8rem;  .transform(rotate(80deg));  }
+          .line02{  width: 0.4rem;  left: 24px;  top: 88px;  }
+          strong{  left: 72px;  top: 88px;}
+        }
+        &:nth-child(13){
+          left: 353px;
+          bottom: 362px;
+          .line01{  width: 0.8rem;  .transform(rotate(100deg));  }
+          .line02{  width: 0.4rem;  right: 23px;  top: 88px;  }
+          strong{  right: 73px;  top: 88px;  }
+        }
+        &:nth-child(14){
+          left: 294px;
+          bottom: 385px;
+          .line01{  width: 0.6rem;  .transform(rotate(100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: 68px;  }
+          strong{  right: 67px;  top: 68px;  }
+        }
+        &:nth-child(15){
+          left: 251px;
+          bottom: 431px;
+          .line01{  width: 0.4rem;  .transform(rotate(105deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: 48px;  }
+          strong{  right: 67px;  top: 48px;  }
+        }
+      }
+    }
+  }
+  &:nth-child(2){
+    width: 7.95rem;
+    .planet-one{
+      left: 368px;
+      top: 480px;
+    }
+    .planet-two{
+      transform-origin: 56% 54%;
+      .planet-warp{
+        &:nth-child(1){
+          left: 277px;
+          top: 402px;
+        }
+        &:nth-child(2){
+          right: 191px;
+          top: 361px;
+        }
+        &:nth-child(3){
+          right: 140px;
+          bottom: 362px;
+        }
+        &:nth-child(4){
+          left: 339px;
+          bottom: 294px;
+        }
+      }
+    }
+    .planet-three{
+      .planet-warp{
+        &:nth-child(1){
+          left: 294px;
+          top: 516px;
+          .line01{  width: 0.6rem;  .transform(rotate(190deg));  }
+          .line02{  width: 0.4rem;  right: 69px;  top: 0;  }
+          strong{  right: 120px;  top: 0;  }
+        }
+        &:nth-child(2){
+          left: 247px;
+          top: 477px;
+          .line01{  width: 0.6rem;  .transform(rotate(220deg));  }
+          .line02{  width: 0.3rem;  right: 56px;  top: -28px;  }
+          strong{  right: 96px;  top: -28px;  }
+        }
+        &:nth-child(3){
+          left: 242px;
+          top: 415px;
+          .line01{  width: 0.6rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.3rem;  right: 20px;  top: -48px;  }
+          strong{  right: 60px;  top: -48px;}
+
+        }
+        &:nth-child(4){
+          left: 285px;
+          top: 367px;
+          .line01{  width: 0.6rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: -48px;  }
+          strong{  right: 70px;  top: -48px;}
+        }
+        &:nth-child(5){
+          left: 351px;
+          top: 371px;
+          .line01{  width: 1.2rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 30px;  top: -108px;  }
+          strong{  right: 77px;  top: -108px;}
+        }
+        &:nth-child(6){
+          right: 293px;
+          top: 349px;
+          .line01{  width: 1.2rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  right: -50px;  top: -108px;  }
+          strong{  right: -167px;  top: -108px;}
+        }
+        &:nth-child(7){
+          right: 237px;
+          top: 321px;
+          .line01{  width: 0.6rem;  .transform(rotate(-70deg));  }
+          .line02{  width: 0.4rem;  right: -50px;  top: -46px;  }
+          strong{  right: -167px;  top: -46px;}
+        }
+        &:nth-child(8){
+          right: 180px;
+          top: 338px;
+          .line01{  width: 0.3rem;  .transform(rotate(-60deg));  }
+          .line02{  width: 0.4rem;  right: -45px;  top: -16px;  }
+          strong{  right: -167px;  top: -16px;}
+        }
+        &:nth-child(9){
+          right: 152px;
+          top: 387px;
+          .line01{  width: 0.3rem;  .transform(rotate(-60deg));  }
+          .line02{  width: 0.4rem;  right: -45px;  top: -16px;  }
+          strong{  right: -164px;  top: -16px;}
+        }
+        &:nth-child(10){
+          right: 165px;
+          top: 445px;
+          .line01{  width: 0.3rem;  .transform(rotate(40deg));  }
+          .line02{  width: 0.4rem;  right: -53px;  top: 30px;  }
+          strong{  right: -170px;  top: 30px;}
+        }
+        &:nth-child(11){
+          right: 210px;
+          top: 479px;
+          .line01{  width: 0.3rem;  .transform(rotate(60deg));  }
+          .line02{  width: 0.4rem;  right: -45px;  top: 36px;  }
+          strong{  right: -160px;  top: 36px;}
+        }
+        &:nth-child(12){
+          right: 118px;
+          bottom: 355px;
+          .line01{  width: 0.4rem;  .transform(rotate(80deg));  }
+          .line02{  width: 0.4rem;  right: -37px;  top: 48px;  }
+          strong{  right: -187px;  top: 48px;}
+        }
+        &:nth-child(13){
+          right: 172px;
+          bottom: 321px;
+          .line01{  width: 0.5rem;  .transform(rotate(80deg));  }
+          .line02{  width: 0.4rem;  right: -38px;  top: 59px;  }
+          strong{  right: -230px;  top: 59px;}
+        }
+        &:nth-child(14){
+          right: 232px;
+          bottom: 343px;
+          .line01{  width: 1.2rem;  .transform(rotate(80deg));  }
+          .line02{  width: 0.4rem;  right: -50px;  top: 128px;  }
+          strong{  right: -187px;  top: 128px;}
+        }
+        &:nth-child(15){
+          left: 406px;
+          bottom: 255px;
+          .line01{  width: 1.2rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.4rem;  right: 70px;  top: 114px;  }
+          strong{  right: 117px;  top: 114px;  }
+        }
+        &:nth-child(16){
+          left: 354px;
+          bottom: 257px;
+          .line01{  width: 0.6rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.4rem;  right: 40px;  top: 62px;  }
+          strong{  right: 87px;  top: 62px;  }
+        }
+        &:nth-child(17){
+          left: 310px;
+          bottom: 290px;
+          .line01{  width: 0.4rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.4rem;  right: 30px;  top: 45px;  }
+          strong{  right: 77px;  top: 45px;  }
+        }
+        &:nth-child(18){
+          left: 300px;
+          bottom: 342px;
+          .line01{  width: 0.4rem;  .transform(rotate(130deg));  }
+          .line02{  width: 0.4rem;  right: 36px;  top: 40px;  }
+          strong{  right: 86px;  top: 40px;}
+        }
+      }
+    }
+  }
+  &:nth-child(3){
+    width: 8.05rem;
+    .planet-one{
+      left: 411px;
+      top: 480px;
+    }
+    .planet-two{
+      transform-origin: 60% 54%;
+      .planet-warp{
+        &:nth-child(1){
+          left: 321px;
+          top: 375px;
+        }
+        &:nth-child(2){
+          right: 95px;
+          top: 438px;
+        }
+        &:nth-child(3){
+          left: 398px;
+          bottom: 290px;
+        }
+      }
+    }
+    .planet-three{
+      .planet-warp{
+        &:nth-child(1){
+          left: 306px;
+          top: 500px;
+          .line01{  width: 0.6rem;  .transform(rotate(100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: 68px;  }
+          strong{  right: 67px;  top: 68px;  }
+        }
+        &:nth-child(2){
+          left: 260px;
+          top: 460px;
+          .line01{  width: 0.4rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.4rem;  right: 30px;  top: 44px;  }
+          strong{  right: 77px;  top: 44px;  }
+        }
+        &:nth-child(3){
+          left: 250px;
+          top: 400px;
+          .line01{  width: 0.3rem;  .transform(rotate(-160deg));  }
+          .line02{  width: 0.4rem;  right: 38px;  top: 0;  }
+          strong{  right: 90px;  top: 0;  }
+        }
+        &:nth-child(4){
+          left: 281px;
+          top: 345px;
+          .line01{  width: 0.4rem;  .transform(rotate(-120deg));  }
+          .line02{  width: 0.4rem;  right: 30px;  top: -25px;  }
+          strong{  right: 77px;  top: -25px;  }
+        }
+        &:nth-child(5){
+          left: 330px;
+          top: 315px;
+          .line01{  width: 0.5rem;  .transform(rotate(-120deg));  }
+          .line02{  width: 0.4rem;  right: 34px;  top: -32px;  }
+          strong{  right: 80px;  top: -32px;  }
+        }
+        &:nth-child(6){
+          left: 391px;
+          top: 320px;
+          .line01{  width: 0.8rem;  .transform(rotate(-110deg));  }
+          .line02{  width: 0.4rem;  right: 36px;  top: -64px;  }
+          strong{  right: 82px;  top: -64px;  }
+        }
+        &:nth-child(7){
+          left: 441px;
+          top: 350px;
+          .line01{  width:1.4rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 35px;  top: -128px;  }
+          strong{  right: 77px;  top: -128px;  }
+        }
+        &:nth-child(8){
+          right: 203px;
+          top: 439px;
+          .line01{  width:0.4rem;  .transform(rotate(-120deg));  }
+          .line02{  width: 0.4rem;  right: 30px;  top: -24px;  }
+          strong{  right: 77px;  top: -24px;  }
+        }
+        &:nth-child(9){
+          right: 172px;
+          top: 406px;
+          .line01{  width:0.4rem;  .transform(rotate(-120deg));  }
+          .line02{  width: 0.4rem;  right: 30px;  top: -24px;  }
+          strong{  right: 77px;  top: -24px;  }
+        }
+        &:nth-child(10){
+          right: 127px;
+          top: 396px;
+          .line01{  width:0.6rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: -48px;  }
+          strong{  right: 67px;  top: -48px;  }
+        }
+        &:nth-child(11){
+          right: 84px;
+          top: 413px;
+          .line01{  width:0.6rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  left: 20px;  top: -48px;  }
+          strong{  left: 67px;  top: -48px;  }
+        }
+        &:nth-child(12){
+          right: 58px;
+          top: 449px;
+          .line01{  width:0.6rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  left: 20px;  top: -48px;  }
+          strong{  left: 67px;  top: -48px;  }
+        }
+        &:nth-child(13){
+          right: 57px;
+          top: 498px;
+          .line01{  width:0.6rem;  .transform(rotate(-60deg));  }
+          .line02{  width: 0.4rem;  left: 40px;  top: -42px;  }
+          strong{  left: 86px;  top: -42px;  }
+        }
+        &:nth-child(14){
+          right: 92px;
+          top: 538px;
+          .line01{  width:0.6rem;  .transform(rotate(40deg));  }
+          .line02{  width: 0.4rem;  left: 54px;  top: 48px;  }
+          strong{  left: 100px;  top: 48px;  }
+        }
+        &:nth-child(15){
+          right: 148px;
+          top: 557px;
+          .line01{  width:0.6rem;  .transform(rotate(60deg));  }
+          .line02{  width: 0.4rem;  left: 40px;  top: 62px;  }
+          strong{  left: 90px;  top: 62px;  }
+        }
+        &:nth-child(16){
+          left: 518px;
+          bottom: 338px;
+          .line01{  width:0.5rem;  .transform(rotate(30deg));  }
+          .line02{  width: 0.4rem;  left: 53px;  top: 35px;  }
+          strong{  left: 105px;  top: 35px;  }
+        }
+        &:nth-child(17){
+          left: 511px;
+          bottom: 294px;
+          .line01{  width:0.4rem;  .transform(rotate(50deg));  }
+          .line02{  width: 0.4rem;  left: 35px;  top: 40px;  }
+          strong{  left: 85px;  top: 40px;  }
+        }
+        &:nth-child(18){
+          left: 480px;
+          bottom: 260px;
+          .line01{  width:0.6rem;  .transform(rotate(60deg));  }
+          .line02{  width: 0.4rem;  left: 40px;  top: 62px;  }
+          strong{  left: 90px;  top: 62px;  }
+        }
+        &:nth-child(19){
+          left: 436px;
+          bottom: 247px;
+          .line01{  width:0.8rem;  .transform(rotate(100deg));  }
+          .line02{  width: 0.4rem;  right: 23px;  top: 87px;  }
+          strong{  right: 75px;  top: 87px;  }
+        }
+        &:nth-child(20){
+          left: 391px;
+          bottom: 262px;
+          .line01{  width:0.6rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.4rem;  right: 40px;  top: 62px;  }
+          strong{  right: 85px;  top: 62px;  }
+        }
+        &:nth-child(21){
+          left: 359px;
+          bottom: 296px;
+          .line01{  width:0.4rem;  .transform(rotate(150deg));  }
+          .line02{  width: 0.4rem;  right: 42px;  top: 29px;  }
+          strong{  right: 90px;  top: 29px;  }
+        }
+        &:nth-child(22){
+          left: 353px;
+          bottom: 341px;
+          .line01{  width:0.4rem;  .transform(rotate(-140deg));  }
+          .line02{  width: 0.4rem;  right: 40px;  top:-15px;  }
+          strong{  right: 90px;  top: -15px;  }
+        }
+        &:nth-child(23){
+          left: 375px;
+          bottom: 379px;
+          .line01{  width:0.6rem;  .transform(rotate(-120deg));  }
+          .line02{  width: 0.4rem;  right: 40px;  top: -42px;  }
+          strong{  right: 85px;  top: -42px;  }
+        }
+      }
+    }
+  }
+  &:nth-child(4){
+    width: 8.15rem;
+    .planet-one{
+      left: 420px;
+      top: 480px;
+    }
+    .planet-two{
+      transform-origin: 61% 54%;
+      .planet-warp{
+        &:nth-child(1){
+          right: 271px;
+          top: 351px;
+        }
+        &:nth-child(2){
+          right: 97px;
+          bottom: 383px;
+        }
+        &:nth-child(3){
+          left: 297px;
+          bottom: 372px;
+        }
+      }
+    }
+    .planet-three{
+      .planet-warp {
+        &:nth-child(1) {
+          right: 379px;
+          top: 352px;
+          .line01{  width:0.4rem;  .transform(rotate(-160deg));  }
+          .line02{  width: 0.4rem;  right: 47px;  top: -4px;  }
+          strong{  right: 98px;  top: -4px;  }
+        }
+        &:nth-child(2) {
+          right: 348px;
+          top: 319px;
+          .line01{  width:0.4rem;  .transform(rotate(-150deg));  }
+          .line02{  width: 0.4rem;  right: 44px;  top: -10px;  }
+          strong{  right: 94px;  top: -10px;  }
+        }
+        &:nth-child(3) {
+          right: 303px;
+          top: 310px;
+          .line01{  width:0.6rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: -48px;  }
+          strong{  right: 67px;  top: -48px;  }
+        }
+        &:nth-child(4) {
+          right: 260px;
+          top: 325px;
+          .line01{  width:0.6rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  left: 20px;  top: -48px;  }
+          strong{  left: 67px;  top: -48px;  }
+        }
+        &:nth-child(5) {
+          right: 234px;
+          top: 362px;
+          .line01{  width:0.6rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  left: 20px;  top: -48px;  }
+          strong{  left: 67px;  top: -48px;  }
+        }
+        &:nth-child(6) {
+          right: 70px;
+          bottom: 382px;
+          .line01{  width:0.5rem;  .transform(rotate(50deg));  }
+          .line02{  width: 0.3rem;  left: 42px;  top: 48px;  }
+          strong{  left: 82px;  top: 48px;  }
+        }
+        &:nth-child(7) {
+          right: 106px;
+          bottom: 349px;
+          .line01{  width:0.6rem;  .transform(rotate(60deg));  }
+          .line02{  width: 0.4rem;  left: 40px;  top: 62px;  }
+          strong{  left: 90px;  top: 62px;  }
+        }
+        &:nth-child(8) {
+          right: 159px;
+          bottom: 346px;
+          .line01{  width:0.95rem;  .transform(rotate(70deg));  }
+          .line02{  width: 0.4rem;  right: -62px;  top: 99px;  }
+          strong{  right: -163px;  top:99px;  }
+        }
+        &:nth-child(9) {
+          right: 203px;
+          bottom: 373px;
+          .line01{  width:1.6rem;  .transform(rotate(80deg));  }
+          .line02{  width: 0.4rem;  right: -58px;  top: 168px;  }
+          strong{  right: -177px;  top:168px;  }
+        }
+        &:nth-child(10) {
+          left: 392px;
+          bottom: 350px;
+          .line01{  width:1.2rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.4rem;  right: 69px;  top: 113px;  }
+          strong{  right: 120px;  top:113px;  }
+        }
+        &:nth-child(11) {
+          left: 328px;
+          bottom: 331px;
+          .line01{  width:0.5rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.5rem;  right: 35px;  top: 53px;  }
+          strong{  right: 95px;  top:53px;  }
+        }
+        &:nth-child(12) {
+          left: 266px;
+          bottom: 367px;
+          .line01{  width:0.4rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.4rem;  right: 29px;  top: 44px;  }
+          strong{  right: 80px;  top:44px;  }
+        }
+        &:nth-child(13) {
+          left: 255px;
+          bottom: 418px;
+          .line01{  width:0.4rem;  .transform(rotate(120deg));  }
+          .line02{  width: 0.4rem;  right: 29px;  top: 44px;  }
+          strong{  right: 80px;  top:44px;  }
+        }
+      }
+    }
+  }
+  &:nth-child(5){
+    width: 6.2rem;
+    .planet-one{
+      left: 2.1rem;
+      top: 4.8rem;
+    }
+    .planet-three{
+      .planet-warp {
+        &:nth-child(1) {
+          left: 170px;
+          top: 460px;
+          .line01{  width: 0.6rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: -49px;  }
+          strong{  right: 67px;  top: -49px;}
+        }
+        &:nth-child(2) {
+          left: 220px;
+          top: 427px;
+          .line01{  width: 0.6rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 20px;  top: -49px;  }
+          strong{  right: 67px;  top: -49px;}
+        }
+        &:nth-child(3) {
+          left: 276px;
+          top: 412px;
+          .line01{  width: 0.8rem;  .transform(rotate(-100deg));  }
+          .line02{  width: 0.4rem;  right: 23px;  top: -68px;  }
+          strong{  right: 70px;  top: -68px;}
+        }
+        &:nth-child(4) {
+          right: 274px;
+          top: 420px;
+          .line01{  width: 1rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  left: 28px;  top: -88px;  }
+          strong{  left: 75px;  top: -88px;}
+        }
+        &:nth-child(5) {
+          right: 220px;
+          top: 453px;
+          .line01{  width: 0.8rem;  .transform(rotate(-80deg));  }
+          .line02{  width: 0.4rem;  left: 23px;  top: -68px;  }
+          strong{  left: 70px;  top: -68px;}
+        }
+      }
+    }
+  }
+}
 
 
-@import "view.less";        //三个view子页
-@import "good-tip.less";    //公司年终总结
-@import "meeting.less";     //年会照片锦集
-@import "welocme.less";     //欢迎xxx来公司
+.view-chart{
+  float: left;
+  width: 9.8rem;
+  height: 4rem;
+  padding: 1.4rem 1.2rem 0;
+  overflow: hidden;
+  position: relative;
+  h2{
+    width: 9.8rem;
+    font-weight: bold;
+    font-size: 0.3rem;
+    text-align: center;
+    color: @view-green-color;
+    position: absolute;
+    top: 0.5rem;
+    will-change: opacity;
+  }
+}
+.chart-line{
+  width: 9.8rem;
+  height: 3.3rem;
+  position: absolute;
+  left: 1.2rem;
+  top: 1.4rem;
+  z-index: 3;
+  &:before,&:after{
+    content: '';
+    border: 1px solid fade(@whit-color,15%);
+    will-change: clip;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
+  &:before{
+    border-top: none;
+    border-right: none;
+  }
+  &:after{
+    border-left: none;
+    border-bottom: none;
+  }
+  span{
+    display: block;
+    width: 100%;
+    height: 1px;
+    .flo();
+    background-color: fade(@whit-color,15%);
+    position: absolute;
+    left: 0;
+    will-change: clip;
+    .nth-child(@num) when (@num < 7){
+      &:nth-child(@{num}){
+        top: 0.47rem*@num;
+      }
+      .nth-child(( @num + 1 ));// 递归调用自身
+    }
+    .nth-child(1);
+  }
+}
+.chart-left,.chart-right{
+  width: 0.8rem;
+  height: 3.3rem;
+  position: absolute;
+  top: 1.4rem;
+  z-index: 4;
+  will-change: opacity,transform;
+  h3{
+    width: 0.8rem;
+    font-size: 0.2rem;
+    position: absolute;
+    top: -0.4rem;
+  }
+  span{
+    display: block;
+    font-family: @geoFont;
+    font-size: 0.16rem;
+    text-shadow: 1px 1px 1px @black-color;
+    position: absolute;
+    .nth-child(@num) when (@num < 9){
+      &:nth-child(@{num}){
+        top: -0.07rem + (0.47rem*(@num - 1));
+      }
+      .nth-child(( @num + 1 ));
+    }
+    .nth-child(1);
+  }
+}
+.chart-left{
+  left: 0.4rem;
+  text-align: right;
+  color: @view-yellow-color;
+  h3,span{
+    padding-right: 0.1rem;
+    right: 0;
+  }
+}
+.chart-right{
+  right: 0.4rem;
+  color: @view-green-color;
+  h3,span{
+    padding-left: 0.1rem;
+    left: 0;
+  }
+}
+.chart-top{
+  font-size: 0.2rem;
+  position: absolute;
+  right: 1.2rem;
+  top: 1rem;
+  color: @view-yellow-color;
+  span{
+    float: right;
+    margin-left: 1.3rem;
+    position: relative;
+    &:before{
+      display: block;
+      content: '';
+      width: 0.7rem;
+      height: 3px;
+      position: absolute;
+      left: -0.8rem;
+      top: 9px;
+    }
+    &:nth-child(1){
+      &:before{
+        background-color: #7DCDF3;
+      }
+    }
+    &:nth-child(2){
+      &:before{
+        background-color: @view-red-color;
+      }
+    }
+  }
+}
+.chart-content{
+  width: 8.8rem;
+  height: 3.3rem;
+  margin: 0 auto;
+  position: relative;
+  z-index: 5;
+  display:flex;
+  justify-content:space-between;
+  li{
+    width: 0.3rem;
+    height: 100%;
+    position: relative;
+  }
+  h4{
+    width: 1rem;
+    font-size: 0.14rem;
+    text-align: center;
+    color: @view-green-color;
+    position: absolute;
+    left: 50%;
+    bottom: -0.24rem;
+    .transform(translateX(-50%));
+  }
+}
+
+.chart-pillar{
+  width: 100%;
+  color: @view-green-color;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 6;
+  span{
+    display: block;
+    width: 0.8rem;
+    text-align: center;
+    font-family: @geoFont;
+    font-size: 0.16rem;
+    position: absolute;
+    left: 50%;
+    top: -0.25rem;
+    text-shadow: 1px 1px 1px @black-color;
+    margin-left: -0.4rem;
+    &.top{
+      top: -0.45rem;
+    }
+  }
+  em{
+    display: block;
+    .wh();
+    overflow: hidden;
+    &:before{
+      display: block;
+      content: '';
+      .wh();
+      background-color: #08C9EB;
+    }
+  }
+}
+.chart-piece{
+  .wh(0.2rem);
+  color: @view-yellow-color;
+  margin: 0 0 -0.1rem -0.1rem;
+  position: absolute;
+  left: 50%;
+  z-index: 7;
+  &:before,&:after{
+    display: block;
+    content: '';
+    .wh();
+    border-radius: 50%;
+    background-color: #A2F1FF;
+    position: absolute;
+    z-index: 9;
+  }
+  i{
+    display: block;
+    .wh(0.1rem);
+    border-radius: 50%;
+    background-color: @view-yellow-color;
+    position: absolute;
+    left: 0.05rem;
+    top: 0.05rem;
+    z-index: 10;
+  }
+  span{
+    display: block;
+    width: 0.6rem;
+    text-align: center;
+    font-family: @geoFont;
+    font-size: 0.16rem;
+    text-shadow: 1px 1px 1px @black-color;
+    position: absolute;
+    left: 50%;
+    top: -0.25rem;
+    margin-left: -0.3rem;
+    z-index: 11;
+    &.bottom{
+      top: auto;
+      bottom: -0.25rem;
+    }
+  }
+  em{
+    display: block;
+    height: 4px;
+    border-radius: 2px;
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    z-index: 8;
+    transform-origin: left center !important;
+    &:before{
+      display: block;
+      content: '';
+      .wh();
+      background-color: #7DCDF3;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+#view-chart01{
+  @left:14;
+  @right:70000;
+  @pillar01:5234;
+  @pillar02:31014;
+  @pillar03:49224;
+  @pillar04:61235;
+  @pillar05:32543;
+  @pillar06:28128;
+  @pillar07:23336;
+  @pillar08:20248;
+  @pillar09:16227;
+  @piece01:6.3;
+  @piece02:5.9;
+  @piece03:3.5;
+  @piece04:2.7;
+  @piece05:2.0;
+  @piece06:1.2;
+  @piece07:0.9;
+  @piece08:0.5;
+  @piece09:0.3;
+  @item:9;
+  @ab:(880-(@item * 30))/(@item - 1) + 30;
+  @bc01:round(@piece01*330/@left,2) - round(@piece02*330/@left,2);
+  @bc02:round(@piece02*330/@left,2) - round(@piece03*330/@left,2);
+  @bc03:round(@piece03*330/@left,2) - round(@piece04*330/@left,2);
+  @bc04:round(@piece04*330/@left,2) - round(@piece05*330/@left,2);
+  @bc05:round(@piece05*330/@left,2) - round(@piece06*330/@left,2);
+  @bc06:round(@piece06*330/@left,2) - round(@piece07*330/@left,2);
+  @bc07:round(@piece07*330/@left,2) - round(@piece08*330/@left,2);
+  @bc08:round(@piece08*330/@left,2) - round(@piece09*330/@left,2);
+  li{
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece01/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc01*@bc01))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc01/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece02/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc02*@bc02))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc02/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece03/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc03*@bc03))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc03/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece04/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc04*@bc04))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc04/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(5){
+      .chart-pillar{
+        height: percentage(round(@pillar05/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece05/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc05*@bc05))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc05/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(6){
+      .chart-pillar{
+        height: percentage(round(@pillar06/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece06/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc06*@bc06))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc06/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(7){
+      .chart-pillar{
+        height: percentage(round(@pillar07/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece07/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc07*@bc07))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc07/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(8){
+      .chart-pillar{
+        height: percentage(round(@pillar08/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece08/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc08*@bc08))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc08/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(9){
+      .chart-pillar{
+        height: percentage(round(@pillar09/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece09/@left,4));
+      }
+    }
+  }
+}
+#view-chart02{
+  @left:14;
+  @right:35000;
+  @pillar01:7891;
+  @pillar02:13414;
+  @pillar03:18822;
+  @pillar04:22002;
+  @pillar05:15094;
+  @pillar06:11712;
+  @pillar07:9224;
+  @pillar08:5359;
+  @pillar09:3567;
+  @piece01:9.2;
+  @piece02:7.6;
+  @piece03:7.9;
+  @piece04:4.5;
+  @piece05:3.9;
+  @piece06:2.2;
+  @piece07:1.6;
+  @piece08:0.9;
+  @piece09:0.3;
+  @item:9;
+  @ab:(880-(@item * 30))/(@item - 1) + 30;
+  @bc01:round(@piece01*330/@left,2) - round(@piece02*330/@left,2);
+  @bc02:round(@piece02*330/@left,2) - round(@piece03*330/@left,2);
+  @bc03:round(@piece03*330/@left,2) - round(@piece04*330/@left,2);
+  @bc04:round(@piece04*330/@left,2) - round(@piece05*330/@left,2);
+  @bc05:round(@piece05*330/@left,2) - round(@piece06*330/@left,2);
+  @bc06:round(@piece06*330/@left,2) - round(@piece07*330/@left,2);
+  @bc07:round(@piece07*330/@left,2) - round(@piece08*330/@left,2);
+  @bc08:round(@piece08*330/@left,2) - round(@piece09*330/@left,2);
+  li{
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece01/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc01*@bc01))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc01/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece02/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc02*@bc02))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc02/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece03/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc03*@bc03))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc03/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece04/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc04*@bc04))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc04/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(5){
+      .chart-pillar{
+        height: percentage(round(@pillar05/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece05/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc05*@bc05))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc05/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(6){
+      .chart-pillar{
+        height: percentage(round(@pillar06/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece06/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc06*@bc06))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc06/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(7){
+      .chart-pillar{
+        height: percentage(round(@pillar07/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece07/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc07*@bc07))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc07/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(8){
+      .chart-pillar{
+        height: percentage(round(@pillar08/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece08/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc08*@bc08))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc08/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(9){
+      .chart-pillar{
+        height: percentage(round(@pillar09/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece09/@left,4));
+      }
+    }
+  }
+}
+#view-chart03{
+  @left:14;
+  @right:35000;
+  @pillar01:24124;
+  @pillar02:16128;
+  @pillar03:16530;
+  @pillar04:17529;
+  @pillar05:4980;
+  @pillar06:9924;
+  @pillar07:3870;
+  @pillar08:2213;
+  @pillar09:1932;
+  @piece01:5.3;
+  @piece02:3.2;
+  @piece03:1.1;
+  @piece04:1.3;
+  @piece05:12.5;
+  @piece06:11.7;
+  @piece07:8.8;
+  @piece08:5.1;
+  @piece09:5.3;
+  @item:9;
+  @ab:(880-(@item * 30))/(@item - 1) + 30;
+  @bc01:round(@piece01*330/@left,2) - round(@piece02*330/@left,2);
+  @bc02:round(@piece02*330/@left,2) - round(@piece03*330/@left,2);
+  @bc03:round(@piece03*330/@left,2) - round(@piece04*330/@left,2);
+  @bc04:round(@piece04*330/@left,2) - round(@piece05*330/@left,2);
+  @bc05:round(@piece05*330/@left,2) - round(@piece06*330/@left,2);
+  @bc06:round(@piece06*330/@left,2) - round(@piece07*330/@left,2);
+  @bc07:round(@piece07*330/@left,2) - round(@piece08*330/@left,2);
+  @bc08:round(@piece08*330/@left,2) - round(@piece09*330/@left,2);
+  li{
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece01/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc01*@bc01))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc01/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece02/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc02*@bc02))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc02/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece03/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc03*@bc03))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc03/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece04/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc04*@bc04))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc04/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(5){
+      .chart-pillar{
+        height: percentage(round(@pillar05/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece05/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc05*@bc05))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc05/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(6){
+      .chart-pillar{
+        height: percentage(round(@pillar06/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece06/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc06*@bc06))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc06/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(7){
+      .chart-pillar{
+        height: percentage(round(@pillar07/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece07/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc07*@bc07))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc07/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(8){
+      .chart-pillar{
+        height: percentage(round(@pillar08/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece08/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc08*@bc08))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc08/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(9){
+      .chart-pillar{
+        height: percentage(round(@pillar09/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece09/@left,4));
+      }
+    }
+  }
+}
+#view-chart04{
+  @left:14;
+  @right:350000;
+  @pillar01:138509;
+  @pillar02:53592;
+  @pillar03:212344;
+  @pillar04:88214;
+  @pillar05:50088;
+  @pillar06:25131;
+  @piece01:7.2;
+  @piece02:2.5;
+  @piece03:4.4;
+  @piece04:3.3;
+  @piece05:2.7;
+  @piece06:1.5;
+  @item:6;
+  @ab:(880-(@item * 30))/(@item - 1) + 30;
+  @bc01:round(@piece01*330/@left,2) - round(@piece02*330/@left,2);
+  @bc02:round(@piece02*330/@left,2) - round(@piece03*330/@left,2);
+  @bc03:round(@piece03*330/@left,2) - round(@piece04*330/@left,2);
+  @bc04:round(@piece04*330/@left,2) - round(@piece05*330/@left,2);
+  @bc05:round(@piece05*330/@left,2) - round(@piece06*330/@left,2);
+  li{
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece01/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc01*@bc01))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc01/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece02/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc02*@bc02))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc02/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece03/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc03*@bc03))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc03/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece04/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc04*@bc04))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc04/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(5){
+      .chart-pillar{
+        height: percentage(round(@pillar05/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece05/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc05*@bc05))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc05/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(6){
+      .chart-pillar{
+        height: percentage(round(@pillar06/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece06/@left,4));
+      }
+    }
+  }
+}
+#view-chart05{
+  @left:14;
+  @right:35000;
+  @pillar01:16092;
+  @pillar02:17914;
+  @pillar03:27525;
+  @pillar04:31145;
+  @pillar05:25000;
+  @piece01:8.2;
+  @piece02:4.8;
+  @piece03:3.1;
+  @piece04:3.3;
+  @piece05:4.1;
+  @item:5;
+  @ab:(880-(@item * 30))/(@item - 1) + 30;
+  @bc01:round(@piece01*330/@left,2) - round(@piece02*330/@left,2);
+  @bc02:round(@piece02*330/@left,2) - round(@piece03*330/@left,2);
+  @bc03:round(@piece03*330/@left,2) - round(@piece04*330/@left,2);
+  @bc04:round(@piece04*330/@left,2) - round(@piece05*330/@left,2);
+  li{
+    &:nth-child(1){
+      .chart-pillar{
+        height: percentage(round(@pillar01/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece01/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc01*@bc01))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc01/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(2){
+      .chart-pillar{
+        height: percentage(round(@pillar02/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece02/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc02*@bc02))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc02/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(3){
+      .chart-pillar{
+        height: percentage(round(@pillar03/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece03/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc03*@bc03))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc03/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(4){
+      .chart-pillar{
+        height: percentage(round(@pillar04/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece04/@left,4));
+        em{
+          width: unit(round(sqrt(@ab*@ab+abs(@bc04*@bc04))/100,2), rem);
+          transform: rotate(unit(round(atan(@bc04/@ab)/pi()*180,1),deg));
+        }
+      }
+    }
+    &:nth-child(5){
+      .chart-pillar{
+        height: percentage(round(@pillar05/@right,4));
+      }
+      .chart-piece{
+        bottom: percentage(round(@piece05/@left,4));
+      }
+    }
+  }
+}
+.view-last{
+  .chart-line{
+    span{
+      .nth-child(@num) when (@num < 5){
+        &:nth-child(@{num}){
+          top: 0.658rem*@num;
+        }
+        .nth-child(( @num + 1 ));// 递归调用自身
+      }
+      .nth-child(1);
+    }
+  }
+  .chart-left{
+    span{
+      .nth-child(@num) when (@num < 7){
+        &:nth-child(@{num}){
+          top: -0.07rem + (0.658rem*(@num - 1));
+        }
+        .nth-child(( @num + 1 ));
+      }
+      .nth-child(1);
+    }
+  }
+  .chart-content{
+    width: 10.1rem;
+    margin-left: -0.15rem;
+  }
+  h5{
+    width: 9.8rem;
+    font-size: 0.16rem;
+    text-align: center;
+    color: @view-green-color;
+    position: absolute;
+    bottom: 0.2rem;
+    left: 1.5rem;
+  }
+}
+.view-curve{
+  width: 9.8rem;
+  height: 3.3rem;
+  position: absolute;
+  left: 1.2rem;
+  top: 1.4rem;
+  z-index: 6;
+  img{
+    .wh();
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+.view-curve-ks{
+  width: 1.2rem;
+  height: 1.44rem;
+  position: absolute;
+  top: 1.88rem;
+  right: 2.64rem;
+  img{
+    .wh();
+  }
+}
+.ppt-left{
+  width: 7.2rem;
+  height: 100%;
+  font-size: 0.24rem;
+  margin-right: 1.75rem;
+  float: left;
+  overflow: hidden;
+  position: relative;
+  ul{
+    padding: 1rem 1.55rem 0.6rem;
+    overflow: hidden;
+  }
+  li{
+    line-height: 0.5rem;
+    text-align: center;
+    &:nth-child(1){
+      float: left;
+    }
+    &:nth-child(2){
+      float: right;
+    }
+    span{
+      display: block;
+      width: 1.8rem;
+      height: 0.5rem;
+      border-radius: 0.1rem;
+      background-color: #2186FA;
+      margin-top: 0.25rem;
+    }
+  }
+  .view-arrow{
+    display: block;
+    width: 0.47rem;
+    height: 0.65rem;
+    margin: 0 auto;
+  }
+  p{
+    margin-top: 0.6rem;
+    text-align: center;
+  }
+  .view-jigsaw{
+    width: 7.18rem;
+    position: absolute;
+    left: 0.01rem;
+    bottom: 0;
+    span{
+      display: block;
+      position: absolute;
+      top: 0.9rem;
+      &:nth-child(1){
+        left: 1.1rem;
+      }
+      &:nth-child(2){
+        right: 1.1rem;
+      }
+    }
+  }
+}
+.ppt-center{
+  width: 11.6rem;
+  height: 100%;
+  float: left;
+  position: relative;
+  .view-lamp{
+    width: 4.3rem;
+    height: 5.35rem;
+    position: absolute;
+    left: 3.25rem;
+    bottom: 2rem;
+    img{
+      position: absolute;
+      &:nth-child(1){
+        width: 3.13rem;
+        height: 4.62rem;
+        bottom: 0;
+        left: 0.58rem;
+      }
+      &:nth-child(2){
+        width: 4.3rem;
+        height: 3.91rem;
+        top: 0;
+        left: 0;
+      }
+    }
+    p{
+      width: 1.3rem;
+      font-size: 0.42rem;
+      line-height: 1.3;
+      position: absolute;
+      left: 50%;
+      top: 1.8rem;
+      margin-left: -0.65rem;
+    }
+  }
+  dt{
+    float: left;
+    height: 0.52rem;
+    padding: 0 0.24rem;
+    border-radius: 0.1rem;
+    font-size: 0.26rem;
+    line-height: 0.52rem;
+    background-color: #4F61FA;
+  }
+  dd{
+    clear: both;
+    padding-top: 0.12rem;
+    font-size: 0.2rem;
+    line-height: 1.3;
+  }
+  dl{
+    position: absolute;
+    &:nth-last-child(odd){
+      text-align: right;
+      dt{
+        float: right;
+      }
+    }
+    &:nth-child(1){
+      left: 4.2rem;
+      top: 1.47rem;
+    }
+    &:nth-child(2){
+      right: 8rem;
+      top: 2.75rem;
+    }
+    &:nth-child(3){
+      left: 7.2rem;
+      top: 2.75rem;
+    }
+    &:nth-child(4){
+      right: 8.7rem;
+      top: 4.5rem;
+    }
+    &:nth-child(5){
+      left: 7.9rem;
+      top: 4.5rem;
+    }
+    &:nth-child(6){
+      right: 8.7rem;
+      top: 6.2rem;
+    }
+    &:nth-child(7){
+      left: 7.9rem;
+      top: 6.2rem;
+    }
+    &:nth-child(8){
+      right: 7.7rem;
+      top: 7.75rem;
+    }
+    &:nth-child(9){
+      left: 7rem;
+      top: 7.75rem;
+    }
+  }
+}
+.ppt-right{
+  width: 12.3rem;
+  height: 100%;
+  float: right;
+  position: relative;
+  .view-farmer{
+    width: 1.42rem;
+    height: 3.4rem;
+    position: absolute;
+    right: 5.3rem;
+    top: 3.73rem;
+    p{
+      font-size: 0.26rem;
+      position: absolute;
+      bottom: 0;
+      left: 0.25rem;
+    }
+  }
+  dt{
+    .wh(1.6rem);
+    font-size: 0.26rem;
+    line-height: 1.2;
+    border-radius: 50%;
+    background-color: #4F61FA;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  dd{
+    font-size: 0.2rem;
+    line-height: 1.4;
+  }
+  dl{
+    position: absolute;
+    padding-left: 1.85rem;
+    &:nth-last-child(odd){
+      text-align: right;
+      padding-left: 0;
+      padding-right: 1.85rem;
+      dt{
+        left: auto;
+        right: 0;
+      }
+    }
+    &:nth-child(1){
+      right: 6.6rem;
+      top: 1.5rem;
+    }
+    &:nth-child(2){
+      left: 6.95rem;
+      top: 1.5rem;
+    }
+    &:nth-child(3){
+      right: 7.35rem;
+      top: 4.2rem;
+    }
+    &:nth-child(4){
+      left: 7.75rem;
+      top: 4.34rem;
+    }
+    &:nth-child(5){
+      right: 6.6rem;
+      bottom: 1.45rem;
+    }
+    &:nth-child(6){
+      left: 6.95rem;
+      bottom: 1.73rem;
+    }
+  }
+}
+@keyframes star_Animation{
+  0%,100%{transform: scale(0.4);}
+  25%{transform: scale(1.2);}
+  50%{transform: scale(0.8);}
+  75%{transform: scale(1.5);}
+}
+@keyframes meteor_Animation{
+  0%,20%{opacity: 0; transform: scale(0) translate(2rem,-2rem);}
+  40%{opacity: 1;}
+  99%{opacity: 1;transform: scale(1) translate(-8rem,8rem);}
+  100%{opacity: 0;transform: scale(1) translate(-8.2rem,8.2rem);}
+}
+@keyframes halo_Animation{
+  from {opacity: 0.75; transform: scale(1);}
+  to {opacity: 0; transform: scale(1.5);}
+}
+@keyframes halo_Animation02{
+  from {opacity: 0.15; transform: scale(1);}
+  to {opacity: 0; transform: scale(1.5);}
+}
+@keyframes planet_two_Animation{
+  from {opacity: 0; transform: scale(0) rotate(0deg);}
+  to {opacity: 1; transform: scale(1) rotate(360deg);}
+}
+@keyframes planet_three_Animation{
+  0% {opacity: 1;}
+  50% {opacity: 0.6;}
+  100% {opacity: 1;}
+}
+@keyframes rotate_Animation{
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(360deg);}
+}
+@keyframes view_scale_Animation{
+  0%,50%,100% {transform: scale(1) translate(0,0);}
+  25% {transform: scale(1.05) translate(2%,-1%);}
+  75% {transform: scale(1.05) translate(-2%,1%);}
+}
+@keyframes clip_Animation01{
+  0%{clip: rect(1px, 1px, 1px, 0px);}
+  60% {clip: rect(1px, 1px, 330px, 0px);}
+  100% {clip: rect(1px, 979px, 330px, 0px);}
+}
+@keyframes clip_Animation02{
+  0%{clip: rect(329px, 980px, 330px, 979px);}
+  60% {clip: rect(0px, 980px, 330px, 979px);}
+  100% {clip: rect(0px, 980px, 330px, 0px);}
+}
+@keyframes clip_Animation03{
+  0%{clip: rect(0px, 1px, 1px, 1px);}
+  100% {clip: rect(0px, 979px, 1px, 1px);}
+}
+@keyframes clip_Animation04{
+  0%{clip: rect(0px, 979px, 1px, 979px);}
+  100% {clip: rect(0px, 979px, 1px, 1px);}
+}
+@keyframes piece_line_Animation{
+  0%{clip: rect(0px, 0px, 330px, 0px);}
+  100% {clip: rect(0px, 230px, 330px, 0px);}
+}
+@keyframes view_curve_Animation{
+  0%{clip: rect(0px, 1px, 330px, 1px);}
+  100% {clip: rect(0px, 979px, 330px, 1px);}
+}
+@keyframes chart_piece_Animation{
+  0% {opacity: 0; transform: scale(0.5);}
+  50% {opacity: 0.8;}
+  100% {opacity: 0; transform: scale(1.5);}
+}
+@keyframes opacity_cycle_Animation{
+  0% {opacity: 1;}
+  50% {opacity: 0.4;}
+  100% {opacity: 1;}
+}
+@keyframes opacity_Animation{
+  from{opacity:0;}
+  to{opacity:1;}
+}
+@keyframes opacity_hide_Animation{
+  from{opacity:1;}
+  to{opacity:0;}
+}
+@keyframes left_right_Animation{
+  from {opacity: 0;transform:translate(-200%,0);}
+  to {opacity: 1;transform:translate(0,0);}
+}
+@keyframes right_left_Animation{
+  from {opacity: 0;transform:translate(200%,0);}
+  to {opacity: 1;transform:translate(0,0);}
+}
+@keyframes bottom_top_Animation{
+  from {transform:translate(0,100%);}
+  to {transform:translate(0,0);}
+}
+@keyframes bottom_top_Animation2{
+  from {opacity: 0; transform:translate(0,100%);}
+  to {opacity: 1; transform:translate(0,0);}
+}
+@keyframes top_bottom_Animation{
+  from {opacity: 0; transform:translate(0,-100%);}
+  to {opacity: 1; transform:translate(0,0);}
+}
+@keyframes viewLamp_Animation{
+  from {clip: rect(2.15rem, 2.15rem, 1.95rem, 1.95rem);}
+  to {clip: rect(0rem, 4.3rem, 3.91rem, 0rem);}
+}
+
+
+.view-warp-show{
+  .view-bg01{
+    span{
+      .animation(star_Animation,4000ms,ease-in-out,0ms,infinite,normal);
+      animation-fill-mode: backwards;
+      .nth-child(@num) when (@num < 12){
+        &:nth-child(@{num}){
+          animation-delay: 300ms*(@num - 1);
+        }
+        .nth-child(( @num + 1 ));
+      }
+      .nth-child(2);
+    }
+    em{
+      .animation(meteor_Animation,4000ms,linear,0ms,infinite,normal);
+      animation-fill-mode: backwards;
+      .nth-child(@num) when (@num < 11){
+        &:nth-child(@{num}){
+          animation-delay: 600ms*(@num - 1);
+        }
+        .nth-child(( @num + 1 ));
+      }
+      .nth-child(2);
+    }
+  }
+  &.view-warp01{
+    h2{
+      .animation(top_bottom_Animation,400ms,linear,0ms,1,normal);
+    }
+  }
+  .planet-one{
+    .animation(opacity_Animation,600ms,linear,400ms,1,normal);
+    animation-fill-mode: backwards;
+    .planet-warp{
+      em{
+        .animation(halo_Animation,4000ms,linear,0ms,infinite,normal);
+        .nth-child(@num) when (@num < 5){
+          &:nth-child(@{num}){
+            animation-delay: 1000ms*(@num - 1);
+          }
+          .nth-child(( @num + 1 ));
+        }
+        .nth-child(2);
+      }
+      .planet{
+        .animation(rotate_Animation,8000ms,linear,0ms,infinite,normal);
+      }
+    }
+  }
+  .planet-two{
+    .animation(planet_two_Animation,500ms,linear,1000ms,1,normal);
+    animation-fill-mode: backwards;
+    .planet-warp{
+      em{
+        .animation(halo_Animation02,2000ms,linear,0ms,infinite,normal);
+        &:nth-child(2){
+          animation-delay: 1000ms;
+        }
+      }
+      .planet{
+        .animation(rotate_Animation,8000ms,linear,0ms,infinite,normal);
+      }
+      &:nth-child(2){
+        .planet{
+          animation-delay: -2000ms;
+        }
+      }
+      &:nth-child(3){
+        .planet{
+          animation-delay: -4000ms;
+        }
+      }
+      &:nth-child(4){
+        .planet{
+          animation-delay: -6000ms;
+        }
+      }
+    }
+  }
+  .planet-three{
+    .planet-warp{
+      .animation(opacity_Animation,300ms,linear,1500ms,1,normal);
+      animation-fill-mode: backwards;
+      .planet{
+        .animation(planet_three_Animation,1500ms,linear,0ms,infinite,normal);
+      }
+      .nth-child(@num) when (@num < 24){
+        &:nth-child(@{num}){
+          animation-delay: 1500+150ms*(@num - 1);
+          .planet{
+            animation-delay: -600ms*(@num - 1);
+          }
+        }
+        .nth-child(( @num + 1 ));
+      }
+      .nth-child(2);
+    }
+  }
+  .view-bg02{
+    .animation(view_scale_Animation,8000ms,linear,0ms,infinite,normal);
+  }
+  .view-chart{
+    h2{
+      .animation(opacity_Animation,400ms,linear,1500ms,1,normal);
+      animation-fill-mode: backwards;
+    }
+  }
+  .chart-line{
+    &:before,&:after{
+      .animation(clip_Animation01,1000ms,linear,0ms,1,normal);
+      animation-fill-mode: backwards;
+    }
+    &:after{
+      animation-name: clip_Animation02;
+    }
+    span{
+      .animation(clip_Animation03,400ms,linear,1000ms,1,normal);
+      animation-fill-mode: both;
+      &:nth-of-type(even){
+        -webkit-animation-name: clip_Animation04;
+        animation-name: clip_Animation04;
+      }
+    }
+  }
+  .chart-left,.chart-right,.chart-top{
+    .animation(left_right_Animation,400ms,linear,1500ms,1,normal);
+    animation-fill-mode: backwards;
+  }
+  .chart-right,.chart-top{
+    animation-name: right_left_Animation;
+  }
+  .chart-content{
+    li{
+      h4{
+        .animation(opacity_Animation,200ms,linear,2000ms,1,normal);
+        animation-fill-mode: backwards;
+      }
+      .chart-pillar{
+        em{
+          &:before{
+            .animation(bottom_top_Animation,400ms,linear,2200ms,1,normal);
+            animation-fill-mode: backwards;
+          }
+        }
+        span{
+          .animation(opacity_Animation,400ms,linear,2600ms,1,normal);
+          animation-fill-mode: backwards;
+        }
+      }
+      .chart-piece{
+        .animation(opacity_Animation,300ms,linear,2200ms,1,normal);
+        animation-fill-mode: backwards;
+        &:before,&:after{
+          animation: chart_piece_Animation 1800ms linear 0ms infinite normal;
+        }
+        &:after{
+          animation-delay: 900ms;
+        }
+        em{
+          .animation(piece_line_Animation,500ms,linear,2400ms,1,normal);
+          animation-fill-mode: backwards;
+          &:before{
+            animation: opacity_cycle_Animation 1500ms linear 0ms infinite normal;
+          }
+        }
+      }
+      .nth-child(@num) when (@num < 10){
+        &:nth-child(@{num}){
+          h4{
+            animation-delay: 2000ms + 400*(@num - 1);
+          }
+          .chart-pillar{
+            em{
+              &:before{
+                animation-delay: 2200ms + 400*(@num - 1);
+              }
+            }
+            span{
+              animation-delay: 2600ms + 400*(@num - 1);
+            }
+          }
+          .chart-piece{
+            animation-delay: 2200ms + 400*(@num - 1);
+            &:before{
+              animation-delay: 250ms*(@num - 1);
+            }
+            &:after{
+              animation-delay: 900ms + 250*(@num - 1);;
+            }
+            .piece-line(@num) when (@num < 9) {
+              em{
+                animation-delay: 2400ms + 400*(@num - 1);
+                &:before{
+                  animation-delay: 800ms*(@num - 1);
+                }
+              }
+            }
+            .piece-line(@num);
+          }
+        }
+        .nth-child(( @num + 1 ));
+      }
+      .nth-child(2);
+    }
+  }
+  .view-curve{
+    img{
+      .animation(view_curve_Animation,2600ms,linear,2000ms,1,normal);
+      animation-fill-mode: both;
+      &:nth-child(2){
+        animation-delay: 4600ms;
+      }
+    }
+  }
+  .view-curve-ks{
+    .animation(opacity_Animation,400ms,linear,7200ms,1,normal);
+    animation-fill-mode: backwards;
+    img{
+      .animation(opacity_cycle_Animation,2000ms,ease,0ms,infinite,normal);
+    }
+  }
+  h5{
+    .animation(opacity_Animation,400ms,linear,0ms,1,normal);
+    animation-fill-mode: backwards;
+  }
+  .view-bg03{
+    .animation(opacity_Animation,300ms,linear,1500ms,1,normal);
+    animation-fill-mode: backwards;
+  }
+  .view-lamp{
+    img{
+      animation-fill-mode: backwards !important;
+      &:nth-child(1){
+        .animation(opacity_Animation,500ms,linear,200ms,1,normal);
+      }
+      &:nth-child(2){
+        .animation(viewLamp_Animation,500ms,linear,1000ms,1,normal);
+      }
+    }
+    p{
+      .animation(opacity_Animation,300ms,linear,700ms,1,normal);
+      animation-fill-mode: backwards;
+    }
+  }
+  .ppt-center{
+    dl{
+      .animation(opacity_Animation,300ms,linear,1800ms,1,normal);
+      animation-fill-mode: backwards;
+      &:nth-child(2),&:nth-child(3){
+        animation-delay: 2100ms;
+      }
+      &:nth-child(4),&:nth-child(5){
+        animation-delay: 2400ms;
+      }
+      &:nth-child(6),&:nth-child(7){
+        animation-delay: 2700ms;
+      }
+      &:nth-child(8),&:nth-child(9){
+        animation-delay: 3000ms;
+      }
+    }
+  }
+  .view-jigsaw{
+    .animation(bottom_top_Animation,300ms,linear,3300ms,1,normal);
+    animation-fill-mode: backwards;
+    span{
+      .animation(right_left_Animation,300ms,linear,3600ms,1,normal);
+      animation-fill-mode: backwards;
+      &:nth-child(2){
+        animation-name:left_right_Animation;
+      }
+    }
+  }
+  .ppt-left{
+    p,.view-arrow{
+      .animation(bottom_top_Animation2,300ms,linear,3900ms,1,normal);
+      animation-fill-mode: backwards;
+    }
+    .view-arrow{
+      animation-delay: 4200ms;
+    }
+    li{
+      .animation(left_right_Animation,300ms,linear,4500ms,1,normal);
+      animation-fill-mode: backwards;
+      &:nth-child(2){
+        animation-name:right_left_Animation;
+      }
+    }
+  }
+  .view-farmer{
+    .animation(top_bottom_Animation,300ms,linear,3300ms,1,normal);
+    animation-fill-mode: backwards;
+    p{
+      .animation(opacity_Animation,300ms,linear,3600ms,1,normal);
+      animation-fill-mode: backwards;
+    }
+  }
+  .ppt-right{
+    dl{
+      .animation(top_bottom_Animation,300ms,linear,4500ms,1,normal);
+      animation-fill-mode: backwards;
+      &:nth-child(3),&:nth-child(4){
+        animation-delay: 4200ms;
+      }
+      &:nth-child(5),&:nth-child(6){
+        animation-delay: 3900ms;
+      }
+    }
+  }
+}
+
+
+
+.annual-meeting{
+  li{
+    display: none;
+    .wh();
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+    .photo,.bg{
+      .wh();
+    }
+    .text1-1,.text1-2{
+      width: 7.84rem;
+      height: 1.68rem;
+      opacity: 0;
+      position: absolute;
+    }
+    .text1-1{
+      left: 8.54rem;
+      bottom: 3.37rem;
+    }
+    .text1-2{
+      left: 10.4rem;
+      bottom: 1.66rem;
+    }
+    .text2-1,.text2-2,.text2-3{
+      opacity: 0;
+      position: absolute;
+      left: 25.64rem;
+    }
+    .text2-1{
+      width: 6.08rem;
+      height: 1.54rem;
+      top: 0.92rem;
+    }
+    .text2-2{
+      width: 6.59rem;
+      height: 1.53rem;
+      top: 3.13rem;
+    }
+    .text2-3{
+      width: 5.06rem;
+      height: 1.53rem;
+      top: 5.34rem;
+    }
+    .text3-1{
+      width: 6.46rem;
+      height: 2.1rem;
+      opacity: 0;
+      position: absolute;
+      left: 7.06rem;
+      bottom: 4.57rem;
+    }
+    .text3-2{
+      width: 9rem;
+      height: 1.68rem;
+      opacity: 0;
+      position: absolute;
+      left: 9.02rem;
+      bottom: 2.86rem;
+    }
+    .text4-1{
+      width: 21.16rem;
+      height: 1.97rem;
+      opacity: 0;
+      position: absolute;
+      right: 2.36rem;
+      bottom: 2.92rem;
+    }
+    .text5-1,.text5-2{
+      height: 0.9rem;
+      opacity: 0;
+      position: absolute;
+    }
+    .text5-1{
+      width: 5.52rem;
+      left: 11.43rem;
+      bottom: 1.86rem;
+    }
+    .text5-2{
+      width: 6.46rem;
+      left: 13.4rem;
+      bottom: 0.76rem;
+    }
+    .text6-1,.text6-2,.text7-1,.text7-2{
+      width: 8.9rem;
+      height: 1.91rem;
+      opacity: 0;
+      position: absolute;
+    }
+    .text6-1{
+      right: 10.74rem;
+      bottom: 3.41rem;
+    }
+    .text6-2{
+      right: 8.63rem;
+      bottom: 1.47rem;
+    }
+    .text7-1{
+      left: 5.8rem;
+      bottom: 2.92rem;
+    }
+    .text7-2{
+      left: 7.92rem;
+      bottom: 0.98rem;
+    }
+    .text8-1{
+      width: 6.46rem;
+      height: 2.09rem;
+      opacity: 0;
+      position: absolute;
+      right: 8.72rem;
+      bottom: 3.31rem;
+    }
+    .text8-2{
+      width: 6.29rem;
+      height: 1.95rem;
+      opacity: 0;
+      position: absolute;
+      right: 5.7rem;
+      bottom: 1.33rem;
+    }
+    .text9-1,.text9-2{
+      width: 11.31rem;
+      height: 1.91rem;
+      opacity: 0;
+      position: absolute;
+    }
+    .text9-1{
+      left: 7.9rem;
+      bottom: 3.37rem;
+    }
+    .text9-2{
+      left: 10rem;
+      bottom: 1.43rem;
+    }
+  }
+}
+
+
+
+@keyframes annualPhoto{
+  100%{
+    transform: scale(1.08);
+  }
+}
+@keyframes annualTextLeft{
+  0%{
+    opacity: 0;
+    transform:translateX(-25%);
+  }
+  8%{
+    opacity: 1;
+    transform:translateX(-5%);
+  }
+  100%{
+    opacity: 1;
+    transform:translateX(0%);
+  }
+}
+
+@keyframes annualTextRight{
+  0%{
+    opacity: 0;
+    transform:translateX(25%);
+  }
+  8%{
+    opacity: 1;
+    transform:translateX(5%);
+  }
+  100%{
+    opacity: 1;
+    transform:translateX(0%);
+  }
+}
+
+
+.annual-meeting{
+  .active{
+    .photo{
+      .animation(annualPhoto,10s,linear,0s,1,normal);
+      animation-fill-mode: both;
+    }
+    .text1-1,.text3-1,.text4-1,.text5-1,.text6-1,.text7-1,.text8-1,.text9-1{
+      .animation(annualTextLeft,10s,linear,0s,1,normal);
+      animation-fill-mode: both;
+    }
+    .text1-2,.text3-2,.text5-2,.text6-2,.text7-2,.text8-2,.text9-2{
+      .animation(annualTextRight,10s,linear,0s,1,normal);
+      animation-fill-mode: both;
+    }
+    .text2-1,.text2-2,.text2-3{
+      .animation(opacity_Animation,0.5s,linear,0s,1,normal);
+      animation-fill-mode: both;
+    }
+    .text2-2{
+      animation-delay: 0.5s;
+    }
+    .text2-3{
+      animation-delay: 1s;
+    }
+  }
+}
+
+@import "system.less";
