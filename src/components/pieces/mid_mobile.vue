@@ -135,7 +135,8 @@
                                     shadowBlur: 10,
                                     shadowColor: '#333'
                                 }
-                            }
+                            },
+                            zlevel: 1
                         }
                     ]
                 }

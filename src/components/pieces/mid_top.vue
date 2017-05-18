@@ -133,9 +133,6 @@
                 this.changeUsers()
                 this.changeTitle()
                 this.changeMap()
-            },
-            userLists(newVal, oldVal) {
-                console.log(newVal)
             }
         },
         methods: {
