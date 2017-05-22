@@ -56,11 +56,9 @@
                 .force("charge", d3.forceManyBody().strength(-500))
                 .force('center', d3.forceCenter(370, 270))
                 .force("link", d3.forceLink().strength(0.4).iterations(5))
-                .force("collide",d3.forceCollide( function(d){return d.r + 20 }).iterations(5).strength(0.4) )
                 .force("x", d3.forceX())
                 .force("y", d3.forceY())
-                .alphaTarget(0.3)
-                .velocityDecay(0.5)
+                .alphaTarget(0.2)
             return {
                 active: 1,
                 simulation
