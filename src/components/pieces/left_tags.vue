@@ -3,18 +3,18 @@
         <div class="main">
             <h1>标签体系</h1>
             <div class="force-button">
-                <a :class="{active:active==1}" href="javascript:void(0);">新闻资讯</a>
-                <a :class="{active:active==2}" href="javascript:void(0);">金融|投资</a>
-                <a :class="{active:active==12}" href="javascript:void(0);">金融|理财</a>
-                <a :class="{active:active==11}" href="javascript:void(0);">金融|保险</a>
-                <a :class="{active:active==9}" href="javascript:void(0);">金融|贷款</a>
-                <a :class="{active:active==10}" href="javascript:void(0);">金融|银行</a>
-                <a :class="{active:active==3}" href="javascript:void(0);">金融|信用卡</a>
-                <a :class="{active:active==4}" href="javascript:void(0);">电商</a>
-                <a :class="{active:active==5}" href="javascript:void(0);">汽车</a>
-                <a :class="{active:active==6}" href="javascript:void(0);">教育</a>
-                <a :class="{active:active==7}" href="javascript:void(0);">房产家居</a>
-                <a :class="{active:active==8}" href="javascript:void(0);">社交</a>
+                <a :class="{active:active==1}" @click="changeActive(1)" href="javascript:void(0);">新闻资讯</a>
+                <a :class="{active:active==2}" @click="changeActive(2)" href="javascript:void(0);">金融|投资</a>
+                <a :class="{active:active==12}" @click="changeActive(12)" href="javascript:void(0);">金融|理财</a>
+                <a :class="{active:active==11}" @click="changeActive(11)" href="javascript:void(0);">金融|保险</a>
+                <a :class="{active:active==9}" @click="changeActive(9)" href="javascript:void(0);">金融|贷款</a>
+                <a :class="{active:active==10}" @click="changeActive(10)" href="javascript:void(0);">金融|银行</a>
+                <a :class="{active:active==3}" @click="changeActive(3)" href="javascript:void(0);">金融|信用卡</a>
+                <a :class="{active:active==4}" @click="changeActive(4)" href="javascript:void(0);">电商</a>
+                <a :class="{active:active==5}" @click="changeActive(5)" href="javascript:void(0);">汽车</a>
+                <a :class="{active:active==6}" @click="changeActive(6)" href="javascript:void(0);">教育</a>
+                <a :class="{active:active==7}" @click="changeActive(7)" href="javascript:void(0);">房产家居</a>
+                <a :class="{active:active==8}" @click="changeActive(8)" href="javascript:void(0);">社交</a>
             </div>
             <div class="force-chart">
                 <svg id="force" width="740" height="540">
@@ -53,19 +53,14 @@
     export default {
         data() {
             let simulation = d3.forceSimulation()
-                .force("charge", d3.forceManyBody().strength(-100))
+                .force("charge", d3.forceManyBody().strength(-500))
                 .force('center', d3.forceCenter(370, 270))
-                .force("link", d3.forceLink().distance(function (d) {
-                    if (d.target.group == 4 || d.target.group == 3) {
-                        return Math.random() * 20 + 20
-                    } else {
-                        return 20
-                    }
-                }))
+                .force("link", d3.forceLink().strength(0.4).iterations(5))
+                .force("collide",d3.forceCollide( function(d){return d.r + 20 }).iterations(5).strength(0.4) )
                 .force("x", d3.forceX())
                 .force("y", d3.forceY())
-                .alphaTarget(0.4)
-                .velocityDecay(0.9)
+                .alphaTarget(0.3)
+                .velocityDecay(0.5)
             return {
                 active: 1,
                 simulation
@@ -137,80 +132,63 @@
                         .attr("y2", function (d) { return d.target.y })
                 })
                 this.simulation.force("link").links(links)
-                this.simulation.alpha(1).restart()
+                this.simulation.restart()
+            },
+            anaTree(node){
+                let nodes = [], links = []
+                function recurse(node, parent) {
+                    nodes.push(node)
+                    if (parent) {
+                        links.push({ source: parent, target: node })
+                    } else {
+                        links.push({ source: 0, target: node })
+                    }
+                    if (node.children) {
+                        node.children.forEach(el => {
+                            recurse(el, node)
+                        })
+                    }
+                }
+                recurse(node)
+                return {nodes,links}
+            },
+            getData(active){
+                mAjax(this, {
+                    url: API.force_direct + '?param=' + active,
+                    success: data => {
+                        let nodes = data.nodes
+                        let links = data.links
+                        links.forEach((el, i) => {
+                            let s = links[i].source, t = links[i].target
+                            if (!nodes[s].children) {
+                                nodes[s].children = []
+                            }
+                            nodes[s].children.push(nodes[t])
+                        })
+                        let obj = this.anaTree(nodes[0])
+                        this.render(obj.nodes, obj.links)
+                    }
+                })
+            },
+            changeActive(num){
+                this.active = num
+                this.getData(num)
             }
         },
         mounted() {
             let _this = this
-
-            mAjax(this, {
-                url: API.force_direct + '?param=1',
-                success: data => {
-                    //将平行nodes变成nodes tree
-                    let nodes = data.nodes
-                    let links = data.links
-                    links.forEach((el, i) => {
-                        let s = links[i].source, t = links[i].target
-                        if (!nodes[s].children) {
-                            nodes[s].children = []
-                        }
-                        nodes[s].children.push(nodes[t])
-                    })
-
-                    //递归遍历tree，讲树形关系解析成序号
-                    let nodeList = [], id = 0, ss = []
-                    function recurse(node, parent) {
-                        if (!node.id) {
-                            node.id = ++id
-                            nodeList.push(node)
-                        }
-                        if (parent) {
-                            ss.push({ source: parent, target: node })
-                        } else {
-                            ss.push({ source: 0, target: node })
-                        }
-                        if (node.children) {
-                            node.children.forEach(el => {
-                                recurse(el, node)
-                            })
-                        }
-                    }
-                    recurse(nodes[0])
-                    nodes = nodeList
-                    links = ss
-                    _this.render(nodes, links)
-
-                    d3.interval(function () {
-                        let ns = nodes.slice()
-                        for (let i = 0; i < ns[0].children.length; i++) {
-                            if (ns[0].children[i].children.length > 0) {
-                                ns[0].children[i]._children = ns[0].children[i].children
-                                ns[0].children[i].children = []
-                                break
-                            }
-                        }
-                        let nodeList = [], id = 0, ss = []
-                        function recurse(node, parent) {
-                            nodeList.push(node)
-                            if (parent) {
-                                ss.push({ source: parent, target: node })
-                            } else {
-                                ss.push({ source: 0, target: node })
-                            }
-                            if (node.children) {
-                                node.children.forEach(el => {
-                                    recurse(el, node)
-                                })
-                            }
-                        }
-                        recurse(ns[0])
-                        nodes = nodeList
-                        links = ss
-                        _this.render(nodes, links)
-                    }, 5000, d3.now() + 1000)
-
+            this.getData(1) 
+            let alist = document.querySelectorAll('.force-button a')
+            let num = 1
+            d3.interval(function(){
+                if(num<12){
+                    alist[num].click()
+                    num++
+                }else{
+                    num = 0
+                    alist[0].click()
                 }
-            })
+            },7000,d3.now())
         }
     }
 
