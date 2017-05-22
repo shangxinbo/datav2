@@ -243,7 +243,8 @@
                                 show: false
                             }
                         },
-                        data: province
+                        data: province,
+                        zlevel: 20
                     }
                 ]
             })

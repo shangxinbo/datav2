@@ -1,10 +1,10 @@
 <template>
     <li>
         <div class="video-data">
-            <video id="video2" loop preload="auto" autoplay="true">
+            <video id="video2" loop preload="auto">
                 <source :src="video" type="video/mp4" />
             </video>
-            <div id="video_data" class="video-data-content">
+            <div class="video-data-content" v-show="play">
                 <div class="text-number">
                     <h2>总用户量</h2>
                     <p class="number">
@@ -58,17 +58,22 @@
     export default {
         data() {
             return {
-                video:video,
-                info:{}
+                video: video,
+                info: {},
+                play: false
             }
         },
         mounted() {
-            mAjax(this,{
-                url:API.video_data,
-                success:data=>{
+            let mp4 = document.querySelector('#video2')
+            
+            mAjax(this, {
+                url: API.video_data,
+                success: data => {
                     this.info = data
+                    mp4.play()
+                    this.play = true
                 },
-                error:err =>{
+                error: err => {
                     console.log(err)
                 }
             })
