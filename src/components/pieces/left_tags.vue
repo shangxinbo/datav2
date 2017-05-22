@@ -16,8 +16,8 @@
                 <a :class="{active:active==7}" href="javascript:void(0);">房产家居</a>
                 <a :class="{active:active==8}" href="javascript:void(0);">社交</a>
             </div>
-            <div id="force" class="force-chart">
-                <svg width="740" height="540">
+            <div class="force-chart">
+                <svg id="force" width="740" height="540">
                     <g class="links"></g>
                     <g class="nodes"></g>
                 </svg>
@@ -72,11 +72,11 @@
             }
         },
         methods: {
-            render(nodes,links) {
-                let svg = d3.select("svg")
+            render(nodes, links) {
+                let svg = d3.select("#force")
                 let link = svg.select('.links').selectAll(".link")
                 let node = svg.select('.nodes').selectAll(".node")
-                let nodeUpdate = svg.select('.nodes').selectAll(".node").data(nodes)
+                let nodeUpdate = node.data(nodes)
                 let nodeEnter = nodeUpdate.enter()
 
                 let item = nodeUpdate.enter().append("g").attr('class', 'node')
@@ -125,7 +125,7 @@
                 // Apply the general update pattern to the links.
                 link = link.data(links, function (d) { return d.source.id + "-" + d.target.id })
                 link.exit().remove()
-                link = link.enter().append("line").attr('stroke-width', 2).attr('stroke', '#2258f5').merge(link)
+                link = link.enter().append("line").attr('class', 'link').attr('stroke-width', 2).attr('stroke', '#2258f5').merge(link)
                 // Update and restart the simulation.
                 this.simulation.nodes(nodes).on("tick", function () {
                     nodeMerge.attr("transform", function (d) {
@@ -141,7 +141,6 @@
             }
         },
         mounted() {
-            let svg = d3.select("svg")
             let _this = this
 
             mAjax(this, {
@@ -179,7 +178,7 @@
                     recurse(nodes[0])
                     nodes = nodeList
                     links = ss
-                    restart(nodes, links)
+                    _this.render(nodes, links)
 
                     d3.interval(function () {
                         let ns = nodes.slice()
@@ -207,81 +206,11 @@
                         recurse(ns[0])
                         nodes = nodeList
                         links = ss
-                        restart(nodes, links)
+                        _this.render(nodes, links)
                     }, 5000, d3.now() + 1000)
 
                 }
             })
-
-            function restart(nodes, links) {
-                let svg = d3.select('svg')
-                let link = svg.select('.links').selectAll(".link")
-                let node = svg.select('.nodes').selectAll(".node")
-                console.log(d3.select('svg').select('.links').selectAll('.link'))
-                let nodeUpdate = svg.select('.nodes').selectAll(".node").data(nodes)
-                let nodeEnter = nodeUpdate.enter()
-
-                let item = nodeUpdate.enter().append("g").attr('class', 'node')
-                nodeUpdate.exit().remove()
-                let nodeMerge = item.merge(nodeUpdate)
-
-                //节点名称
-                item.append('text').attr('class', 't1').attr('x', 15).attr('y', 5)
-                    .attr('fill', '#b2b2b2')
-                    .style('font-size', '12px')
-                    .text(function (d) {
-                        if (d.name.length > 8) {
-                            return d.name.substr(0, 8) + '…'
-                        } else {
-                            return d.name
-                        }
-                    })
-
-                //节点pv
-                item.append('text')
-                    .attr('class', 't2')
-                    .attr('x', 15)
-                    .attr('y', 6)
-                    .attr('fill', '#fff')
-                    .attr('font-size', '12px')
-                    .text(function (d) {
-                        return d.pv
-                    })
-                    .style('display', 'none')
-
-                //节点圆形
-                item.append("circle").attr('class', 'c1').attr("r", function (d) {
-                    return radius(d)
-                }).style("fill", function (d) {
-                    return levelColor(d.group)
-                })
-                // //节点圆环
-                item.append("circle").attr('class', 'c2').style('cursor', function (d) {
-                    if (d.group < 4) return 'pointer'
-                }).attr("r", function (d) {
-                    return radius(d)
-                }).style("fill", 'rgba(0,0,0,0)').style('stroke-width', 8).attr('stroke', function (d) {
-                    return 'rgba(255,255,255,0.4)'
-                }).style('display', 'none')
-
-                // Apply the general update pattern to the links.
-                link = link.data(links, function (d) { return d.source.id + "-" + d.target.id })
-                link.exit().remove()
-                link = link.enter().append("line").attr('stroke-width', 2).attr('stroke', '#2258f5').merge(link)
-                // Update and restart the simulation.
-                _this.simulation.nodes(nodes).on("tick", function () {
-                    nodeMerge.attr("transform", function (d) {
-                        return "translate(" + d.x + "," + d.y + ")"
-                    })
-                    link.attr("x1", function (d) { return d.source.x })
-                        .attr("y1", function (d) { return d.source.y })
-                        .attr("x2", function (d) { return d.target.x })
-                        .attr("y2", function (d) { return d.target.y })
-                })
-                _this.simulation.force("link").links(links)
-                _this.simulation.alpha(1).restart()
-            }
-
         }
     }
 
