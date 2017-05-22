@@ -4,7 +4,7 @@
             <video id="video2" loop preload="auto">
                 <source :src="video" type="video/mp4" />
             </video>
-            <div class="video-data-content" v-show="play">
+            <div class="video-data-content" v-if="play">
                 <div class="text-number">
                     <h2>总用户量</h2>
                     <p class="number">
@@ -65,18 +65,29 @@
         },
         mounted() {
             let mp4 = document.querySelector('#video2')
-            
+            let _this = this
+            mp4.pause()
             mAjax(this, {
                 url: API.video_data,
                 success: data => {
                     this.info = data
-                    mp4.play()
                     this.play = true
+                    let mp4 = document.querySelector('#video2')
+                    mp4.currentTime = 0
+                    mp4.play()
                 },
                 error: err => {
                     console.log(err)
                 }
-            })
+            }),
+            this.$on('restart',this.restart)
+        },
+        methods:{
+            restart(){
+                let mp4 = document.querySelector('#video2')
+                mp4.currentTime = 0
+                this.play = true
+            }
         }
     }
 

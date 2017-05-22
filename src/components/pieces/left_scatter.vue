@@ -3,7 +3,7 @@
         <div class="main" v-show="!iframe">
             <h1>各省投资消费占比</h1>
             <div class="scatter-chart-warp">
-                <div id="scatter"></div>
+                <div id="scatter" style="width:680px;height:537px;"></div>
             </div>
             <div class="scatter-right">
                 <div class="title">

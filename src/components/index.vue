@@ -2,7 +2,7 @@
     <div class="warp-content">
         <ul class="warp-content-right">
             <rightPiece1></rightPiece1>
-            <rightPiece2></rightPiece2>
+            <rightPiece2 ref="video"></rightPiece2>
         </ul>
         <ul class="warp-content-middle">
             <midTop></midTop>
@@ -24,6 +24,14 @@
     import leftTags from 'components/pieces/left_tags'
     import leftScatter from 'components/pieces/left_scatter'
     export default {
+        props:['index'],
+        watch:{
+            index(newVal,oldVal){
+                if(newVal){
+                    this.$refs.video.$emit('restart')
+                }
+            }
+        },
         components:{
             rightPiece1,
             rightPiece2,
